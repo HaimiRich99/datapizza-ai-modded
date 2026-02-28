@@ -22,8 +22,13 @@ classifiers = [
 dependencies = [
     "datapizza-ai-core>=0.0.1",
     "datapizza-ai-clients-openai>=0.0.1",
+    "datapizza-ai-clients-openai-like>=0.0.1",
     "datapizza-ai-embedders-openai>=0.0.1",
     "datapizza-ai-vectorstores-qdrant>=0.0.1",
+    # HTTP client for streaming SSE and MCP connections
+    "aiohttp",
+    # environment variable loader used in main/orchestrator
+    "python-dotenv",
 ]
 
 # Development dependencies
@@ -34,83 +39,21 @@ dev = [
     "ruff>=0.11.5",
 ]
 
-# UV workspace configuration
-[tool.uv.workspace]
-members = [
-    # Core
-    "datapizza-ai-core",
+# UV workspace configuration (removed)
+# The original pyproject contained a full datapizza-ai workspace
+# declaration.  That made sense for the upstream library repo but
+# our hackapizza project is just an application that depends on the
+# published packages, it does *not* contain any of the workspace
+# members.  When `uv sync` ran it attempted to treat
+# ``datapizza-ai-core`` as a local package and failed because that
+# directory doesn't exist here.
+#
+# We can keep the build metadata for the application itself and
+# simply remove the workspace blocks.  If you ever do want to work
+# on the datapizza libraries themselves, restore the original
+# sections or run `uv init` from the appropriate repo.
 
-    # Clients
-    "datapizza-ai-clients/datapizza-ai-clients-anthropic",
-    "datapizza-ai-clients/datapizza-ai-clients-bedrock",
-    "datapizza-ai-clients/datapizza-ai-clients-google",
-    "datapizza-ai-clients/datapizza-ai-clients-mistral",
-    "datapizza-ai-clients/datapizza-ai-clients-openai",
-    "datapizza-ai-clients/datapizza-ai-clients-openai-like",
-
-    # Embedders
-    "datapizza-ai-embedders/cohere",
-    "datapizza-ai-embedders/fastembedder",
-    "datapizza-ai-embedders/google",
-    "datapizza-ai-embedders/mistral",
-    "datapizza-ai-embedders/openai",
-
-    # Modules
-    "datapizza-ai-modules/parsers/azure",
-    #"datapizza-ai-modules/parsers/docling",
-    "datapizza-ai-modules/rerankers/cohere",
-    "datapizza-ai-modules/rerankers/together",
-
-    # Vectorstores
-    "datapizza-ai-vectorstores/datapizza-ai-vectorstores-qdrant",
-    "datapizza-ai-vectorstores/datapizza-ai-vectorstores-milvus",
-
-    # Cache
-    "datapizza-ai-cache/redis",
-
-    # Tools
-    "datapizza-ai-tools/duckduckgo",
-    "datapizza-ai-tools/sqldatabase",
-    "datapizza-ai-tools/filesystem",
-    "datapizza-ai-tools/web_fetch",
-
-]
-
-[tool.uv.sources]
-# Core
-datapizza-ai-core = {workspace = true}
-
-# Clients
-datapizza-ai-clients-anthropic = {workspace = true}
-datapizza-ai-clients-google = {workspace = true}
-datapizza-ai-clients-mistral = {workspace = true}
-datapizza-ai-clients-openai = {workspace = true}
-datapizza-ai-clients-openai-like = {workspace = true}
-
-# Embedders
-datapizza-ai-embedders-cohere = {workspace = true}
-datapizza-ai-embedders-fastembedder = {workspace = true}
-datapizza-ai-embedders-google = {workspace = true}
-datapizza-ai-embedders-mistral = {workspace = true}
-datapizza-ai-embedders-openai = {workspace = true}
-
-# Modules
-datapizza-ai-parsers-azure = {workspace = true}
-#datapizza-ai-parsers-docling = {workspace = true}
-datapizza-ai-rerankers-cohere = {workspace = true}
-datapizza-ai-rerankers-together = {workspace = true}
-
-# Vectorstores
-datapizza-ai-vectorstores-qdrant = {workspace = true}
-
-# Cache
-datapizza-ai-cache-redis = {workspace = true}
-
-# Tools
-datapizza-ai-tools-duckduckgo = {workspace = true}
-datapizza-ai-tools-filesystem = {workspace = true}
-datapizza-ai-tools-sqldatabase = {workspace = true}
-datapizza-ai-tools-web-fetch = {workspace = true}
+# (sections deleted)
 
 
 # Hatch build configuration

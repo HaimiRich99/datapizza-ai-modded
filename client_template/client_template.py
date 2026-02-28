@@ -37,6 +37,11 @@ async def game_started(data: dict[str, Any]) -> None:
     turn_id = data.get("turn_id", 0)
     log("EVENT", "game started, turn id: " + str(turn_id))
 
+async def new_message(data: dict[str, Any]) -> None:
+    sender = data.get("sender", "unknown")
+    text = data.get("payload", "")
+    log("EVENT", f"new message from {sender}: {text}")
+
 
 async def speaking_phase_started() -> None:
     log("EVENT", "speaking phase started")
@@ -106,6 +111,7 @@ EVENT_HANDLERS: dict[str, Callable[[dict[str, Any]], Awaitable[None]]] = {
     "client_spawned": client_spawned,
     "preparation_complete": preparation_complete,
     "message": message,
+    "new_message": new_message
 }
 
 ##########################################################################################
