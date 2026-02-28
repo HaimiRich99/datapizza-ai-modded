@@ -74,44 +74,53 @@ class FocusStrategyPlan(BaseModel):
 # LLM call
 # ---------------------------------------------------------------------------
 
-_SYSTEM_PROMPT = """\
-Sei un agente strategico per un gioco di ristorante galattico con aste chiuse.
+_SYSTEM_PROMPT = """Sei l'Executive Chef e il Procurement Manager Supremo del nostro ristorante nel Multiverso Gastronomico. Il tuo obiettivo assoluto è dominare il mercato massimizzando il volume di piatti serviti, applicando la "Strategia della Semplicità Spietata". 
 
-Ricevi l'inventario attuale e la lista delle ricette (con ingredienti e prestige).
+Abbiamo già scremato il Ricettario Cosmico e selezionato per te le 2 ricette in assoluto più semplici da preparare, con il minor numero di ingredienti e quantità. Questa è la tua "Shortlist d'Assalto" su cui concentrarti.
 
-OBIETTIVO: identificare 1 ricetta da produrre più volte (massimizzare le copie vendute),
-più opzionalmente 1 ricetta di backup con ingredienti sovrapposti.
+Ecco il tuo scenario operativo in questo esatto istante:
+- BUDGET ATTUALE: {current_budget} Crediti Galattici
+- INVENTARIO ATTUALE: {current_inventory}
 
-Criteri di selezione della ricetta focus:
-- Alta prestige (più punti per serving)
-- Pochi ingredienti unici da comprare (meno costi di approvvigionamento)
-- Rapporto prestige/n_ingredienti_mancanti il più alto possibile
-- Ingredienti già parzialmente in inventario = bonus
+LE 2 RICETTE PIÙ SEMPLICI (LA TUA SHORTLIST):
+{simplest_recipes_formatted}
 
-Criteri del backup:
-- Ingredienti il più sovrapposti possibile con la focus (condivisione ingredienti = efficienza)
-- Buona prestige
+Il tuo ciclo di operazioni DEVE seguire questi passi, senza eccezioni:
 
-copies_target: stima quante copie della focus possiamo permetterci.
-Se il saldo stimato è alto (>2000) → 3-4 copie. Se basso (<1000) → 2 copie.
-"""
+1. LOGICA DI APPROVVIGIONAMENTO (ZERO SPRECHI):
+Analizza la Shortlist e calcola la strategia.
+- Scegli la ricetta principale su cui puntare (focus_recipe_name) dalle due fornite.
+- L'obiettivo è preparare il numero massimo di copie possibili (copies_target) della tua ricetta focus.
+- Valuta gli ingredienti previsti per il tuo target in base al budget e a ciò che hai in inventario.
 
+2. ESECUZIONE:
+Genera in output il piano strategico (FocusStrategyPlan). Spiega brevemente la tua scelta strategica di Focus e target copie nel campo reasoning."""
 
-def _compact_recipes(recipes: list[dict], inventory: dict[str, int]) -> list[dict]:
-    out = []
-    for r in recipes:
+def _get_simplest_recipes(recipes: list[dict], n: int = 2) -> list[dict]:
+    """Seleziona le n ricette con il minor numero assoluto di ingredienti e quantità totali."""
+    def sort_key(r):
         ings = r.get("ingredients", {})
-        missing = [ing for ing, qty in ings.items() if inventory.get(ing, 0) < qty]
-        out.append({
-            "name": r["name"],
-            "prestige": r.get("prestige", 0),
-            "ingredients": list(ings.keys()),
-            "missing": missing,
-            "score": round(r.get("prestige", 0) / max(1, len(missing)), 1),
-        })
-    # Ordina per score decrescente per aiutare l'LLM
-    out.sort(key=lambda x: -x["score"])
-    return out
+        diff_ings = len(ings)               # Numero di ingredienti diversi
+        total_qty = sum(ings.values())      # Quantità totale di ingredienti
+        prep_time = r.get("preparationTimeMs", 0)
+        # Aggiungiamo il prestigio come stringa negata/parametro per favorire ricette migliori a parità d'altro
+        prestige = -r.get("prestige", 0)
+        return (diff_ings, total_qty, prep_time, prestige)
+        
+    return sorted(recipes, key=sort_key)[:n]
+
+
+def _format_simplest_recipes(recipes: list[dict]) -> str:
+    lines = []
+    for i, r in enumerate(recipes, 1):
+        lines.append(f"Ricetta {i}: {r['name']}")
+        lines.append(f"  - Prestige: {r.get('prestige', 0)}")
+        lines.append(f"  - Tempo di preparazione: {r.get('preparationTimeMs', 0)} ms")
+        lines.append("  - Ingredienti necessari:")
+        for ing, qty in r.get("ingredients", {}).items():
+            lines.append(f"      * {ing}: {qty}")
+        lines.append("")
+    return "\n".join(lines).strip()
 
 
 def _call_llm_sync(
@@ -123,21 +132,25 @@ def _call_llm_sync(
     if not regolo_key:
         return None
 
+    simplest = _get_simplest_recipes(recipes, n=2)
+    formatted_recipes = _format_simplest_recipes(simplest)
+    
+    formatted_system_prompt = _SYSTEM_PROMPT.format(
+        current_budget=balance,
+        current_inventory=json.dumps(inventory, ensure_ascii=False) if inventory else '(vuoto)',
+        simplest_recipes_formatted=formatted_recipes
+    )
+
     client = OpenAILikeClient(
         api_key=regolo_key,
         model="gpt-oss-120b",
         base_url="https://api.regolo.ai/v1",
-        system_prompt=_SYSTEM_PROMPT,
+        system_prompt=formatted_system_prompt,
     )
 
-    compact = _compact_recipes(recipes, inventory)
-    prompt = (
-        f"Saldo stimato: {balance}\n"
-        f"Inventario attuale: {json.dumps(inventory, ensure_ascii=False) if inventory else '(vuoto)'}\n\n"
-        f"Ricette disponibili (ordinate per score prestige/ingredienti_mancanti):\n"
-        f"{json.dumps(compact[:40], ensure_ascii=False, indent=2)}"
-    )
+    prompt = "Esegui il tuo compito e genera l'output richiesto nel formato atteso."
 
+    print(f"[STRATEGY] Inventario attuale passato all'LLM: {inventory}")
     print("[STRATEGY] LLM in elaborazione...")
     response = client.structured_response(input=prompt, output_cls=FocusStrategyPlan)
 
@@ -374,6 +387,8 @@ async def run_strategy_agent() -> tuple[list[str], int]:
     if backup_name:
         focus_recipes_list.append(backup_name)
 
+    simplest_recipes = _get_simplest_recipes(recipes, n=2)
+
     out: dict = {
         "method": "llm" if not isinstance(plan, FocusStrategyPlan) or _LLM_AVAILABLE else "algorithmic",
         "focus_recipes": focus_recipes_list,
@@ -384,6 +399,7 @@ async def run_strategy_agent() -> tuple[list[str], int]:
         "ingredient_quantities": ingredient_quantities,
         "price_hints": price_hints,
         "avoid_ingredients": list(avoid_ings),
+        "simplest_recipes": simplest_recipes,
     }
 
     out_path = Path(__file__).parent / "explorer_data" / "strategy.json"
