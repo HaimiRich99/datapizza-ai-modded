@@ -31,11 +31,11 @@ from strategy_agent import run_strategy_agent
 load_dotenv()
 
 TEAM_ID: int = 24
-API_KEY: str = os.getenv("API_KEY", "")
+TEAM_API_KEY: str = os.getenv("TEAM_API_KEY", "")
 BASE_URL: str = "https://hackapizza.datapizza.tech"
 
-if not API_KEY:
-    raise SystemExit("Imposta API_KEY nel file .env")
+if not TEAM_API_KEY:
+    raise SystemExit("Imposta TEAM_API_KEY nel file .env")
 
 
 def log(tag: str, msg: str) -> None:
@@ -87,18 +87,27 @@ async def on_speaking() -> None:
 
 async def on_closed_bid() -> None:
     log("PHASE", "closed_bid — avvio strategy + bid agent")
-    target_ingredients = await run_strategy_agent()
+    result = await run_strategy_agent()
+    target_ingredients, primary_count = result if isinstance(result, tuple) else (result, 0)
     if target_ingredients:
-        await run_bid_agent(preferred_ingredients=target_ingredients)
+        await run_bid_agent(preferred_ingredients=target_ingredients, primary_count=primary_count)
     else:
         log("BID", "strategy_agent non ha prodotto ingredienti, uso fallback random")
         await run_bid_agent()
 
 
 async def on_waiting() -> None:
-    log("PHASE", "waiting — avvio menu + market agent")
-    await run_menu_agent()
-    await run_market_agent()
+    log("PHASE", "waiting — market (vendi+compra) → menu (componi) → market (compra mancanti) → apri")
+    await run_market_agent(sell=True)   # 1. vendi surplus + compra loop (ricette più vicine)
+    await run_menu_agent()              # 2. componi menu con inventario aggiornato
+    await run_market_agent(sell=False)  # 3. secondo pass acquisti mirati (no vendita)
+    # 4. apri il ristorante ora (non durante serving)
+    async with HackapizzaClient(BASE_URL, TEAM_API_KEY, TEAM_ID) as client:
+        try:
+            await client.update_restaurant_is_open(True)
+            log("WAIT", "ristorante aperto")
+        except Exception as exc:
+            log("WAIT", f"WARN apertura ristorante: {exc}")
 
 
 async def on_serving() -> None:
@@ -185,85 +194,87 @@ EVENT_HANDLERS: dict[str, Any] = {
 }
 
 
-async def dispatch(event_type: str, event_data: dict[str, Any]) -> None:
+##########################################################################################
+#                                    DANGER ZONE                                         #
+##########################################################################################
+# DO NOT EDIT THE CODE BELOW until you are sure what you are doing.
+
+
+# It is the central event dispatcher used by all handlers.
+async def dispatch_event(event_type: str, event_data: dict[str, Any]) -> None:
     handler = EVENT_HANDLERS.get(event_type)
     if not handler:
-        if event_type != "heartbeat":
-            log("EVENT", f"(ignorato) {event_type}")
         return
     try:
         await handler(event_data)
     except Exception as exc:
-        log("ERROR", f"handler {event_type}: {exc}")
+        log("ERROR", f"handler failed for {event_type}: {exc}")
 
 
-async def handle_line(raw: bytes) -> None:
-    if not raw:
+# DO NOT EDIT THE CODE BELOW until you are sure what you are doing.
+# It parses SSE lines and translates them into internal events.
+async def handle_line(raw_line: bytes) -> None:
+    if not raw_line:
         return
-    line = raw.decode("utf-8", errors="ignore").strip()
+
+    line = raw_line.decode("utf-8", errors="ignore").strip()
     if not line:
         return
+
+    # Standard SSE data format: data: ...
     if line.startswith("data:"):
-        line = line[5:].strip()
-    if line == "connected":
-        log("SSE", "connesso")
-        return
+        payload = line[5:].strip()
+        if payload == "connected":
+            log("SSE", "connected")
+            return
+        line = payload
+
     try:
-        obj = json.loads(line)
+        event_json = json.loads(line)
     except json.JSONDecodeError:
         log("SSE", f"raw: {line}")
         return
-    etype = obj.get("type", "unknown")
-    edata = obj.get("data", {})
-    await dispatch(etype, edata if isinstance(edata, dict) else {"value": edata})
+
+    event_type = event_json.get("type", "unknown")
+    event_data = event_json.get("data", {})
+    if isinstance(event_data, dict):
+        await dispatch_event(event_type, event_data)
+    else:
+        await dispatch_event(event_type, {"value": event_data})
 
 
-# ---------------------------------------------------------------------------
-# SSE loop con reconnect
-# ---------------------------------------------------------------------------
-
+# DO NOT EDIT THE CODE BELOW until you are sure what you are doing.
+# It owns the SSE HTTP connection lifecycle.
 async def listen_once(session: aiohttp.ClientSession) -> None:
     url = f"{BASE_URL}/events/{TEAM_ID}"
-    headers = {"Accept": "text/event-stream", "x-api-key": API_KEY}
-    async with session.get(url, headers=headers) as resp:
-        resp.raise_for_status()
-        log("SSE", "connessione aperta")
-        async for line in resp.content:
+    headers = {"Accept": "text/event-stream", "x-api-key": TEAM_API_KEY}
+
+    async with session.get(url, headers=headers) as response:
+        response.raise_for_status()
+        log("SSE", "connection open")
+        async for line in response.content:
             await handle_line(line)
 
 
-async def listen_loop() -> None:
+# DO NOT EDIT THE CODE BELOW until you are sure what you are doing.
+# It controls script exit behavior when the SSE connection drops.
+async def listen_once_and_exit_on_drop() -> None:
     timeout = aiohttp.ClientTimeout(total=None, sock_connect=15, sock_read=None)
-    while True:
-        try:
-            async with aiohttp.ClientSession(timeout=timeout) as session:
-                await listen_once(session)
-        except aiohttp.ClientError as exc:
-            log("SSE", f"connessione persa: {exc} — riconnessione in 5s")
-        except Exception as exc:
-            log("ERROR", f"SSE inatteso: {exc} — riconnessione in 5s")
-        else:
-            log("SSE", "connessione chiusa dal server — riconnessione in 5s")
-        await asyncio.sleep(5)
+
+    async with aiohttp.ClientSession(timeout=timeout) as session:
+        await listen_once(session)
+        log("SSE", "connection closed, exiting")
 
 
-# ---------------------------------------------------------------------------
-# Main
-# ---------------------------------------------------------------------------
-
+# DO NOT EDIT THE CODE BELOW until you are sure what you are doing.
+# Keep this minimal to avoid changing startup behavior.
 async def main() -> None:
-    log("INIT", f"team={TEAM_ID} | url={BASE_URL}")
-    async with HackapizzaClient(BASE_URL, API_KEY, TEAM_ID) as client:
-        try:
-            info = await client.get_restaurant()
-            log("INIT", f"ristorante: {info.get('name')} | saldo: {info.get('balance')}")
-        except Exception as exc:
-            log("INIT", f"impossibile ottenere info: {exc}")
-    await listen_loop()
+    log("INIT", f"team={TEAM_ID} base_url={BASE_URL}")
+    await listen_once_and_exit_on_drop()
 
 
 if __name__ == "__main__":
     try:
         asyncio.run(main())
     except KeyboardInterrupt:
-        log("INIT", "orchestratore fermato")
+        log("INIT", "client stopped")

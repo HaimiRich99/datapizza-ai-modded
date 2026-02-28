@@ -23,33 +23,64 @@ TEAM_ID = 24
 BASE_URL = "https://hackapizza.datapizza.tech"
 API_KEY = os.getenv("API_KEY", "")
 
-BUDGET_FRACTION = 0.3   # % del saldo da spendere
-MAX_INGREDIENTS = 8     # quanti ingredienti puntare al massimo
+BUDGET_FRACTION = 0.35  # % del saldo da spendere
+MAX_INGREDIENTS = 20    # quanti ingredienti puntare al massimo
 MIN_QTY = 1
-MAX_QTY = 3
+MAX_QTY = 2
 
 
-def build_bids(ingredients: list[str], balance: float) -> list[dict]:
-    """Distribuisce il budget tra gli ingredienti target con pesi casuali."""
+def build_bids(ingredients: list[str], balance: float, primary_count: int = 0) -> list[dict]:
+    """
+    Distribuisce il budget tra gli ingredienti target.
+    Se primary_count > 0:
+      - primi primary_count ingredienti: 70% budget, qty=1, quota uguale per ognuno
+      - resto: 30% budget, distribuzione casuale
+    Altrimenti: distribuzione casuale sull'intero budget.
+    """
     if not ingredients or balance <= 0:
         return []
 
     budget = balance * BUDGET_FRACTION
-    chosen = random.sample(ingredients, min(MAX_INGREDIENTS, len(ingredients)))
-    weights = [random.random() for _ in chosen]
-    total_weight = sum(weights)
-
+    chosen = ingredients[:MAX_INGREDIENTS]
     bids = []
-    for ing, w in zip(chosen, weights):
-        qty = random.randint(MIN_QTY, MAX_QTY)
-        bid_per_unit = max(1, int((w / total_weight) * budget / qty))
-        bids.append({"ingredient": ing, "quantity": qty, "bid": bid_per_unit})
+
+    n_primary = min(primary_count, len(chosen))
+
+    if n_primary > 0:
+        primary = chosen[:n_primary]
+        secondary = chosen[n_primary:]
+
+        # 70% → ingredienti primari (qty=1, bid uguale per tutti)
+        primary_budget = budget * 0.70
+        per_primary = max(1, int(primary_budget / n_primary))
+        for ing in primary:
+            bids.append({"ingredient": ing, "quantity": 1, "bid": per_primary})
+
+        # 30% → ingredienti secondari (distribuzione casuale)
+        if secondary:
+            sec_budget = budget * 0.30
+            weights = [random.random() for _ in secondary]
+            total_w = sum(weights)
+            for ing, w in zip(secondary, weights):
+                qty = random.randint(MIN_QTY, MAX_QTY)
+                bid_per_unit = max(1, int((w / total_w) * sec_budget / qty))
+                bids.append({"ingredient": ing, "quantity": qty, "bid": bid_per_unit})
+    else:
+        # Distribuzione casuale sull'intero budget
+        weights = [random.random() for _ in chosen]
+        total_weight = sum(weights)
+        for ing, w in zip(chosen, weights):
+            qty = random.randint(MIN_QTY, MAX_QTY)
+            bid_per_unit = max(1, int((w / total_weight) * budget / qty))
+            bids.append({"ingredient": ing, "quantity": qty, "bid": bid_per_unit})
+
     return bids
 
 
-async def run_bid_agent(preferred_ingredients: list[str] | None = None) -> list[dict]:
+async def run_bid_agent(preferred_ingredients: list[str] | None = None, primary_count: int = 0) -> list[dict]:
     """
     preferred_ingredients: lista di ingredienti da strategy_agent.
+    primary_count: quanti dei primi ingredienti sono "primari" (70% budget).
     Se None, sceglie a caso da tutte le ricette (fallback).
     """
     async with HackapizzaClient(BASE_URL, API_KEY, TEAM_ID) as client:
@@ -67,9 +98,9 @@ async def run_bid_agent(preferred_ingredients: list[str] | None = None) -> list[
             })
             print(f"[BID] nessun suggerimento — pool random: {len(preferred_ingredients)} ingredienti")
         else:
-            print(f"[BID] pool da strategy_agent: {len(preferred_ingredients)} ingredienti")
+            print(f"[BID] pool da strategy_agent: {len(preferred_ingredients)} ingredienti | primari: {primary_count}")
 
-    bids = build_bids(preferred_ingredients, balance)
+    bids = build_bids(preferred_ingredients, balance, primary_count)
 
     print("\n=== OFFERTE ASTA ===")
     for b in bids:

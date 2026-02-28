@@ -102,7 +102,11 @@ class HackapizzaClient:
             headers=self._headers,
         ) as resp:
             resp.raise_for_status()
-            return await resp.json()
+            data = await resp.json()
+        # Il server ritorna {"items": [...]} oppure [...] direttamente
+        if isinstance(data, dict):
+            return data.get("items", [])
+        return data
 
     async def get_market_entries(self) -> list[dict[str, Any]]:
         """GET /market/entries — entry di mercato attive/chiuse."""

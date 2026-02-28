@@ -200,7 +200,7 @@ async def run_serving_agent(turn_id: int = 0) -> None:
     _menu_names = {}
     _seen_clients = set()
 
-    # Carica menu e apri ristorante
+    # Carica menu (il ristorante è già stato aperto nella fase waiting)
     async with HackapizzaClient(BASE_URL, API_KEY, TEAM_ID) as client:
         try:
             menu_raw = await client.get_menu()
@@ -211,12 +211,6 @@ async def run_serving_agent(turn_id: int = 0) -> None:
             print(f"[SERVING] menu: {list(_menu_names.values()) or '(vuoto)'}")
         except Exception as exc:
             print(f"[SERVING] WARN caricamento menu: {exc}")
-
-        try:
-            await client.update_restaurant_is_open(True)
-            print("[SERVING] ristorante aperto")
-        except Exception as exc:
-            print(f"[SERVING] WARN apertura ristorante: {exc}")
 
     print(f"[SERVING] in attesa di clienti (turno {turn_id})…")
 
