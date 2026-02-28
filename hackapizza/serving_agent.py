@@ -2,9 +2,8 @@
 Agente Serving — Fase serving
 
 Logica:
-1. Apre il ristorante (update_restaurant_is_open)
-2. Carica il menu attivo in memoria
-3. All'arrivo di ogni cliente (client_spawned, via orchestratore):
+1. Carica il menu attivo in memoria (il ristorante viene aperto dall'orchestratore prima di avviare questo agente)
+2. All'arrivo di ogni cliente (client_spawned, via orchestratore):
    - Abbina l'orderText a un piatto nel menu
    - Avvia la preparazione (prepare_dish)
 4. Quando il piatto è pronto (preparation_complete, via orchestratore):
@@ -31,7 +30,7 @@ load_dotenv()
 
 TEAM_ID = 24
 BASE_URL = "https://hackapizza.datapizza.tech"
-API_KEY = os.getenv("API_KEY", "")
+API_KEY = os.getenv("TEAM_API_KEY", "")
 
 POLL_INTERVAL = 5.0   # secondi tra polling fallback dei meals
 

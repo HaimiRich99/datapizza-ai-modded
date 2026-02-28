@@ -21,7 +21,7 @@ load_dotenv()
 
 TEAM_ID = 24
 BASE_URL = "https://hackapizza.datapizza.tech"
-API_KEY = os.getenv("API_KEY", "")
+API_KEY = os.getenv("TEAM_API_KEY", "")
 
 SNAPSHOTS_DIR = Path(__file__).parent / "explorer_data" / "snapshots"
 DELAY = 0.5  # secondi tra chiamate per evitare 429

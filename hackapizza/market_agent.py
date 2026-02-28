@@ -32,7 +32,7 @@ load_dotenv()
 
 TEAM_ID = 24
 BASE_URL = "https://hackapizza.datapizza.tech"
-API_KEY = os.getenv("API_KEY", "")
+API_KEY = os.getenv("TEAM_API_KEY", "")
 
 # Prezzo massimo accettabile per unita di ingrediente (acquisti)
 MAX_PRICE_PER_UNIT = 80.0

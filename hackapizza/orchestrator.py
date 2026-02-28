@@ -2,8 +2,8 @@
 Orchestratore — ascolta gli eventi SSE e lancia l'agente giusto per ogni fase.
 
 Fasi e agenti:
-  speaking    → snapshot (osservazione, nessuna azione)
-  closed_bid  → strategy_agent → bid_agent  (sceglie ingredienti e offre)
+  speaking    → strategy_agent (avvio anticipato) + snapshot
+  closed_bid  → bid_agent legge strategy.json già pronto
   waiting     → menu_agent → market_agent   (compone menu, compra/vende)
   serving     → serving_agent               (apre ristorante, prepara e serve)
   stopped     → snapshot finale del turno
@@ -15,6 +15,7 @@ import asyncio
 import json
 import os
 from datetime import datetime
+from pathlib import Path
 from typing import Any
 
 import aiohttp
@@ -49,6 +50,9 @@ def log(tag: str, msg: str) -> None:
 current_turn_id: int = 0
 _running_task: asyncio.Task | None = None  # un solo agente alla volta per fase
 _in_serving: bool = False                  # True durante la fase serving
+_strategy_task: asyncio.Task | None = None # avviato in speaking, letto in closed_bid
+
+_STRATEGY_PATH = Path(__file__).parent / "explorer_data" / "strategy.json"
 
 
 def _cancel_running() -> None:
@@ -81,33 +85,69 @@ def _run(coro) -> None:
 # ---------------------------------------------------------------------------
 
 async def on_speaking() -> None:
-    log("PHASE", "speaking — snapshot osservazione")
+    global _strategy_task
+    log("PHASE", "speaking — avvio anticipato strategy + snapshot")
+    # Avvia la strategy subito come task indipendente (non cancellata da _cancel_running)
+    if _strategy_task and not _strategy_task.done():
+        _strategy_task.cancel()
+    _strategy_task = asyncio.create_task(run_strategy_agent())
+    # Snapshot in parallelo (può essere cancellato senza problemi)
     await run_snapshot(current_turn_id)
 
 
 async def on_closed_bid() -> None:
-    log("PHASE", "closed_bid — avvio strategy + bid agent")
-    result = await run_strategy_agent()
-    target_ingredients, primary_count = result if isinstance(result, tuple) else (result, 0)
+    global _strategy_task
+    log("PHASE", "closed_bid — attendo strategy e invio offerte")
+
+    target_ingredients: list[str] | None = None
+    primary_count: int = 0
+
+    # 1. Aspetta la strategy task se ancora in corso
+    if _strategy_task is not None and not _strategy_task.done():
+        log("BID", "strategy ancora in corso — attendo...")
+        try:
+            target_ingredients, primary_count = await _strategy_task
+        except asyncio.CancelledError:
+            log("BID", "strategy cancellata")
+        except Exception as exc:
+            log("BID", f"strategy errore: {exc}")
+    elif _strategy_task is not None and not _strategy_task.cancelled():
+        try:
+            target_ingredients, primary_count = _strategy_task.result()
+        except Exception:
+            pass
+    _strategy_task = None
+
+    # 2. Fallback: leggi strategy.json scritto in precedenza
+    if not target_ingredients and _STRATEGY_PATH.exists():
+        try:
+            data = json.loads(_STRATEGY_PATH.read_text(encoding="utf-8"))
+            target_ingredients = data.get("target_ingredients") or []
+            primary_count = data.get("primary_count", 0)
+            if target_ingredients:
+                log("BID", f"strategia letta da file ({len(target_ingredients)} ingredienti)")
+        except Exception as exc:
+            log("BID", f"errore lettura strategy.json: {exc}")
+
     if target_ingredients:
         await run_bid_agent(preferred_ingredients=target_ingredients, primary_count=primary_count)
     else:
-        log("BID", "strategy_agent non ha prodotto ingredienti, uso fallback random")
+        log("BID", "nessuna strategy disponibile — fallback random")
         await run_bid_agent()
 
 
 async def on_waiting() -> None:
-    log("PHASE", "waiting — market (vendi+compra) → menu (componi) → market (compra mancanti) → apri")
+    log("PHASE", "waiting — market (vendi+compra) → menu (componi) → apri → market (compra mancanti)")
     await run_market_agent(sell=True)   # 1. vendi surplus + compra loop (ricette più vicine)
     await run_menu_agent()              # 2. componi menu con inventario aggiornato
-    await run_market_agent(sell=False)  # 3. secondo pass acquisti mirati (no vendita)
-    # 4. apri il ristorante ora (non durante serving)
+    # 3. apri il ristorante subito dopo aver composto il menu
     async with HackapizzaClient(BASE_URL, TEAM_API_KEY, TEAM_ID) as client:
         try:
             await client.update_restaurant_is_open(True)
             log("WAIT", "ristorante aperto")
         except Exception as exc:
             log("WAIT", f"WARN apertura ristorante: {exc}")
+    await run_market_agent(sell=False)  # 4. secondo pass acquisti mirati (no vendita)
 
 
 async def on_serving() -> None:

@@ -21,7 +21,7 @@ load_dotenv()
 
 TEAM_ID = 24
 BASE_URL = "https://hackapizza.datapizza.tech"
-API_KEY = os.getenv("API_KEY", "")
+API_KEY = os.getenv("TEAM_API_KEY", "")
 
 BUDGET_FRACTION = 0.35  # % del saldo da spendere
 MAX_INGREDIENTS = 20    # quanti ingredienti puntare al massimo
