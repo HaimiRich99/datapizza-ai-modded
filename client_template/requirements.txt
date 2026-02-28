@@ -1,0 +1,3 @@
+aiohttp
+datapizza-ai
+python-dotenv
