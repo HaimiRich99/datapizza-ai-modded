@@ -29,6 +29,13 @@ import os
 from typing import Any
 
 from dotenv import load_dotenv
+from pydantic import BaseModel, Field
+
+# Setup imports per l'LLM
+try:
+    from datapizza.clients.openai_like import OpenAILikeClient
+except ImportError:
+    pass
 
 from server_client import HackapizzaClient
 
@@ -37,6 +44,7 @@ load_dotenv()
 TEAM_ID = 24
 BASE_URL = "https://hackapizza.datapizza.tech"
 API_KEY = os.getenv("TEAM_API_KEY", "")
+REGOLO_API_KEY = os.getenv("REGOLO_API_KEY", "")
 
 POLL_INTERVAL = 5.0   # secondi tra polling fallback dei meals
 
@@ -53,6 +61,7 @@ _dish_queue: dict[str, list[str]] = {}
 
 # piatti nel menu: {nome_lowercase: nome_originale}
 _menu_names: dict[str, str] = {}
+_recipes: dict[str, dict] = {}
 
 # clientName già processati (per evitare duplicati SSE/polling)
 _seen_clients: set[str] = set()
@@ -95,6 +104,50 @@ def _match_dish(order_text: str) -> str | None:
             best_name = name_orig
 
     return best_name if best_score > 0 else None
+
+
+# ---------------------------------------------------------------------------
+# LLM Intolleranze Check
+# ---------------------------------------------------------------------------
+
+class IntoleranceCheck(BaseModel):
+    has_intolerance: bool = Field(description="True se l'ordine contiene un'intolleranza o allergia in conflitto con gli ingredienti del piatto, False altrimenti.")
+    reasoning: str = Field(description="Spiegazione concisa")
+
+async def _check_intolerances(order_text: str, dish_name: str, dish_ingredients: list[str]) -> bool:
+    if not REGOLO_API_KEY:
+        print("[SERVING] WARN: REGOLO_API_KEY mancante, salto check intolleranze.")
+        return False
+        
+    try:
+        # Eseguiamo l'LLM in un thread per non bloccare l'event loop, dato che structured_response è sincrono
+        client = OpenAILikeClient(
+            api_key=REGOLO_API_KEY,
+            model="gpt-oss-120b",
+            base_url="https://api.regolo.ai/v1",
+            system_prompt="Sei un assistente di un ristorante. Verifica se l'ordine del cliente contiene richieste per intolleranze o allergie in conflitto con gli ingredienti del piatto. Rispondi in JSON secondo la struttura richiesta."
+        )
+        
+        prompt = f"Ordine del cliente: {order_text}\nPiatto: {dish_name}\nIngredienti del piatto: {dish_ingredients}"
+        
+        def run_llm():
+            return client.structured_response(input=prompt, output_cls=IntoleranceCheck)
+            
+        response = await asyncio.to_thread(run_llm)
+        raw = response.structured_data
+        
+        if isinstance(raw, IntoleranceCheck):
+            print(f"[SERVING] LLM Check per {dish_name}: intolleranza={raw.has_intolerance} ({raw.reasoning})")
+            return raw.has_intolerance
+        elif isinstance(raw, dict):
+            parsed = IntoleranceCheck(**raw)
+            print(f"[SERVING] LLM Check per {dish_name}: intolleranza={parsed.has_intolerance} ({parsed.reasoning})")
+            return parsed.has_intolerance
+            
+    except Exception as exc:
+        print(f"[SERVING] ERRORE durante check intolleranze: {exc}")
+        
+    return False
 
 
 # ---------------------------------------------------------------------------
@@ -262,6 +315,17 @@ async def handle_dish_ready(data: dict[str, Any]) -> None:
         print(f"[SERVING] DEBUG: _name_to_id attuale = {_name_to_id}")
         return
 
+    # Call LLM per intolleranze "prima di servire"
+    dish_info = _recipes.get(dish, {})
+    dish_ings = list(dish_info.get("ingredients", {}).keys())
+    order_text = client_info.get("order_text", "")
+    
+    if order_text:
+        has_intol = await _check_intolerances(order_text, dish, dish_ings)
+        if has_intol:
+            print(f"[SERVING] STOP ORDINE: Intolleranza rilevata per {client_name} (Ordine: {order_text!r} | Piatto: {dish})")
+            return
+
     async with HackapizzaClient(BASE_URL, API_KEY, TEAM_ID) as client:
         try:
             result = await client.serve_dish(dish, serve_id)
@@ -279,12 +343,13 @@ async def run_serving_agent(turn_id: int = 0) -> None:
     Carica il menu, poi gira in polling finché il task non viene cancellato
     dall'orchestratore (cambio fase).
     """
-    global _pending_clients, _dish_queue, _menu_names, _seen_clients, _name_to_id, _current_turn_id
+    global _pending_clients, _dish_queue, _menu_names, _recipes, _seen_clients, _name_to_id, _current_turn_id
 
     # Reset stato per il nuovo turno
     _pending_clients = {}
     _dish_queue = {}
     _menu_names = {}
+    _recipes = {}
     _seen_clients = set()
     _name_to_id = {}
     _current_turn_id = turn_id
@@ -297,6 +362,11 @@ async def run_serving_agent(turn_id: int = 0) -> None:
                 name = item.get("name", "") if isinstance(item, dict) else str(item)
                 if name:
                     _menu_names[name.lower()] = name
+                    
+            recipes_raw = await client.get_recipes()
+            for r in recipes_raw:
+                _recipes[r.get("name", "")] = r
+                
             print(f"[SERVING] menu: {list(_menu_names.values()) or '(vuoto)'}")
         except Exception as exc:
             print(f"[SERVING] WARN caricamento menu: {exc}")
