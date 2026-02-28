@@ -1,0 +1,50 @@
+{
+  "timestamp": "2026-02-28_16-28-39",
+  "turn_id": null,
+  "restaurant": {
+    "name": "Accattoni",
+    "balance": 1896,
+    "is_open": "?",
+    "inventory": {
+      "Carne di Drago": 2,
+      "Carne di Balena spaziale": 1,
+      "Carne di Xenodonte": 2,
+      "Uova di Fenice": 1,
+      "Teste di Idra": 3,
+      "Carne di Mucca": 2,
+      "Amido di Stellarion": 1,
+      "Pane di Luce": 2
+    }
+  },
+  "menu_count": 0,
+  "recipes_count": 287,
+  "market_entries": 21,
+  "competitors": [
+    "Siesta dopo pizza",
+    "ventre a terra",
+    "Piadina as a Service (PaaS)",
+    "Samur_ai",
+    "team 2",
+    "Neural Nomads",
+    "Synapse AI",
+    "The Hallucinators",
+    "The Transformer guys",
+    "Domenicaln",
+    "DeepAiUG",
+    "Starrats",
+    "Accattoni",
+    "Bluers",
+    "Cavalli al trotto",
+    "Claudio Opuscoli",
+    "sphacketti",
+    "AIS Privè",
+    "Prompt in the shell",
+    "RAGù",
+    "AI Caramba",
+    "Desf-AI",
+    "SPAM!",
+    "EGEnts",
+    "MARADONA",
+    "team 1"
+  ]
+}

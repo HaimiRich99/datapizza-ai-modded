@@ -1,0 +1,128 @@
+[
+  {
+    "id": 20,
+    "createdByRestaurantId": 23,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T14:23:44.174Z",
+    "ingredientId": 26,
+    "quantity": 2,
+    "totalPrice": 150,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 26,
+      "name": "Plasma Vitale"
+    }
+  },
+  {
+    "id": 21,
+    "createdByRestaurantId": 23,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T14:23:45.916Z",
+    "ingredientId": 17,
+    "quantity": 2,
+    "totalPrice": 140,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 17,
+      "name": "Shard di Prisma Stellare"
+    }
+  },
+  {
+    "id": 22,
+    "createdByRestaurantId": 23,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T14:23:48.830Z",
+    "ingredientId": 6,
+    "quantity": 2,
+    "totalPrice": 90,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 6,
+      "name": "Carne di Balena spaziale"
+    }
+  },
+  {
+    "id": 23,
+    "createdByRestaurantId": 23,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T14:23:52.415Z",
+    "ingredientId": 8,
+    "quantity": 2,
+    "totalPrice": 80,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 8,
+      "name": "Carne di Xenodonte"
+    }
+  },
+  {
+    "id": 24,
+    "createdByRestaurantId": 23,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T14:24:01.229Z",
+    "ingredientId": 19,
+    "quantity": 2,
+    "totalPrice": 85,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 19,
+      "name": "Carne di Kraken"
+    }
+  },
+  {
+    "id": 25,
+    "createdByRestaurantId": 23,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T14:24:05.733Z",
+    "ingredientId": 4,
+    "quantity": 2,
+    "totalPrice": 300,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 4,
+      "name": "Gnocchi del Crepuscolo"
+    }
+  },
+  {
+    "id": 26,
+    "createdByRestaurantId": 23,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T14:24:11.109Z",
+    "ingredientId": 5,
+    "quantity": 2,
+    "totalPrice": 200,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 5,
+      "name": "Essenza di Tachioni"
+    }
+  },
+  {
+    "id": 27,
+    "createdByRestaurantId": 23,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T14:24:39.716Z",
+    "ingredientId": 32,
+    "quantity": 1,
+    "totalPrice": 120,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 32,
+      "name": "Uova di Fenice"
+    }
+  },
+  {
+    "id": 28,
+    "createdByRestaurantId": 23,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T14:24:45.025Z",
+    "ingredientId": 26,
+    "quantity": 2,
+    "totalPrice": 10,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 26,
+      "name": "Plasma Vitale"
+    }
+  }
+]

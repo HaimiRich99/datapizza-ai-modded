@@ -1,0 +1,912 @@
+[
+  {
+    "id": 40,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T14:41:47.622Z",
+    "ingredientId": 17,
+    "quantity": 5,
+    "totalPrice": 250,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 17,
+      "name": "Shard di Prisma Stellare"
+    }
+  },
+  {
+    "id": 41,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T14:42:05.809Z",
+    "ingredientId": 11,
+    "quantity": 5,
+    "totalPrice": 200,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 11,
+      "name": "Polvere di Pulsar"
+    }
+  },
+  {
+    "id": 42,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T14:42:43.741Z",
+    "ingredientId": 11,
+    "quantity": 5,
+    "totalPrice": 100,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 11,
+      "name": "Polvere di Pulsar"
+    }
+  },
+  {
+    "id": 43,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T14:42:45.806Z",
+    "ingredientId": 17,
+    "quantity": 3,
+    "totalPrice": 180,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 17,
+      "name": "Shard di Prisma Stellare"
+    }
+  },
+  {
+    "id": 44,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T14:43:08.260Z",
+    "ingredientId": 17,
+    "quantity": 5,
+    "totalPrice": 500,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 17,
+      "name": "Shard di Prisma Stellare"
+    }
+  },
+  {
+    "id": 45,
+    "createdByRestaurantId": 23,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T14:43:32.314Z",
+    "ingredientId": 41,
+    "quantity": 1,
+    "totalPrice": 50,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 41,
+      "name": "Essenza di Vuoto"
+    }
+  },
+  {
+    "id": 46,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T14:43:46.535Z",
+    "ingredientId": 17,
+    "quantity": 5,
+    "totalPrice": 250,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 17,
+      "name": "Shard di Prisma Stellare"
+    }
+  },
+  {
+    "id": 47,
+    "createdByRestaurantId": 23,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T14:43:47.864Z",
+    "ingredientId": 4,
+    "quantity": 1,
+    "totalPrice": 120,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 4,
+      "name": "Gnocchi del Crepuscolo"
+    }
+  },
+  {
+    "id": 48,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T14:44:08.479Z",
+    "ingredientId": 17,
+    "quantity": 5,
+    "totalPrice": 500,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 17,
+      "name": "Shard di Prisma Stellare"
+    }
+  },
+  {
+    "id": 49,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T14:45:06.465Z",
+    "ingredientId": 17,
+    "quantity": 2,
+    "totalPrice": 400,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 17,
+      "name": "Shard di Prisma Stellare"
+    }
+  },
+  {
+    "id": 50,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T14:46:02.278Z",
+    "ingredientId": 17,
+    "quantity": 1,
+    "totalPrice": 100,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 17,
+      "name": "Shard di Prisma Stellare"
+    }
+  },
+  {
+    "id": 51,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T14:48:16.011Z",
+    "ingredientId": 11,
+    "quantity": 1,
+    "totalPrice": 200,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 11,
+      "name": "Polvere di Pulsar"
+    }
+  },
+  {
+    "id": 52,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T14:48:17.834Z",
+    "ingredientId": 17,
+    "quantity": 1,
+    "totalPrice": 300,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 17,
+      "name": "Shard di Prisma Stellare"
+    }
+  },
+  {
+    "id": 53,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T14:49:17.594Z",
+    "ingredientId": 17,
+    "quantity": 2,
+    "totalPrice": 1000,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 17,
+      "name": "Shard di Prisma Stellare"
+    }
+  },
+  {
+    "id": 54,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T14:50:02.826Z",
+    "ingredientId": 11,
+    "quantity": 4,
+    "totalPrice": 800,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 11,
+      "name": "Polvere di Pulsar"
+    }
+  },
+  {
+    "id": 55,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T14:50:07.280Z",
+    "ingredientId": 17,
+    "quantity": 2,
+    "totalPrice": 400,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 17,
+      "name": "Shard di Prisma Stellare"
+    }
+  },
+  {
+    "id": 56,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T14:50:27.122Z",
+    "ingredientId": 17,
+    "quantity": 5,
+    "totalPrice": 200,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 17,
+      "name": "Shard di Prisma Stellare"
+    }
+  },
+  {
+    "id": 57,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T14:51:19.038Z",
+    "ingredientId": 1,
+    "quantity": 1,
+    "totalPrice": 10,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 1,
+      "name": "Radici di Gravità"
+    }
+  },
+  {
+    "id": 58,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T14:51:21.098Z",
+    "ingredientId": 2,
+    "quantity": 1,
+    "totalPrice": 10,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 2,
+      "name": "Alghe Bioluminescenti"
+    }
+  },
+  {
+    "id": 20,
+    "createdByRestaurantId": 23,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T14:23:44.174Z",
+    "ingredientId": 26,
+    "quantity": 2,
+    "totalPrice": 150,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 26,
+      "name": "Plasma Vitale"
+    }
+  },
+  {
+    "id": 21,
+    "createdByRestaurantId": 23,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T14:23:45.916Z",
+    "ingredientId": 17,
+    "quantity": 2,
+    "totalPrice": 140,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 17,
+      "name": "Shard di Prisma Stellare"
+    }
+  },
+  {
+    "id": 22,
+    "createdByRestaurantId": 23,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T14:23:48.830Z",
+    "ingredientId": 6,
+    "quantity": 2,
+    "totalPrice": 90,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 6,
+      "name": "Carne di Balena spaziale"
+    }
+  },
+  {
+    "id": 23,
+    "createdByRestaurantId": 23,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T14:23:52.415Z",
+    "ingredientId": 8,
+    "quantity": 2,
+    "totalPrice": 80,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 8,
+      "name": "Carne di Xenodonte"
+    }
+  },
+  {
+    "id": 24,
+    "createdByRestaurantId": 23,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T14:24:01.229Z",
+    "ingredientId": 19,
+    "quantity": 2,
+    "totalPrice": 85,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 19,
+      "name": "Carne di Kraken"
+    }
+  },
+  {
+    "id": 25,
+    "createdByRestaurantId": 23,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T14:24:05.733Z",
+    "ingredientId": 4,
+    "quantity": 2,
+    "totalPrice": 300,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 4,
+      "name": "Gnocchi del Crepuscolo"
+    }
+  },
+  {
+    "id": 26,
+    "createdByRestaurantId": 23,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T14:24:11.109Z",
+    "ingredientId": 5,
+    "quantity": 2,
+    "totalPrice": 200,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 5,
+      "name": "Essenza di Tachioni"
+    }
+  },
+  {
+    "id": 27,
+    "createdByRestaurantId": 23,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T14:24:39.716Z",
+    "ingredientId": 32,
+    "quantity": 1,
+    "totalPrice": 120,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 32,
+      "name": "Uova di Fenice"
+    }
+  },
+  {
+    "id": 28,
+    "createdByRestaurantId": 23,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T14:24:45.025Z",
+    "ingredientId": 26,
+    "quantity": 2,
+    "totalPrice": 10,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 26,
+      "name": "Plasma Vitale"
+    }
+  },
+  {
+    "id": 29,
+    "createdByRestaurantId": 20,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T14:36:55.034Z",
+    "ingredientId": 1,
+    "quantity": 1,
+    "totalPrice": 20,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 1,
+      "name": "Radici di Gravità"
+    }
+  },
+  {
+    "id": 30,
+    "createdByRestaurantId": 6,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T14:36:59.873Z",
+    "ingredientId": 1,
+    "quantity": 1,
+    "totalPrice": 30,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 1,
+      "name": "Radici di Gravità"
+    }
+  },
+  {
+    "id": 31,
+    "createdByRestaurantId": 20,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T14:37:03.177Z",
+    "ingredientId": 1,
+    "quantity": 1,
+    "totalPrice": 10,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 1,
+      "name": "Radici di Gravità"
+    }
+  },
+  {
+    "id": 32,
+    "createdByRestaurantId": 6,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T14:37:04.691Z",
+    "ingredientId": 2,
+    "quantity": 1,
+    "totalPrice": 25,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 2,
+      "name": "Alghe Bioluminescenti"
+    }
+  },
+  {
+    "id": 33,
+    "createdByRestaurantId": 20,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T14:37:07.489Z",
+    "ingredientId": 2,
+    "quantity": 1,
+    "totalPrice": 10,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 2,
+      "name": "Alghe Bioluminescenti"
+    }
+  },
+  {
+    "id": 34,
+    "createdByRestaurantId": 6,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T14:37:08.922Z",
+    "ingredientId": 4,
+    "quantity": 1,
+    "totalPrice": 40,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 4,
+      "name": "Gnocchi del Crepuscolo"
+    }
+  },
+  {
+    "id": 35,
+    "createdByRestaurantId": 6,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T14:37:14.631Z",
+    "ingredientId": 3,
+    "quantity": 1,
+    "totalPrice": 20,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 3,
+      "name": "Foglie di Nebulosa"
+    }
+  },
+  {
+    "id": 36,
+    "createdByRestaurantId": 6,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T14:37:19.325Z",
+    "ingredientId": 34,
+    "quantity": 1,
+    "totalPrice": 45,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 34,
+      "name": "Polvere di Crononite"
+    }
+  },
+  {
+    "id": 37,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T14:39:01.158Z",
+    "ingredientId": 17,
+    "quantity": 5,
+    "totalPrice": 150,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 17,
+      "name": "Shard di Prisma Stellare"
+    }
+  },
+  {
+    "id": 38,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T14:40:18.714Z",
+    "ingredientId": 17,
+    "quantity": 2,
+    "totalPrice": 400,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 17,
+      "name": "Shard di Prisma Stellare"
+    }
+  },
+  {
+    "id": 39,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T14:40:38.389Z",
+    "ingredientId": 17,
+    "quantity": 2,
+    "totalPrice": 200,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 17,
+      "name": "Shard di Prisma Stellare"
+    }
+  },
+  {
+    "id": 59,
+    "createdByRestaurantId": 10,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T14:56:25.644Z",
+    "ingredientId": 6,
+    "quantity": 1,
+    "totalPrice": 300,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 6,
+      "name": "Carne di Balena spaziale"
+    }
+  },
+  {
+    "id": 60,
+    "createdByRestaurantId": 10,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T14:56:26.441Z",
+    "ingredientId": 2,
+    "quantity": 1,
+    "totalPrice": 200,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 2,
+      "name": "Alghe Bioluminescenti"
+    }
+  },
+  {
+    "id": 61,
+    "createdByRestaurantId": 10,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T14:56:27.102Z",
+    "ingredientId": 21,
+    "quantity": 2,
+    "totalPrice": 250,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 21,
+      "name": "Amido di Stellarion"
+    }
+  },
+  {
+    "id": 62,
+    "createdByRestaurantId": 10,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T14:56:27.745Z",
+    "ingredientId": 17,
+    "quantity": 1,
+    "totalPrice": 400,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 17,
+      "name": "Shard di Prisma Stellare"
+    }
+  },
+  {
+    "id": 63,
+    "createdByRestaurantId": 10,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T14:56:28.440Z",
+    "ingredientId": 19,
+    "quantity": 1,
+    "totalPrice": 350,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 19,
+      "name": "Carne di Kraken"
+    }
+  },
+  {
+    "id": 64,
+    "createdByRestaurantId": 10,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T14:56:29.097Z",
+    "ingredientId": 8,
+    "quantity": 1,
+    "totalPrice": 350,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 8,
+      "name": "Carne di Xenodonte"
+    }
+  },
+  {
+    "id": 65,
+    "createdByRestaurantId": 10,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T14:56:29.714Z",
+    "ingredientId": 1,
+    "quantity": 1,
+    "totalPrice": 200,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 1,
+      "name": "Radici di Gravità"
+    }
+  },
+  {
+    "id": 66,
+    "createdByRestaurantId": 10,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T14:56:30.403Z",
+    "ingredientId": 30,
+    "quantity": 1,
+    "totalPrice": 150,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 30,
+      "name": "Lattuga Namecciana"
+    }
+  },
+  {
+    "id": 67,
+    "createdByRestaurantId": 10,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T14:56:31.063Z",
+    "ingredientId": 31,
+    "quantity": 1,
+    "totalPrice": 150,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 31,
+      "name": "Erba Pipa"
+    }
+  },
+  {
+    "id": 68,
+    "createdByRestaurantId": 10,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T14:56:31.720Z",
+    "ingredientId": 29,
+    "quantity": 1,
+    "totalPrice": 200,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 29,
+      "name": "Colonia di Mycoflora"
+    }
+  },
+  {
+    "id": 69,
+    "createdByRestaurantId": 10,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T14:56:32.454Z",
+    "ingredientId": 27,
+    "quantity": 1,
+    "totalPrice": 400,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 27,
+      "name": "Shard di Materia Oscura"
+    }
+  },
+  {
+    "id": 70,
+    "createdByRestaurantId": 10,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T14:56:33.139Z",
+    "ingredientId": 28,
+    "quantity": 1,
+    "totalPrice": 300,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 28,
+      "name": "Lacrime di Unicorno"
+    }
+  },
+  {
+    "id": 71,
+    "createdByRestaurantId": 6,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T15:03:16.468Z",
+    "ingredientId": 34,
+    "quantity": 1,
+    "totalPrice": 500,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 34,
+      "name": "Polvere di Crononite"
+    }
+  },
+  {
+    "id": 72,
+    "createdByRestaurantId": 6,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T15:03:38.907Z",
+    "ingredientId": 6,
+    "quantity": 1,
+    "totalPrice": 300,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 6,
+      "name": "Carne di Balena spaziale"
+    }
+  },
+  {
+    "id": 73,
+    "createdByRestaurantId": 6,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T15:03:45.951Z",
+    "ingredientId": 4,
+    "quantity": 1,
+    "totalPrice": 500,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 4,
+      "name": "Gnocchi del Crepuscolo"
+    }
+  },
+  {
+    "id": 74,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T15:03:53.574Z",
+    "ingredientId": 17,
+    "quantity": 5,
+    "totalPrice": 500,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 17,
+      "name": "Shard di Prisma Stellare"
+    }
+  },
+  {
+    "id": 75,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T15:03:55.597Z",
+    "ingredientId": 11,
+    "quantity": 5,
+    "totalPrice": 400,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 11,
+      "name": "Polvere di Pulsar"
+    }
+  },
+  {
+    "id": 76,
+    "createdByRestaurantId": 6,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T15:04:21.816Z",
+    "ingredientId": 4,
+    "quantity": 1,
+    "totalPrice": 1000,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 4,
+      "name": "Gnocchi del Crepuscolo"
+    }
+  },
+  {
+    "id": 77,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T15:04:33.022Z",
+    "ingredientId": 17,
+    "quantity": 5,
+    "totalPrice": 200,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 17,
+      "name": "Shard di Prisma Stellare"
+    }
+  },
+  {
+    "id": 78,
+    "createdByRestaurantId": 6,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T15:04:48.416Z",
+    "ingredientId": 41,
+    "quantity": 1,
+    "totalPrice": 500,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 41,
+      "name": "Essenza di Vuoto"
+    }
+  },
+  {
+    "id": 79,
+    "createdByRestaurantId": 6,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T15:04:53.266Z",
+    "ingredientId": 35,
+    "quantity": 1,
+    "totalPrice": 300,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 35,
+      "name": "Fibra di Sintetex"
+    }
+  },
+  {
+    "id": 80,
+    "createdByRestaurantId": 6,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T15:04:54.743Z",
+    "ingredientId": 37,
+    "quantity": 1,
+    "totalPrice": 200,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 37,
+      "name": "Muffa Lunare"
+    }
+  },
+  {
+    "id": 81,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T15:05:13.195Z",
+    "ingredientId": 11,
+    "quantity": 20,
+    "totalPrice": 600,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 11,
+      "name": "Polvere di Pulsar"
+    }
+  },
+  {
+    "id": 82,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T15:05:14.803Z",
+    "ingredientId": 17,
+    "quantity": 30,
+    "totalPrice": 1500,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 17,
+      "name": "Shard di Prisma Stellare"
+    }
+  },
+  {
+    "id": 83,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T15:05:54.319Z",
+    "ingredientId": 11,
+    "quantity": 20,
+    "totalPrice": 200,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 11,
+      "name": "Polvere di Pulsar"
+    }
+  },
+  {
+    "id": 84,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T15:06:04.387Z",
+    "ingredientId": 17,
+    "quantity": 5,
+    "totalPrice": 100,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 17,
+      "name": "Shard di Prisma Stellare"
+    }
+  }
+]

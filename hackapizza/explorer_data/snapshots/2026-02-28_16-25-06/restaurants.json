@@ -1,0 +1,485 @@
+[
+  {
+    "id": "19",
+    "name": "ventre a terra",
+    "balance": 2732,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "2",
+    "name": "team 2",
+    "balance": 3000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "4",
+    "name": "Neural Nomads",
+    "balance": 3000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "8",
+    "name": "Synapse AI",
+    "balance": 3000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "9",
+    "name": "The Hallucinators",
+    "balance": 3000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "10",
+    "name": "Samur_ai",
+    "balance": 2640,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "3",
+    "name": "Domenicaln",
+    "balance": 2990,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": [
+        {
+          "name": "Nebulosa Galattica",
+          "price": 100
+        }
+      ]
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "5",
+    "name": "Piadina as a Service (PaaS)",
+    "balance": 1750,
+    "inventory": {},
+    "reputation": 98,
+    "isOpen": true,
+    "kitchen": [],
+    "menu": {
+      "items": [
+        {
+          "name": "Più-dimensionale Sinfonia di Sapori: La Carne del Cosmo",
+          "price": 15
+        },
+        {
+          "name": "Portale Cosmico: Sinfonia di Gnocchi del Crepuscolo con Essenza di Tachioni e Sfumature di Fenice",
+          "price": 13
+        },
+        {
+          "name": "Sinfonia Cosmica del Multiverso",
+          "price": 18
+        },
+        {
+          "name": "Sinfonia Astrale - Risotto Multiversale con Risacca Celeste",
+          "price": 23
+        }
+      ]
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "7",
+    "name": "Siesta dopo pizza",
+    "balance": 2080,
+    "inventory": {},
+    "reputation": 92,
+    "isOpen": true,
+    "kitchen": [],
+    "menu": {
+      "items": [
+        {
+          "name": "Nebulosa Galattica",
+          "price": 286
+        },
+        {
+          "name": "Sinfonia Cosmica di Proteine Interstellari",
+          "price": 286
+        }
+      ]
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "26",
+    "name": "The Transformer guys",
+    "balance": 0,
+    "inventory": {},
+    "reputation": 96,
+    "isOpen": true,
+    "kitchen": [],
+    "menu": {
+      "items": [
+        {
+          "name": "Nebulosa Galattica",
+          "price": 50
+        },
+        {
+          "name": "Sinfonia Cosmica di Proteine Interstellari",
+          "price": 50
+        },
+        {
+          "name": "L'Estasi Cosmica di Nova",
+          "price": 50
+        },
+        {
+          "name": "Viaggio Galattico: Sinfonia dei Sensi",
+          "price": 50
+        },
+        {
+          "name": "Cosmic Synchrony: Il Destino di Pulsar",
+          "price": 50
+        }
+      ]
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "24",
+    "name": "Accattoni",
+    "balance": 1698,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "13",
+    "name": "Cavalli al trotto",
+    "balance": 1394,
+    "inventory": {},
+    "reputation": 98,
+    "isOpen": true,
+    "kitchen": [
+      {
+        "preparationId": "54",
+        "dish": "Sinfonia Quantica dell'Oceano Interstellare",
+        "status": "ready",
+        "startTime": 1772292129468,
+        "completionTime": 1772292133475
+      },
+      {
+        "preparationId": "56",
+        "dish": "Sinfonia Quantica dell'Oceano Interstellare",
+        "status": "ready",
+        "startTime": 1772292135401,
+        "completionTime": 1772292139408
+      },
+      {
+        "preparationId": "57",
+        "dish": "Portale Cosmico: Sinfonia di Gnocchi del Crepuscolo con Essenza di Tachioni e Sfumature di Fenice",
+        "status": "ready",
+        "startTime": 1772292149369,
+        "completionTime": 1772292154593
+      },
+      {
+        "preparationId": "58",
+        "dish": "Portale Cosmico: Sinfonia di Gnocchi del Crepuscolo con Essenza di Tachioni e Sfumature di Fenice",
+        "status": "ready",
+        "startTime": 1772292151630,
+        "completionTime": 1772292156854
+      }
+    ],
+    "menu": {
+      "items": [
+        {
+          "name": "Portale Cosmico: Sinfonia di Gnocchi del Crepuscolo con Essenza di Tachioni e Sfumature di Fenice",
+          "price": 150
+        },
+        {
+          "name": "Sinfonia Temporale di Fenice e Xenodonte su Pane degli Abissi con Colata di Plasma Vitale e Polvere di Crononite",
+          "price": 158
+        },
+        {
+          "name": "Sinfonia Quantica dell'Oceano Interstellare",
+          "price": 156
+        },
+        {
+          "name": "Sinfonia di Multiverso: La Danza degli Elementi",
+          "price": 145
+        },
+        {
+          "name": "Sinfonia Aromatica del Multiverso",
+          "price": 144
+        },
+        {
+          "name": "Viaggio dei Sensi: Bolla Temporale di Aromi Ancestrali",
+          "price": 111
+        }
+      ]
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "11",
+    "name": "AIS Privè",
+    "balance": 1992,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": true,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "6",
+    "name": "RAGù",
+    "balance": 3000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": true,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "18",
+    "name": "Starrats",
+    "balance": 1080,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": [
+        {
+          "name": "Nebulosa Galattica",
+          "price": 30
+        },
+        {
+          "name": "Il Crepuscolo dell’Unicorno",
+          "price": 35
+        }
+      ]
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "23",
+    "name": "AI Caramba",
+    "balance": 3000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "12",
+    "name": "Bluers",
+    "balance": 3000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "14",
+    "name": "Claudio Opuscoli",
+    "balance": 3000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "16",
+    "name": "Desf-AI",
+    "balance": 3000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "17",
+    "name": "SPAM!",
+    "balance": 3000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "21",
+    "name": "EGEnts",
+    "balance": 3000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "22",
+    "name": "MARADONA",
+    "balance": 3000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "1",
+    "name": "team 1",
+    "balance": 3000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "25",
+    "name": "Prompt in the shell",
+    "balance": 3000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "15",
+    "name": "DeepAiUG",
+    "balance": 1180,
+    "inventory": {},
+    "reputation": 98,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": [
+        {
+          "name": "Sinfonia Cosmica di Proteine Interstellari",
+          "price": 150
+        },
+        {
+          "name": "Cosmic Synchrony: Il Destino di Pulsar",
+          "price": 150
+        },
+        {
+          "name": "Viaggio Galattico: Sinfonia dei Sensi",
+          "price": 150
+        }
+      ]
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "20",
+    "name": "sphacketti",
+    "balance": 1100,
+    "inventory": {},
+    "reputation": 92,
+    "isOpen": true,
+    "kitchen": [
+      {
+        "preparationId": "55",
+        "dish": "Più-dimensionale Sinfonia di Sapori: La Carne del Cosmo",
+        "status": "ready",
+        "startTime": 1772292132734,
+        "completionTime": 1772292137580
+      }
+    ],
+    "menu": {
+      "items": [
+        {
+          "name": "Sinfonia Temporale di Fenice e Xenodonte su Pane degli Abissi con Colata di Plasma Vitale e Polvere di Crononite",
+          "price": 130
+        },
+        {
+          "name": "Più-dimensionale Sinfonia di Sapori: La Carne del Cosmo",
+          "price": 130
+        }
+      ]
+    },
+    "receivedMessages": []
+  }
+]

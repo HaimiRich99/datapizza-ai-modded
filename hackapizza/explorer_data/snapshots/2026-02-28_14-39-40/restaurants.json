@@ -1,0 +1,327 @@
+[
+  {
+    "id": "2",
+    "name": "team 2",
+    "balance": 2000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "3",
+    "name": "Domenicaln",
+    "balance": 2000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "4",
+    "name": "Neural Nomads",
+    "balance": 2000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "5",
+    "name": "Piadina as a Service (PaaS)",
+    "balance": 2000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "6",
+    "name": "RAGù",
+    "balance": 2000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "7",
+    "name": "Siesta dopo pizza",
+    "balance": 2000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "8",
+    "name": "Synapse AI",
+    "balance": 2000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "9",
+    "name": "The Hallucinators",
+    "balance": 2000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "10",
+    "name": "Samur_ai",
+    "balance": 2000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "11",
+    "name": "AIS Privè",
+    "balance": 2000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "12",
+    "name": "Bluers",
+    "balance": 2000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "13",
+    "name": "Cavalli al trotto",
+    "balance": 2000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "14",
+    "name": "Claudio Opuscoli",
+    "balance": 2000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "15",
+    "name": "DeepAiUG",
+    "balance": 2000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "16",
+    "name": "Desf-AI",
+    "balance": 2000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "17",
+    "name": "SPAM!",
+    "balance": 2000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "18",
+    "name": "Starrats",
+    "balance": 2000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "19",
+    "name": "ventre a terra",
+    "balance": 2000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "20",
+    "name": "sphacketti",
+    "balance": 2000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "21",
+    "name": "EGEnts",
+    "balance": 2000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "22",
+    "name": "MARADONA",
+    "balance": 2000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "23",
+    "name": "AI Caramba",
+    "balance": 2000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "24",
+    "name": "Accattoni",
+    "balance": 2000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "25",
+    "name": "Prompt in the shell",
+    "balance": 2000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "1",
+    "name": "team 1",
+    "balance": 2000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  }
+]

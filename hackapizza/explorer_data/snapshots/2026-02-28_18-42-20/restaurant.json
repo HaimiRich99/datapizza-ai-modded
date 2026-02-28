@@ -1,0 +1,34 @@
+{
+  "id": "24",
+  "name": "Accattoni",
+  "balance": 1966,
+  "inventory": {
+    "Alghe Bioluminescenti": 1,
+    "Polvere di Crononite": 2,
+    "Muffa Lunare": 2,
+    "Vero Ghiaccio": 1,
+    "Colonia di Mycoflora": 2,
+    "Pane di Luce": 1,
+    "Plasma Vitale": 1,
+    "Pane degli Abissi": 1,
+    "Foglie di Nebulosa": 2,
+    "Funghi dell’Etere": 2,
+    "Frammenti di Supernova": 2,
+    "Lattuga Namecciana": 1,
+    "Carne di Mucca": 1,
+    "Petali di Eco": 1,
+    "Foglie di Mandragora": 1,
+    "Lacrime di Unicorno": 2,
+    "Biscotti della Galassia": 2,
+    "Riso di Cassandra": 2,
+    "Radici di Singolarità": 1,
+    "Burrobirra": 1
+  },
+  "reputation": 100,
+  "isOpen": true,
+  "kitchen": [],
+  "menu": {
+    "items": []
+  },
+  "receivedMessages": []
+}

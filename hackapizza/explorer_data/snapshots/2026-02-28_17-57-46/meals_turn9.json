@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1048,
+    "turnId": 9,
+    "customerId": 664,
+    "restaurantId": 24,
+    "request": "Portale Cosmico: Sinfonia di Gnocchi del Crepuscolo con Essenza di Tachioni e Sfumature di Fenice",
+    "startTime": "2026-02-28T16:54:56.180Z",
+    "servedDishId": null,
+    "status": "cancelled",
+    "customer": {
+      "name": "Pavel Morn"
+    },
+    "executed": false
+  }
+]

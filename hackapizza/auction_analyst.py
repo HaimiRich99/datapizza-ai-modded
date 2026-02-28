@@ -47,6 +47,8 @@ _EXPLORER_DIR = Path(__file__).parent / "explorer_data"
 _HISTORY_PATH = _EXPLORER_DIR / "auction_history.json"
 _RECOMMENDATIONS_PATH = _EXPLORER_DIR / "bid_recommendations.json"
 _STRATEGY_PATH = _EXPLORER_DIR / "strategy.json"
+_RECIPES_PATH = _EXPLORER_DIR / "recipes.json"
+_INGREDIENTS_PATH = Path(__file__).parent / "ingredienti_unici.txt"
 
 
 # ---------------------------------------------------------------------------
@@ -184,6 +186,136 @@ def build_price_summary(history: dict) -> dict[str, dict]:
     return result
 
 
+def load_recipes() -> list[dict]:
+    """Carica le ricette salvate da strategy_agent. Lista vuota se non disponibili."""
+    if _RECIPES_PATH.exists():
+        try:
+            return json.loads(_RECIPES_PATH.read_text(encoding="utf-8"))
+        except Exception:
+            pass
+    return []
+
+
+def load_unique_ingredients() -> list[str]:
+    """Carica la lista completa degli ingredienti da ingredienti_unici.txt."""
+    if not _INGREDIENTS_PATH.exists():
+        print(f"[AUCTION] WARN: {_INGREDIENTS_PATH} non trovato")
+        return []
+    return [
+        line.strip()
+        for line in _INGREDIENTS_PATH.read_text(encoding="utf-8").splitlines()
+        if line.strip()
+    ]
+
+
+def rank_least_wanted(
+    all_ingredients: list[str],
+    current_parsed: dict[str, list[dict]],
+    top_n: int = 10,
+) -> list[dict]:
+    """
+    Classifica gli ingredienti per 'meno ricercati' basandosi SOLO sull'ultima asta.
+
+    Logica:
+    - Ingrediente NON apparso nell'asta → n_buyers=0, n_bids=0 → nessuno lo ha voluto
+    - Ingrediente apparso con pochi acquirenti → poco richiesto
+    - Sort: n_buyers ASC, poi n_bids totali ASC
+
+    Ritorna top_n ingredienti con meno concorrenza.
+    """
+    ranked = []
+    for ing in all_ingredients:
+        bids = current_parsed.get(ing, [])
+        if not bids:
+            ranked.append({
+                "ingredient": ing,
+                "n_buyers": 0,
+                "n_bids": 0,
+                "avg_winning_price": None,
+                "status": "not_bid",
+            })
+        else:
+            stats = compute_stats(bids)
+            ranked.append({
+                "ingredient": ing,
+                "n_buyers": stats["n_buyers"],
+                "n_bids": len(bids),
+                "avg_winning_price": stats["avg_winning_price"],
+                "status": "bid",
+            })
+
+    ranked.sort(key=lambda x: (x["n_buyers"], x["n_bids"]))
+    return ranked[:top_n]
+
+
+def score_recipes_by_auction(
+    recipes: list[dict],
+    current_parsed: dict[str, list[dict]],
+) -> list[dict]:
+    """
+    Per ogni ricetta calcola un punteggio di opportunità basato SOLO sull'ultima asta.
+
+    - safe_fraction: % ingredienti non contesi (n_buyers=0 o <=1) nell'ultima asta
+    - estimated_cost: stima costo per copia (ingredienti non apparsi → prezzo basso)
+    - auction_score: prestige * safe_fraction / costo_normalizzato
+
+    Ingredienti non apparsi nell'asta → nessuno li vuole → costo minimo (5 crediti).
+    """
+    # Stats solo dall'asta corrente
+    current_stats: dict[str, dict] = {}
+    for ing, bids in current_parsed.items():
+        stats = compute_stats(bids)
+        current_stats[ing] = {
+            "avg_buyers": stats.get("n_buyers") or 0,
+            "avg_price": stats.get("avg_winning_price") or 0,
+        }
+
+    scored = []
+    for recipe in recipes:
+        ings = recipe.get("ingredients", {})
+        if not ings:
+            continue
+
+        low_comp = []    # nell'asta, avg_buyers <= 1
+        contested = []   # nell'asta, avg_buyers > 1
+        unseen = []      # non apparso nell'asta → nessuno lo ha voluto
+
+        total_cost = 0
+        for ing, qty in ings.items():
+            s = current_stats.get(ing)
+            if s is None:
+                # Non apparso → nessuno lo ha voluto → cheapest
+                unseen.append(ing)
+                total_cost += qty * 5
+            elif s["avg_buyers"] <= 1:
+                low_comp.append(ing)
+                total_cost += qty * max(1, s["avg_price"] or 10)
+            else:
+                contested.append(ing)
+                total_cost += qty * max(1, s["avg_price"] or 30)
+
+        n_ings = len(ings)
+        safe_fraction = (len(low_comp) + len(unseen)) / n_ings
+
+        prestige = recipe.get("prestige", 0)
+        cost_norm = max(1, total_cost / 50)
+        auction_score = round(prestige * safe_fraction / cost_norm, 2)
+
+        scored.append({
+            "name": recipe["name"],
+            "prestige": prestige,
+            "auction_score": auction_score,
+            "safe_fraction": round(safe_fraction, 2),
+            "low_comp_ingredients": low_comp,
+            "contested_ingredients": contested,
+            "unseen_ingredients": unseen,
+            "estimated_cost_per_copy": round(total_cost),
+        })
+
+    scored.sort(key=lambda x: -x["auction_score"])
+    return scored
+
+
 # ---------------------------------------------------------------------------
 # Pydantic models per LLM
 # ---------------------------------------------------------------------------
@@ -208,30 +340,40 @@ class AuctionStrategy(BaseModel):
     opportunity_note: str = Field(
         description="Nota strategica sulle opportunità principali per il prossimo turno (2-3 righe)"
     )
+    recommended_recipes: list[str] = Field(
+        default_factory=list,
+        description=(
+            "Nomi ESATTI di 1-2 ricette da usare come focus nel prossimo turno. "
+            "Scegliere ricette con alta safe_fraction (ingredienti liberi) e buona prestige. MASSIMO 2."
+        ),
+    )
 
 
 _SYSTEM_PROMPT = """\
 Sei un analista strategico per un gioco di ristorante galattico con aste chiuse (closed-bid).
 
-Ricevi:
-- Storico prezzi per ingrediente dalle aste precedenti (prezzi vincenti, n° acquirenti)
-- Ricette target del nostro ristorante (ingredienti necessari)
+Ricevi i dati dell'ULTIMA asta (non storico):
+- least_wanted_ingredients: top 10 ingredienti MENO richiesti nell'ultima asta
+  (n_buyers=0 → nessuno li ha voluti; status=not_bid → non sono nemmeno apparsi)
+- recipe_scores: ricette ordinate per opportunità (safe_fraction alta = usa ingredienti poco contesi)
+- current_auction_stats: dati grezzi dell'ultima asta per riferimento prezzi
 
-Obiettivo: raccomandare offerte ottimali per il prossimo turno.
+Obiettivo: raccomandare offerte ottimali E le 1-2 ricette migliori su cui concentrarsi.
 
 Regole chiave:
-- Se un ingrediente ha poca concorrenza (avg_buyers ≤ 2) e prezzi bassi → offrire 10-20% sopra il minimo vincente storico per assicurarselo
-- Se un ingrediente è molto conteso (avg_buyers ≥ 5) → valutare se vale il costo o trovare alternative
-- Per ingredienti senza storico → offrire conservativamente (es. 10-30 crediti)
-- Ingredienti NON nelle nostre ricette target → raccomandare "low" priority o escludere
-- Massimizza il valore prestige / crediti spesi
+- Ingredienti con n_buyers=0 e status=not_bid → NESSUNO li vuole → offerta MINIMA (5-15 crediti)
+- Ingredienti con n_buyers=1 → POCA concorrenza → offerta moderata (prezzo_corrente + 10%)
+- Ingredienti con n_buyers>=4 → MOLTO CONTESI → evitare o solo se indispensabili
+- Per recommended_recipes: scegliere MASSIMO 2 ricette con safe_fraction >= 0.6 e buona prestige
+- Priorità assoluta alle ricette i cui ingredienti sono in least_wanted_ingredients
+- Massimizza prestige / crediti spesi
 """
 
 
 def _call_llm_sync(
-    price_summary: dict[str, dict],
-    target_recipes_info: list[dict],
     current_turn_parsed: dict[str, list[dict]],
+    least_wanted: list[dict],
+    recipe_scores: list[dict],
 ) -> Optional[AuctionStrategy]:
     regolo_key = os.getenv("REGOLO_API_KEY")
     if not regolo_key:
@@ -245,26 +387,20 @@ def _call_llm_sync(
         system_prompt=_SYSTEM_PROMPT,
     )
 
-    # Compatta il summary per il prompt (solo ingredienti visti)
-    compact_summary = {
-        ing: {k: v for k, v in data.items()}
-        for ing, data in price_summary.items()
-    }
-
-    # Aggiungi stats del turno corrente (più recenti, peso maggiore)
-    current_stats = {}
-    for ing, bids in current_turn_parsed.items():
-        stats = compute_stats(bids)
-        current_stats[ing] = stats
+    current_stats = {ing: compute_stats(bids) for ing, bids in current_turn_parsed.items()}
 
     prompt = (
-        f"=== STORICO PREZZI (tutti i turni) ===\n"
-        f"{json.dumps(compact_summary, ensure_ascii=False, indent=2)}\n\n"
-        f"=== RISULTATI ASTA TURNO CORRENTE (più recente) ===\n"
+        f"=== TOP 10 INGREDIENTI MENO RICHIESTI (ultima asta) ===\n"
+        f"(n_buyers=0 + status=not_bid → nessuno li ha voluti → offerta minima)\n"
+        f"{json.dumps(least_wanted, ensure_ascii=False, indent=2)}\n\n"
+        f"=== CLASSIFICA RICETTE PER OPPORTUNITÀ (top 15) ===\n"
+        f"(auction_score alto = usa ingredienti poco contesi + buona prestige)\n"
+        f"{json.dumps(recipe_scores[:15], ensure_ascii=False, indent=2)}\n\n"
+        f"=== DATI GREZZI ULTIMA ASTA (riferimento prezzi) ===\n"
         f"{json.dumps(current_stats, ensure_ascii=False, indent=2)}\n\n"
-        f"=== RICETTE TARGET DEL NOSTRO RISTORANTE ===\n"
-        f"{json.dumps(target_recipes_info, ensure_ascii=False, indent=2)}\n\n"
-        f"Analizza e fornisci raccomandazioni strategiche per il prossimo turno di aste."
+        f"Analizza e fornisci:\n"
+        f"1. Raccomandazioni offerta per gli ingredienti in least_wanted (prezzi bassi!)\n"
+        f"2. Le 1-2 ricette migliori in recommended_recipes (nomi ESATTI dalla classifica)"
     )
 
     print("[AUCTION] LLM analisi in corso...")
@@ -292,46 +428,57 @@ def _call_llm_sync(
 # ---------------------------------------------------------------------------
 
 def _statistical_recommendations(
-    price_summary: dict[str, dict],
     current_turn_parsed: dict[str, list[dict]],
-    target_ingredients: list[str],
+    least_wanted: list[dict],
+    recipe_scores: list[dict],
 ) -> dict:
-    """Genera raccomandazioni base senza LLM."""
+    """Genera raccomandazioni base senza LLM, usando solo l'ultima asta."""
     recs = {}
     low_comp = []
     high_comp = []
 
-    all_ings = set(price_summary.keys()) | set(current_turn_parsed.keys())
+    # Raccomandazioni prezzi basate sull'ultima asta
+    for ing, bids in current_turn_parsed.items():
+        stats = compute_stats(bids)
+        avg_price = stats.get("avg_winning_price") or 10
+        n_buyers = stats.get("n_buyers") or 0
 
-    for ing in all_ings:
-        hist = price_summary.get(ing, {})
-        curr_stats = compute_stats(current_turn_parsed.get(ing, []))
+        # 0 acquirenti → bid minimo; pochi → +10%; molti → +20%
+        if n_buyers == 0:
+            rec_bid = max(1, int(avg_price * 1.05))
+        elif n_buyers <= 2:
+            rec_bid = max(1, int(avg_price * 1.10))
+        else:
+            rec_bid = max(1, int(avg_price * 1.20))
 
-        avg_price = hist.get("avg_winning_price") or curr_stats.get("avg_winning_price") or 10
-        avg_buyers = hist.get("avg_buyers") or curr_stats.get("n_buyers") or 0
-
-        # Raccomanda prezzo = avg_winning + 15%
-        rec_bid = max(1, int((avg_price or 10) * 1.15))
-
-        is_target = ing in target_ingredients
-        priority = "high" if is_target else "low"
-
-        if avg_buyers <= 2 and is_target:
+        if n_buyers <= 1:
             low_comp.append(ing)
-        elif avg_buyers >= 5:
+        elif n_buyers >= 4:
             high_comp.append(ing)
 
         recs[ing] = {
             "recommended_bid": rec_bid,
-            "priority": priority,
-            "avg_winning_price_historical": avg_price,
-            "avg_buyers_historical": avg_buyers,
+            "n_buyers_last_auction": n_buyers,
+            "avg_winning_price_last_auction": avg_price,
         }
+
+    # Aggiungi ingredienti least_wanted non ancora nell'asta (bid minimo assoluto)
+    for entry in least_wanted:
+        ing = entry["ingredient"]
+        if ing not in recs and entry["status"] == "not_bid":
+            recs[ing] = {
+                "recommended_bid": 5,
+                "n_buyers_last_auction": 0,
+                "avg_winning_price_last_auction": None,
+            }
+
+    recommended_recipes = [r["name"] for r in recipe_scores[:2]]
 
     return {
         "recommendations": recs,
         "low_competition_ingredients": low_comp,
         "avoid_ingredients": high_comp,
+        "recommended_recipes": recommended_recipes,
         "method": "statistical",
     }
 
@@ -360,37 +507,45 @@ async def run_auction_analyst(
     n_transactions = sum(len(v) for v in parsed.values())
     print(f"[AUCTION] parsati {n_ingredients} ingredienti, {n_transactions} transazioni")
 
-    # 2. Aggiorna storico
+    # 2. Aggiorna storico (manteniamo il file ma non lo usiamo per l'analisi)
     _EXPLORER_DIR.mkdir(exist_ok=True)
-    history = update_history(turn_id, parsed)
-    print(f"[AUCTION] storico aggiornato -> {_HISTORY_PATH}")
+    update_history(turn_id, parsed)
 
-    # 3. Consolida summary storico
-    price_summary = build_price_summary(history)
+    # 3. Carica lista completa ingredienti e calcola ranking least_wanted
+    all_ingredients = load_unique_ingredients()
+    if not all_ingredients:
+        # Fallback: usa gli ingredienti apparsi nell'asta
+        all_ingredients = list(parsed.keys())
+        print("[AUCTION] WARN: ingredienti_unici.txt non trovato — ranking parziale")
 
-    # 4. Leggi ricette target dalla strategy
-    target_recipes_info = []
-    target_ingredients: list[str] = []
-    if _STRATEGY_PATH.exists():
-        try:
-            strat = json.loads(_STRATEGY_PATH.read_text(encoding="utf-8"))
-            target_ingredients = strat.get("target_ingredients", [])
-            recipe_names = strat.get("target_recipes", [])
-            target_recipes_info = [
-                {"name": name, "ingredients_needed": [
-                    ing for ing in target_ingredients
-                ]}
-                for name in recipe_names
-            ] if recipe_names else [{"ingredients_needed": target_ingredients}]
-        except Exception as exc:
-            print(f"[AUCTION] WARN lettura strategy: {exc}")
+    least_wanted = rank_least_wanted(all_ingredients, parsed, top_n=10)
+
+    print(f"\n[AUCTION] === TOP 10 INGREDIENTI MENO RICHIESTI (asta {turn_id}) ===")
+    not_bid_count = sum(1 for e in least_wanted if e["status"] == "not_bid")
+    print(f"  ({not_bid_count} non apparsi nell'asta, {10 - not_bid_count} con pochi acquirenti)")
+    for i, entry in enumerate(least_wanted, 1):
+        status = "NON APPARSO" if entry["status"] == "not_bid" else f"{entry['n_buyers']} acquirenti"
+        price_info = f" | prezzo={entry['avg_winning_price']}" if entry["avg_winning_price"] else ""
+        print(f"  {i:2}. {entry['ingredient']!r} — {status}{price_info}")
+
+    # 4. Carica ricette e calcola score usando SOLO l'asta corrente
+    recipes = load_recipes()
+    recipe_scores: list[dict] = []
+    if recipes:
+        recipe_scores = score_recipes_by_auction(recipes, parsed)
+        print(f"\n[AUCTION] classificate {len(recipe_scores)} ricette per opportunità d'asta")
+        print("[AUCTION] top 5 ricette:")
+        for r in recipe_scores[:5]:
+            print(f"  {r['name']!r} | score={r['auction_score']} | safe={r['safe_fraction']} | cost≈{r['estimated_cost_per_copy']}")
+    else:
+        print("[AUCTION] WARN: nessuna ricetta trovata in recipes.json — skip recipe scoring")
 
     # 5. Analisi LLM
     llm_result: Optional[AuctionStrategy] = None
     if _LLM_AVAILABLE:
         try:
             llm_result = await asyncio.to_thread(
-                _call_llm_sync, price_summary, target_recipes_info, parsed
+                _call_llm_sync, parsed, least_wanted, recipe_scores
             )
         except Exception as exc:
             print(f"[AUCTION] LLM errore: {exc}")
@@ -400,8 +555,9 @@ async def run_auction_analyst(
         print(text.encode(sys.stdout.encoding or "utf-8", errors="replace").decode(sys.stdout.encoding or "utf-8", errors="replace"))
 
     if llm_result is not None:
-        _safe_print("[AUCTION] LLM analisi completata:")
-        _safe_print(f"  low_competition: {llm_result.low_competition_ingredients}")
+        _safe_print("\n[AUCTION] LLM analisi completata:")
+        _safe_print(f"  ricette raccomandate: {llm_result.recommended_recipes}")
+        _safe_print(f"  bassa concorrenza: {llm_result.low_competition_ingredients}")
         _safe_print(f"  da evitare: {llm_result.avoid_ingredients}")
         _safe_print(f"  nota: {llm_result.opportunity_note}")
 
@@ -409,6 +565,8 @@ async def run_auction_analyst(
             "method": "llm",
             "turn_id": turn_id,
             "timestamp": datetime.now().isoformat(),
+            "least_wanted_ingredients": least_wanted,
+            "recommended_recipes": llm_result.recommended_recipes,
             "recommendations": [
                 {
                     "ingredient": r.ingredient,
@@ -421,41 +579,44 @@ async def run_auction_analyst(
             "low_competition_ingredients": llm_result.low_competition_ingredients,
             "avoid_ingredients": llm_result.avoid_ingredients,
             "opportunity_note": llm_result.opportunity_note,
+            "recipe_scores": recipe_scores[:10],
         }
     else:
-        # Fallback statistico
-        stat_result = _statistical_recommendations(price_summary, parsed, target_ingredients)
-        print(f"[AUCTION] analisi statistica (fallback LLM):")
-        print(f"  low_competition: {stat_result['low_competition_ingredients']}")
+        stat_result = _statistical_recommendations(parsed, least_wanted, recipe_scores)
+        print(f"\n[AUCTION] analisi statistica (fallback LLM):")
+        print(f"  ricette raccomandate: {stat_result['recommended_recipes']}")
+        print(f"  bassa concorrenza: {stat_result['low_competition_ingredients']}")
         print(f"  alta concorrenza: {stat_result['avoid_ingredients']}")
 
         output = {
             "method": "statistical",
             "turn_id": turn_id,
             "timestamp": datetime.now().isoformat(),
+            "least_wanted_ingredients": least_wanted,
+            "recipe_scores": recipe_scores[:10],
             **stat_result,
         }
 
-    # 7. Stampa top opportunità
-    print("\n[AUCTION] === OPPORTUNITÀ PROSSIMO TURNO ===")
-    if llm_result and llm_result.low_competition_ingredients:
-        print(f"  Ingredienti a bassa concorrenza da sfruttare:")
-        for ing in llm_result.low_competition_ingredients[:5]:
-            hist = price_summary.get(ing, {})
-            print(f"    - {ing} | avg_win={hist.get('avg_winning_price')} | avg_buyers={hist.get('avg_buyers')}")
+    # 7. Stampa riepilogo ricette raccomandate
+    print("\n[AUCTION] === RICETTE RACCOMANDATE PROSSIMO TURNO ===")
+    recommended = output.get("recommended_recipes", [])
+    if recommended:
+        for rec_name in recommended:
+            r = next((x for x in recipe_scores if x["name"] == rec_name), None)
+            if r:
+                print(f"  -> {rec_name!r} | safe={r['safe_fraction']} | cost≈{r['estimated_cost_per_copy']}")
+                if r.get("unseen_ingredients"):
+                    print(f"     non contesi: {r['unseen_ingredients']}")
+                if r.get("low_comp_ingredients"):
+                    print(f"     low_comp: {r['low_comp_ingredients']}")
+                if r.get("contested_ingredients"):
+                    print(f"     contesi: {r['contested_ingredients']}")
     else:
-        # Mostra ingredienti con meno acquirenti medi
-        low_comp = sorted(
-            [(ing, price_summary.get(ing, {}).get("avg_buyers", 99)) for ing in target_ingredients],
-            key=lambda x: x[1]
-        )[:5]
-        for ing, buyers in low_comp:
-            hist = price_summary.get(ing, {})
-            print(f"    - {ing} | avg_win={hist.get('avg_winning_price')} | avg_buyers={buyers}")
+        print("  (nessuna ricetta raccomandata)")
 
     # 8. Salva raccomandazioni
     _RECOMMENDATIONS_PATH.write_text(json.dumps(output, indent=2, ensure_ascii=False), encoding="utf-8")
-    print(f"[AUCTION] raccomandazioni salvate -> {_RECOMMENDATIONS_PATH}\n")
+    print(f"\n[AUCTION] raccomandazioni salvate -> {_RECOMMENDATIONS_PATH}\n")
 
     return output
 

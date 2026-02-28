@@ -1,0 +1,548 @@
+[
+  {
+    "id": 88,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T15:12:50.212Z",
+    "ingredientId": 2,
+    "quantity": 2,
+    "totalPrice": 350,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 2,
+      "name": "Alghe Bioluminescenti"
+    }
+  },
+  {
+    "id": 89,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T15:12:52.241Z",
+    "ingredientId": 11,
+    "quantity": 1,
+    "totalPrice": 200,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 11,
+      "name": "Polvere di Pulsar"
+    }
+  },
+  {
+    "id": 90,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T15:12:54.661Z",
+    "ingredientId": 1,
+    "quantity": 1,
+    "totalPrice": 150,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 1,
+      "name": "Radici di Gravità"
+    }
+  },
+  {
+    "id": 91,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T15:12:56.432Z",
+    "ingredientId": 2,
+    "quantity": 1,
+    "totalPrice": 120,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 2,
+      "name": "Alghe Bioluminescenti"
+    }
+  },
+  {
+    "id": 92,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T15:13:10.559Z",
+    "ingredientId": 11,
+    "quantity": 2,
+    "totalPrice": 200,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 11,
+      "name": "Polvere di Pulsar"
+    }
+  },
+  {
+    "id": 93,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T15:13:26.086Z",
+    "ingredientId": 11,
+    "quantity": 1,
+    "totalPrice": 1,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 11,
+      "name": "Polvere di Pulsar"
+    }
+  },
+  {
+    "id": 85,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T15:12:31.743Z",
+    "ingredientId": 11,
+    "quantity": 1,
+    "totalPrice": 200,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 11,
+      "name": "Polvere di Pulsar"
+    }
+  },
+  {
+    "id": 86,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T15:12:45.966Z",
+    "ingredientId": 11,
+    "quantity": 2,
+    "totalPrice": 400,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 11,
+      "name": "Polvere di Pulsar"
+    }
+  },
+  {
+    "id": 87,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T15:12:48.536Z",
+    "ingredientId": 1,
+    "quantity": 2,
+    "totalPrice": 300,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 1,
+      "name": "Radici di Gravità"
+    }
+  },
+  {
+    "id": 94,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T15:21:25.365Z",
+    "ingredientId": 6,
+    "quantity": 1,
+    "totalPrice": 20,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 6,
+      "name": "Carne di Balena spaziale"
+    }
+  },
+  {
+    "id": 95,
+    "createdByRestaurantId": 3,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T15:21:27.401Z",
+    "ingredientId": 11,
+    "quantity": 2,
+    "totalPrice": 200,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 11,
+      "name": "Polvere di Pulsar"
+    }
+  },
+  {
+    "id": 96,
+    "createdByRestaurantId": 3,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T15:22:16.899Z",
+    "ingredientId": 1,
+    "quantity": 1,
+    "totalPrice": 200,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 1,
+      "name": "Radici di Gravità"
+    }
+  },
+  {
+    "id": 97,
+    "createdByRestaurantId": 3,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T15:22:18.241Z",
+    "ingredientId": 2,
+    "quantity": 1,
+    "totalPrice": 150,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 2,
+      "name": "Alghe Bioluminescenti"
+    }
+  },
+  {
+    "id": 98,
+    "createdByRestaurantId": 3,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T15:22:21.047Z",
+    "ingredientId": 5,
+    "quantity": 1,
+    "totalPrice": 250,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 5,
+      "name": "Essenza di Tachioni"
+    }
+  },
+  {
+    "id": 99,
+    "createdByRestaurantId": 3,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T15:22:22.096Z",
+    "ingredientId": 3,
+    "quantity": 1,
+    "totalPrice": 180,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 3,
+      "name": "Foglie di Nebulosa"
+    }
+  },
+  {
+    "id": 101,
+    "createdByRestaurantId": 11,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T15:27:41.061Z",
+    "ingredientId": 32,
+    "quantity": 1,
+    "totalPrice": 20,
+    "status": "closed",
+    "ingredient": {
+      "id": 32,
+      "name": "Uova di Fenice"
+    }
+  },
+  {
+    "id": 102,
+    "createdByRestaurantId": 11,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T15:27:41.117Z",
+    "ingredientId": 26,
+    "quantity": 1,
+    "totalPrice": 20,
+    "status": "closed",
+    "ingredient": {
+      "id": 26,
+      "name": "Plasma Vitale"
+    }
+  },
+  {
+    "id": 100,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T15:27:27.140Z",
+    "ingredientId": 11,
+    "quantity": 1,
+    "totalPrice": 30,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 11,
+      "name": "Polvere di Pulsar"
+    }
+  },
+  {
+    "id": 103,
+    "createdByRestaurantId": 10,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T15:27:57.017Z",
+    "ingredientId": 2,
+    "quantity": 2,
+    "totalPrice": 20,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 2,
+      "name": "Alghe Bioluminescenti"
+    }
+  },
+  {
+    "id": 104,
+    "createdByRestaurantId": 10,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T15:28:05.348Z",
+    "ingredientId": 2,
+    "quantity": 1,
+    "totalPrice": 5,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 2,
+      "name": "Alghe Bioluminescenti"
+    }
+  },
+  {
+    "id": 105,
+    "createdByRestaurantId": 10,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T15:28:18.795Z",
+    "ingredientId": 2,
+    "quantity": 1,
+    "totalPrice": 5,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 2,
+      "name": "Alghe Bioluminescenti"
+    }
+  },
+  {
+    "id": 106,
+    "createdByRestaurantId": 11,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T15:34:12.844Z",
+    "ingredientId": 32,
+    "quantity": 1,
+    "totalPrice": 20,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 32,
+      "name": "Uova di Fenice"
+    }
+  },
+  {
+    "id": 107,
+    "createdByRestaurantId": 11,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T15:34:12.972Z",
+    "ingredientId": 26,
+    "quantity": 1,
+    "totalPrice": 20,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 26,
+      "name": "Plasma Vitale"
+    }
+  },
+  {
+    "id": 108,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T15:35:38.302Z",
+    "ingredientId": 2,
+    "quantity": 3,
+    "totalPrice": 90,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 2,
+      "name": "Alghe Bioluminescenti"
+    }
+  },
+  {
+    "id": 109,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T15:35:40.684Z",
+    "ingredientId": 11,
+    "quantity": 7,
+    "totalPrice": 150,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 11,
+      "name": "Polvere di Pulsar"
+    }
+  },
+  {
+    "id": 110,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T15:35:43.075Z",
+    "ingredientId": 1,
+    "quantity": 3,
+    "totalPrice": 60,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 1,
+      "name": "Radici di Gravità"
+    }
+  },
+  {
+    "id": 111,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T15:35:44.861Z",
+    "ingredientId": 6,
+    "quantity": 1,
+    "totalPrice": 80,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 6,
+      "name": "Carne di Balena spaziale"
+    }
+  },
+  {
+    "id": 112,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T15:36:04.672Z",
+    "ingredientId": 2,
+    "quantity": 3,
+    "totalPrice": 45,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 2,
+      "name": "Alghe Bioluminescenti"
+    }
+  },
+  {
+    "id": 113,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T15:36:06.794Z",
+    "ingredientId": 11,
+    "quantity": 7,
+    "totalPrice": 105,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 11,
+      "name": "Polvere di Pulsar"
+    }
+  },
+  {
+    "id": 114,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T15:36:08.472Z",
+    "ingredientId": 1,
+    "quantity": 3,
+    "totalPrice": 30,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 1,
+      "name": "Radici di Gravità"
+    }
+  },
+  {
+    "id": 115,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T15:36:10.233Z",
+    "ingredientId": 6,
+    "quantity": 1,
+    "totalPrice": 70,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 6,
+      "name": "Carne di Balena spaziale"
+    }
+  },
+  {
+    "id": 116,
+    "createdByRestaurantId": 3,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T15:40:22.479Z",
+    "ingredientId": 1,
+    "quantity": 5,
+    "totalPrice": 4,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 1,
+      "name": "Radici di Gravità"
+    }
+  },
+  {
+    "id": 117,
+    "createdByRestaurantId": 14,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T15:40:56.014Z",
+    "ingredientId": 19,
+    "quantity": 1,
+    "totalPrice": 170,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 19,
+      "name": "Carne di Kraken"
+    }
+  },
+  {
+    "id": 118,
+    "createdByRestaurantId": 14,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T15:40:59.869Z",
+    "ingredientId": 9,
+    "quantity": 1,
+    "totalPrice": 150,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 9,
+      "name": "Pane degli Abissi"
+    }
+  },
+  {
+    "id": 119,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T15:47:02.572Z",
+    "ingredientId": 11,
+    "quantity": 4,
+    "totalPrice": 200,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 11,
+      "name": "Polvere di Pulsar"
+    }
+  },
+  {
+    "id": 120,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T15:47:04.791Z",
+    "ingredientId": 2,
+    "quantity": 3,
+    "totalPrice": 120,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 2,
+      "name": "Alghe Bioluminescenti"
+    }
+  },
+  {
+    "id": 121,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T15:47:07.199Z",
+    "ingredientId": 1,
+    "quantity": 2,
+    "totalPrice": 140,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 1,
+      "name": "Radici di Gravità"
+    }
+  },
+  {
+    "id": 122,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T15:47:09.632Z",
+    "ingredientId": 6,
+    "quantity": 1,
+    "totalPrice": 150,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 6,
+      "name": "Carne di Balena spaziale"
+    }
+  },
+  {
+    "id": 123,
+    "createdByRestaurantId": 15,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T15:47:30.653Z",
+    "ingredientId": 11,
+    "quantity": 5,
+    "totalPrice": 300,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 11,
+      "name": "Polvere di Pulsar"
+    }
+  }
+]

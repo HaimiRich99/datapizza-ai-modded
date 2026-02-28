@@ -1,0 +1,142 @@
+[
+  {
+    "id": 930,
+    "turnId": 6,
+    "customerId": 594,
+    "restaurantId": 24,
+    "request": "Portale Cosmico: Sinfonia di Gnocchi del Crepuscolo con Essenza di Tachioni e Sfumature di Fenice",
+    "startTime": "2026-02-28T16:35:14.199Z",
+    "servedDishId": null,
+    "status": "cancelled",
+    "customer": {
+      "name": "Caden Rour"
+    },
+    "executed": false
+  },
+  {
+    "id": 934,
+    "turnId": 6,
+    "customerId": 569,
+    "restaurantId": 24,
+    "request": "Portale Cosmico: Sinfonia di Gnocchi del Crepuscolo con Essenza di Tachioni e Sfumature di Fenice",
+    "startTime": "2026-02-28T16:35:22.045Z",
+    "servedDishId": null,
+    "status": "cancelled",
+    "customer": {
+      "name": "Mirael Dorn"
+    },
+    "executed": false
+  },
+  {
+    "id": 935,
+    "turnId": 6,
+    "customerId": 467,
+    "restaurantId": 24,
+    "request": "Portale Cosmico: Sinfonia di Gnocchi del Crepuscolo con Essenza di Tachioni e Sfumature di Fenice",
+    "startTime": "2026-02-28T16:35:24.099Z",
+    "servedDishId": null,
+    "status": "cancelled",
+    "customer": {
+      "name": "Caia York"
+    },
+    "executed": false
+  },
+  {
+    "id": 944,
+    "turnId": 6,
+    "customerId": 551,
+    "restaurantId": 24,
+    "request": "I want to eat Portale Cosmico: Sinfonia di Gnocchi del Crepuscolo con Essenza di Tachioni e Sfumature di Fenice. I'm intolerant to Latte+",
+    "startTime": "2026-02-28T16:35:40.050Z",
+    "servedDishId": null,
+    "status": "cancelled",
+    "customer": {
+      "name": "Petra Aurel"
+    },
+    "executed": false
+  },
+  {
+    "id": 948,
+    "turnId": 6,
+    "customerId": 55,
+    "restaurantId": 24,
+    "request": "Portale Cosmico: Sinfonia di Gnocchi del Crepuscolo con Essenza di Tachioni e Sfumature di Fenice",
+    "startTime": "2026-02-28T16:35:48.134Z",
+    "servedDishId": null,
+    "status": "cancelled",
+    "customer": {
+      "name": "Alden Cross"
+    },
+    "executed": false
+  },
+  {
+    "id": 952,
+    "turnId": 6,
+    "customerId": 78,
+    "restaurantId": 24,
+    "request": "Portale Cosmico: Sinfonia di Gnocchi del Crepuscolo con Essenza di Tachioni e Sfumature di Fenice",
+    "startTime": "2026-02-28T16:35:54.051Z",
+    "servedDishId": null,
+    "status": "cancelled",
+    "customer": {
+      "name": "Xeno Reed"
+    },
+    "executed": false
+  },
+  {
+    "id": 958,
+    "turnId": 6,
+    "customerId": 613,
+    "restaurantId": 24,
+    "request": "Portale Cosmico: Sinfonia di Gnocchi del Crepuscolo con Essenza di Tachioni e Sfumature di Fenice",
+    "startTime": "2026-02-28T16:36:04.089Z",
+    "servedDishId": null,
+    "status": "cancelled",
+    "customer": {
+      "name": "Sira Nox"
+    },
+    "executed": false
+  },
+  {
+    "id": 964,
+    "turnId": 6,
+    "customerId": 452,
+    "restaurantId": 24,
+    "request": "I want to eat Portale Cosmico: Sinfonia di Gnocchi del Crepuscolo con Essenza di Tachioni e Sfumature di Fenice. I'm intolerant to Latte+",
+    "startTime": "2026-02-28T16:36:16.054Z",
+    "servedDishId": null,
+    "status": "cancelled",
+    "customer": {
+      "name": "Lara Forge"
+    },
+    "executed": false
+  },
+  {
+    "id": 971,
+    "turnId": 6,
+    "customerId": 359,
+    "restaurantId": 24,
+    "request": "I want to eat Portale Cosmico: Sinfonia di Gnocchi del Crepuscolo con Essenza di Tachioni e Sfumature di Fenice. I'm intolerant to Salsa Szechuan",
+    "startTime": "2026-02-28T16:36:28.073Z",
+    "servedDishId": null,
+    "status": "cancelled",
+    "customer": {
+      "name": "Wren Xander"
+    },
+    "executed": false
+  },
+  {
+    "id": 975,
+    "turnId": 6,
+    "customerId": 452,
+    "restaurantId": 24,
+    "request": "I want to eat Portale Cosmico: Sinfonia di Gnocchi del Crepuscolo con Essenza di Tachioni e Sfumature di Fenice. I'm intolerant to Latte+",
+    "startTime": "2026-02-28T16:36:36.053Z",
+    "servedDishId": null,
+    "status": "cancelled",
+    "customer": {
+      "name": "Lara Forge"
+    },
+    "executed": false
+  }
+]

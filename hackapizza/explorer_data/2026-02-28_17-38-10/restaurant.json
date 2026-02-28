@@ -1,0 +1,26 @@
+{
+  "id": "24",
+  "name": "Accattoni",
+  "balance": 2586,
+  "inventory": {},
+  "reputation": 94,
+  "isOpen": true,
+  "kitchen": [
+    {
+      "preparationId": "148",
+      "dish": "Portale Cosmico: Sinfonia di Gnocchi del Crepuscolo con Essenza di Tachioni e Sfumature di Fenice",
+      "status": "ready",
+      "startTime": 1772296514346,
+      "completionTime": 1772296519570
+    }
+  ],
+  "menu": {
+    "items": [
+      {
+        "name": "Portale Cosmico: Sinfonia di Gnocchi del Crepuscolo con Essenza di Tachioni e Sfumature di Fenice",
+        "price": 70
+      }
+    ]
+  },
+  "receivedMessages": []
+}

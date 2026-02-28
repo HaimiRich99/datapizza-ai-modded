@@ -1,0 +1,265 @@
+{
+  "ventre a terra": [
+    {
+      "name": "Sinfonia Cosmica di Proteine Interstellari",
+      "price": 92
+    },
+    {
+      "name": "Sinfonia del Multiverso Calante",
+      "price": 100
+    },
+    {
+      "name": "Sinfonia Temporale di Fenice e Xenodonte su Pane degli Abissi con Colata di Plasma Vitale e Polvere di Crononite",
+      "price": 110
+    },
+    {
+      "name": "Sinfonia Cosmica di Mare e Stelle",
+      "price": 92
+    },
+    {
+      "name": "Sinfonia del Multiverso",
+      "price": 95
+    }
+  ],
+  "Domenicaln": [
+    {
+      "name": "L'Estasi Cosmica di Nova",
+      "price": 130
+    }
+  ],
+  "Neural Nomads": [
+    {
+      "name": "Eterea Sinfonia di Gravità con Infusione Temporale",
+      "price": 353
+    },
+    {
+      "name": "Sinfonia del Multiverso Nascente",
+      "price": 353
+    },
+    {
+      "name": "Sinfonia Cosmica di Proteine Interstellari",
+      "price": 323
+    },
+    {
+      "name": "Viaggio Galattico: Sinfonia dei Sensi",
+      "price": 315
+    },
+    {
+      "name": "Universo Cosmico nel Piatto",
+      "price": 307
+    }
+  ],
+  "Samur_ai": [],
+  "The Hallucinators": [],
+  "Siesta dopo pizza": [
+    {
+      "name": "Nebulosa Galattica",
+      "price": 30
+    },
+    {
+      "name": "Sinfonia Cosmica di Proteine Interstellari",
+      "price": 30
+    },
+    {
+      "name": "Il Crepuscolo dell’Unicorno",
+      "price": 30
+    },
+    {
+      "name": "Universo in Fusilli - Variazione Celestiale",
+      "price": 30
+    }
+  ],
+  "Synapse AI": [
+    {
+      "name": "Nebulae Di-Cedri Risvegliati",
+      "price": 360
+    },
+    {
+      "name": "Nebulosa di Confini Sfondati",
+      "price": 414
+    },
+    {
+      "name": "Cosmic Synchrony: Il Destino di Pulsar",
+      "price": 310
+    },
+    {
+      "name": "Sinfonia Celestiale di Gnocchi del Crepuscolo",
+      "price": 317
+    }
+  ],
+  "Piadina as a Service (PaaS)": [
+    {
+      "name": "Nebulosa Galattica",
+      "price": 625
+    },
+    {
+      "name": "Sinfonia del Multiverso Calante",
+      "price": 630
+    },
+    {
+      "name": "Sinfonia Temporale di Fenice e Xenodonte su Pane degli Abissi con Colata di Plasma Vitale e Polvere di Crononite",
+      "price": 640
+    }
+  ],
+  "team 2": [],
+  "The Transformer guys": [
+    {
+      "name": "Nebulosa Galattica",
+      "price": 50
+    },
+    {
+      "name": "Sinfonia Cosmica di Proteine Interstellari",
+      "price": 50
+    },
+    {
+      "name": "L'Estasi Cosmica di Nova",
+      "price": 50
+    },
+    {
+      "name": "Viaggio Galattico: Sinfonia dei Sensi",
+      "price": 50
+    },
+    {
+      "name": "Cosmic Synchrony: Il Destino di Pulsar",
+      "price": 50
+    }
+  ],
+  "team 1": [],
+  "MARADONA": [
+    {
+      "name": "Portale Cosmico: Sinfonia di Gnocchi del Crepuscolo con Essenza di Tachioni e Sfumature di Fenice",
+      "price": 375
+    },
+    {
+      "name": "Sinfonia Temporale di Fenice e Xenodonte su Pane degli Abissi con Colata di Plasma Vitale e Polvere di Crononite",
+      "price": 375
+    }
+  ],
+  "RAGù": [
+    {
+      "name": "Sinfonia Cosmica: Versione Pizza",
+      "price": 350
+    }
+  ],
+  "AIS Privè": [
+    {
+      "name": "Nebulosa Galattica",
+      "price": 200
+    }
+  ],
+  "Claudio Opuscoli": [
+    {
+      "name": "Viaggio Cosmico nel Multiverso",
+      "price": 420
+    },
+    {
+      "name": "Più-dimensionale Sinfonia di Sapori: La Carne del Cosmo",
+      "price": 500
+    },
+    {
+      "name": "Sinfonia del Multiverso Calante",
+      "price": 410
+    }
+  ],
+  "Starrats": [
+    {
+      "name": "Portale Cosmico: Sinfonia di Gnocchi del Crepuscolo con Essenza di Tachioni e Sfumature di Fenice",
+      "price": 300
+    },
+    {
+      "name": "Sinfonia Astrale - Risotto Multiversale con Risacca Celeste",
+      "price": 300
+    }
+  ],
+  "Bluers": [
+    {
+      "name": "Portale Cosmico: Sinfonia di Gnocchi del Crepuscolo con Essenza di Tachioni e Sfumature di Fenice",
+      "price": 375
+    },
+    {
+      "name": "Sinfonia Temporale di Fenice e Xenodonte su Pane degli Abissi con Colata di Plasma Vitale e Polvere di Crononite",
+      "price": 365
+    },
+    {
+      "name": "Sinfonia di Multiverso: La Danza degli Elementi",
+      "price": 339
+    }
+  ],
+  "Cavalli al trotto": [
+    {
+      "name": "Sinfonia Temporale di Fenice e Xenodonte su Pane degli Abissi con Colata di Plasma Vitale e Polvere di Crononite",
+      "price": 150
+    },
+    {
+      "name": "Eclissi del Drago nell'Abbraccio del Kraken",
+      "price": 100
+    },
+    {
+      "name": "Cosmic Harmony Risotto",
+      "price": 85
+    },
+    {
+      "name": "Sinfonia Galattica Agentica",
+      "price": 90
+    },
+    {
+      "name": "La Balena Sputafuoco",
+      "price": 68
+    }
+  ],
+  "Accattoni": [
+    {
+      "name": "Portale Cosmico: Sinfonia di Gnocchi del Crepuscolo con Essenza di Tachioni e Sfumature di Fenice",
+      "price": 1000
+    }
+  ],
+  "sphacketti": [
+    {
+      "name": "Galassia di Sapore",
+      "price": 122
+    },
+    {
+      "name": "Il Viaggio Celeste",
+      "price": 98
+    },
+    {
+      "name": "Il Crepuscolo dell’Unicorno",
+      "price": 94
+    },
+    {
+      "name": "Il Risveglio della Fenice sull'Arcobaleno d'Oceano",
+      "price": 94
+    },
+    {
+      "name": "Luce e Ombra di Nomea Spaziale",
+      "price": 80
+    }
+  ],
+  "AI Caramba": [],
+  "SPAM!": [
+    {
+      "name": "Sinfonia del Multiverso Calante",
+      "price": 348
+    },
+    {
+      "name": "Più-dimensionale Sinfonia di Sapori: La Carne del Cosmo",
+      "price": 363
+    },
+    {
+      "name": "Sinfonia Temporale di Fenice e Xenodonte su Pane degli Abissi con Colata di Plasma Vitale e Polvere di Crononite",
+      "price": 363
+    },
+    {
+      "name": "Plasma Celestiale al Risotto di Kraken nell'Aura del Sole",
+      "price": 353
+    },
+    {
+      "name": "Sinfonia Cosmica",
+      "price": 348
+    }
+  ],
+  "DeepAiUG": [],
+  "Prompt in the shell": [],
+  "EGEnts": [],
+  "Desf-AI": []
+}

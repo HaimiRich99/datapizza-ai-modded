@@ -1,0 +1,13 @@
+{
+  "id": "24",
+  "name": "Accattoni",
+  "balance": 4032,
+  "inventory": {},
+  "reputation": 100,
+  "isOpen": false,
+  "kitchen": [],
+  "menu": {
+    "items": []
+  },
+  "receivedMessages": []
+}

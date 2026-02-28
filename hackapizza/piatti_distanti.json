@@ -1,0 +1,86 @@
+[
+    {
+        "name": "Nebulosa Galattica",
+        "preparationTimeMs": 3000,
+        "ingredients": {
+            "Radici di Gravità": 1,
+            "Alghe Bioluminescenti": 1,
+            "Foglie di Nebulosa": 1,
+            "Gnocchi del Crepuscolo": 1,
+            "Essenza di Tachioni": 1
+        },
+        "prestige": 31
+    },
+    {
+        "name": "Sinfonia Cosmica di Proteine Interstellari",
+        "preparationTimeMs": 3042,
+        "ingredients": {
+            "Carne di Balena spaziale": 1,
+            "Carne di Mucca": 1,
+            "Carne di Xenodonte": 1,
+            "Pane degli Abissi": 1,
+            "Funghi dell’Etere": 1
+        },
+        "prestige": 77
+    },
+    {
+        "name": "Essenze dell'Infinito",
+        "preparationTimeMs": 3881,
+        "ingredients": {
+            "Lattuga Namecciana": 1,
+            "Baccacedro": 1,
+            "Carne di Kraken": 1,
+            "Funghi Orbitali": 1,
+            "Essenza di Vuoto": 1
+        },
+        "prestige": 36
+    },
+    {
+        "name": "Sinfonia del Multiverso",
+        "preparationTimeMs": 5517,
+        "ingredients": {
+            "Petali di Eco": 1,
+            "Foglie di Mandragora": 1,
+            "Radici di Singolarità": 1,
+            "Fusilli del Vento": 1,
+            "Plasma Vitale": 1
+        },
+        "prestige": 80
+    },
+    {
+        "name": "Risotto dei Multiversi",
+        "preparationTimeMs": 7531,
+        "ingredients": {
+            "Cristalli di Nebulite": 1,
+            "Riso di Cassandra": 1,
+            "Spaghi del Sole": 1,
+            "Lacrime di Unicorno": 1,
+            "Sale Temporale": 1
+        },
+        "prestige": 43
+    },
+    {
+        "name": "Nebulosa di Drago Interdimensionale",
+        "preparationTimeMs": 9503,
+        "ingredients": {
+            "Carne di Drago": 1,
+            "Amido di Stellarion": 1,
+            "Pane di Luce": 1,
+            "Nettare di Sirena": 1,
+            "Salsa Szechuan": 1
+        },
+        "prestige": 52
+    },
+    {
+        "name": "Mycoflora con Polvere di Stelle Sbagliato",
+        "preparationTimeMs": 14413,
+        "ingredients": {
+            "Cristalli di Memoria": 1,
+            "Colonia di Mycoflora": 1,
+            "Teste di Idra": 1,
+            "Lacrime di Andromeda": 1,
+            "Essenza di Speziaria": 1
+        },
+        "prestige": 62
+    }
+]

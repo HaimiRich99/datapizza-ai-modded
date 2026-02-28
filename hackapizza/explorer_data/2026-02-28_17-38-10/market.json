@@ -1,0 +1,590 @@
+[
+  {
+    "id": 124,
+    "createdByRestaurantId": 24,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:08:05.141Z",
+    "ingredientId": 10,
+    "quantity": 1,
+    "totalPrice": 25,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 10,
+      "name": "Funghi dell’Etere"
+    }
+  },
+  {
+    "id": 125,
+    "createdByRestaurantId": 24,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:08:05.197Z",
+    "ingredientId": 20,
+    "quantity": 1,
+    "totalPrice": 25,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 20,
+      "name": "Biscotti della Galassia"
+    }
+  },
+  {
+    "id": 126,
+    "createdByRestaurantId": 24,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:08:05.648Z",
+    "ingredientId": 29,
+    "quantity": 2,
+    "totalPrice": 25,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 29,
+      "name": "Colonia di Mycoflora"
+    }
+  },
+  {
+    "id": 127,
+    "createdByRestaurantId": 24,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:14:37.554Z",
+    "ingredientId": 6,
+    "quantity": 2,
+    "totalPrice": 25,
+    "status": "closed",
+    "ingredient": {
+      "id": 6,
+      "name": "Carne di Balena spaziale"
+    }
+  },
+  {
+    "id": 128,
+    "createdByRestaurantId": 24,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:14:37.604Z",
+    "ingredientId": 17,
+    "quantity": 1,
+    "totalPrice": 25,
+    "status": "closed",
+    "ingredient": {
+      "id": 17,
+      "name": "Shard di Prisma Stellare"
+    }
+  },
+  {
+    "id": 130,
+    "createdByRestaurantId": 24,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:14:37.788Z",
+    "ingredientId": 9,
+    "quantity": 1,
+    "totalPrice": 25,
+    "status": "closed",
+    "ingredient": {
+      "id": 9,
+      "name": "Pane degli Abissi"
+    }
+  },
+  {
+    "id": 129,
+    "createdByRestaurantId": 24,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:14:37.667Z",
+    "ingredientId": 41,
+    "quantity": 1,
+    "totalPrice": 25,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 41,
+      "name": "Essenza di Vuoto"
+    }
+  },
+  {
+    "id": 131,
+    "createdByRestaurantId": 24,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:14:37.894Z",
+    "ingredientId": 1,
+    "quantity": 2,
+    "totalPrice": 25,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 1,
+      "name": "Radici di Gravità"
+    }
+  },
+  {
+    "id": 132,
+    "createdByRestaurantId": 24,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:14:37.961Z",
+    "ingredientId": 35,
+    "quantity": 1,
+    "totalPrice": 25,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 35,
+      "name": "Fibra di Sintetex"
+    }
+  },
+  {
+    "id": 133,
+    "createdByRestaurantId": 24,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:14:38.066Z",
+    "ingredientId": 18,
+    "quantity": 1,
+    "totalPrice": 25,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 18,
+      "name": "Baccacedro"
+    }
+  },
+  {
+    "id": 134,
+    "createdByRestaurantId": 24,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:14:38.180Z",
+    "ingredientId": 45,
+    "quantity": 1,
+    "totalPrice": 25,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 45,
+      "name": "Radici di Singolarità"
+    }
+  },
+  {
+    "id": 135,
+    "createdByRestaurantId": 24,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:14:38.240Z",
+    "ingredientId": 44,
+    "quantity": 1,
+    "totalPrice": 25,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 44,
+      "name": "Nduja Fritta Tanto"
+    }
+  },
+  {
+    "id": 136,
+    "createdByRestaurantId": 24,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:14:38.301Z",
+    "ingredientId": 20,
+    "quantity": 1,
+    "totalPrice": 25,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 20,
+      "name": "Biscotti della Galassia"
+    }
+  },
+  {
+    "id": 137,
+    "createdByRestaurantId": 6,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T16:16:33.485Z",
+    "ingredientId": 8,
+    "quantity": 1,
+    "totalPrice": 60,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 8,
+      "name": "Carne di Xenodonte"
+    }
+  },
+  {
+    "id": 138,
+    "createdByRestaurantId": 24,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:21:09.817Z",
+    "ingredientId": 10,
+    "quantity": 1,
+    "totalPrice": 25,
+    "status": "closed",
+    "ingredient": {
+      "id": 10,
+      "name": "Funghi dell’Etere"
+    }
+  },
+  {
+    "id": 143,
+    "createdByRestaurantId": 24,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:21:10.378Z",
+    "ingredientId": 9,
+    "quantity": 1,
+    "totalPrice": 25,
+    "status": "closed",
+    "ingredient": {
+      "id": 9,
+      "name": "Pane degli Abissi"
+    }
+  },
+  {
+    "id": 139,
+    "createdByRestaurantId": 24,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:21:10.030Z",
+    "ingredientId": 13,
+    "quantity": 1,
+    "totalPrice": 25,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 13,
+      "name": "Pane di Luce"
+    }
+  },
+  {
+    "id": 140,
+    "createdByRestaurantId": 24,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:21:10.143Z",
+    "ingredientId": 14,
+    "quantity": 1,
+    "totalPrice": 25,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 14,
+      "name": "Granuli di Nebbia Arcobaleno"
+    }
+  },
+  {
+    "id": 141,
+    "createdByRestaurantId": 24,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:21:10.220Z",
+    "ingredientId": 37,
+    "quantity": 1,
+    "totalPrice": 25,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 37,
+      "name": "Muffa Lunare"
+    }
+  },
+  {
+    "id": 142,
+    "createdByRestaurantId": 24,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:21:10.315Z",
+    "ingredientId": 41,
+    "quantity": 1,
+    "totalPrice": 25,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 41,
+      "name": "Essenza di Vuoto"
+    }
+  },
+  {
+    "id": 144,
+    "createdByRestaurantId": 24,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:21:10.464Z",
+    "ingredientId": 35,
+    "quantity": 1,
+    "totalPrice": 25,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 35,
+      "name": "Fibra di Sintetex"
+    }
+  },
+  {
+    "id": 145,
+    "createdByRestaurantId": 24,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:21:10.531Z",
+    "ingredientId": 45,
+    "quantity": 1,
+    "totalPrice": 25,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 45,
+      "name": "Radici di Singolarità"
+    }
+  },
+  {
+    "id": 146,
+    "createdByRestaurantId": 25,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:21:17.425Z",
+    "ingredientId": 6,
+    "quantity": 2,
+    "totalPrice": 25,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 6,
+      "name": "Carne di Balena spaziale"
+    }
+  },
+  {
+    "id": 147,
+    "createdByRestaurantId": 25,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:21:19.275Z",
+    "ingredientId": 12,
+    "quantity": 1,
+    "totalPrice": 25,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 12,
+      "name": "Foglie di Mandragora"
+    }
+  },
+  {
+    "id": 148,
+    "createdByRestaurantId": 18,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T16:21:28.301Z",
+    "ingredientId": 17,
+    "quantity": 1,
+    "totalPrice": 10,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 17,
+      "name": "Shard di Prisma Stellare"
+    }
+  },
+  {
+    "id": 149,
+    "createdByRestaurantId": 12,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T16:21:33.823Z",
+    "ingredientId": 17,
+    "quantity": 1,
+    "totalPrice": 1500,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 17,
+      "name": "Shard di Prisma Stellare"
+    }
+  },
+  {
+    "id": 150,
+    "createdByRestaurantId": 12,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T16:21:34.277Z",
+    "ingredientId": 41,
+    "quantity": 1,
+    "totalPrice": 1500,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 41,
+      "name": "Essenza di Vuoto"
+    }
+  },
+  {
+    "id": 151,
+    "createdByRestaurantId": 18,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T16:22:20.164Z",
+    "ingredientId": 17,
+    "quantity": 1,
+    "totalPrice": 2,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 17,
+      "name": "Shard di Prisma Stellare"
+    }
+  },
+  {
+    "id": 152,
+    "createdByRestaurantId": 18,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T16:22:33.741Z",
+    "ingredientId": 26,
+    "quantity": 1,
+    "totalPrice": 2,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 26,
+      "name": "Plasma Vitale"
+    }
+  },
+  {
+    "id": 153,
+    "createdByRestaurantId": 24,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:34:15.858Z",
+    "ingredientId": 29,
+    "quantity": 1,
+    "totalPrice": 25,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 29,
+      "name": "Colonia di Mycoflora"
+    }
+  },
+  {
+    "id": 154,
+    "createdByRestaurantId": 24,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:34:15.961Z",
+    "ingredientId": 1,
+    "quantity": 1,
+    "totalPrice": 25,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 1,
+      "name": "Radici di Gravità"
+    }
+  },
+  {
+    "id": 155,
+    "createdByRestaurantId": 24,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:34:16.234Z",
+    "ingredientId": 17,
+    "quantity": 1,
+    "totalPrice": 25,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 17,
+      "name": "Shard di Prisma Stellare"
+    }
+  },
+  {
+    "id": 156,
+    "createdByRestaurantId": 24,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:34:16.400Z",
+    "ingredientId": 20,
+    "quantity": 1,
+    "totalPrice": 25,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 20,
+      "name": "Biscotti della Galassia"
+    }
+  },
+  {
+    "id": 157,
+    "createdByRestaurantId": 24,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:34:16.837Z",
+    "ingredientId": 18,
+    "quantity": 1,
+    "totalPrice": 25,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 18,
+      "name": "Baccacedro"
+    }
+  },
+  {
+    "id": 158,
+    "createdByRestaurantId": 24,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:34:16.995Z",
+    "ingredientId": 44,
+    "quantity": 2,
+    "totalPrice": 25,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 44,
+      "name": "Nduja Fritta Tanto"
+    }
+  },
+  {
+    "id": 159,
+    "createdByRestaurantId": 24,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:34:17.059Z",
+    "ingredientId": 14,
+    "quantity": 1,
+    "totalPrice": 25,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 14,
+      "name": "Granuli di Nebbia Arcobaleno"
+    }
+  },
+  {
+    "id": 160,
+    "createdByRestaurantId": 24,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:34:17.133Z",
+    "ingredientId": 37,
+    "quantity": 1,
+    "totalPrice": 25,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 37,
+      "name": "Muffa Lunare"
+    }
+  },
+  {
+    "id": 161,
+    "createdByRestaurantId": 24,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:34:17.199Z",
+    "ingredientId": 41,
+    "quantity": 1,
+    "totalPrice": 25,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 41,
+      "name": "Essenza di Vuoto"
+    }
+  },
+  {
+    "id": 162,
+    "createdByRestaurantId": 24,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:34:17.257Z",
+    "ingredientId": 35,
+    "quantity": 1,
+    "totalPrice": 25,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 35,
+      "name": "Fibra di Sintetex"
+    }
+  },
+  {
+    "id": 163,
+    "createdByRestaurantId": 24,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:34:17.316Z",
+    "ingredientId": 45,
+    "quantity": 1,
+    "totalPrice": 25,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 45,
+      "name": "Radici di Singolarità"
+    }
+  },
+  {
+    "id": 164,
+    "createdByRestaurantId": 25,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:34:23.078Z",
+    "ingredientId": 6,
+    "quantity": 2,
+    "totalPrice": 25,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 6,
+      "name": "Carne di Balena spaziale"
+    }
+  },
+  {
+    "id": 165,
+    "createdByRestaurantId": 25,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:34:25.909Z",
+    "ingredientId": 29,
+    "quantity": 1,
+    "totalPrice": 25,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 29,
+      "name": "Colonia di Mycoflora"
+    }
+  }
+]

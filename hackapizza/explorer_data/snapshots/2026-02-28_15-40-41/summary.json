@@ -1,0 +1,41 @@
+{
+  "timestamp": "2026-02-28_15-40-41",
+  "turn_id": 3,
+  "restaurant": {
+    "name": "Accattoni",
+    "balance": 2180,
+    "is_open": "?",
+    "inventory": {}
+  },
+  "menu_count": 1,
+  "recipes_count": 287,
+  "market_entries": 20,
+  "competitors": [
+    "Siesta dopo pizza",
+    "ventre a terra",
+    "The Transformer guys",
+    "team 2",
+    "Domenicaln",
+    "Neural Nomads",
+    "Piadina as a Service (PaaS)",
+    "Synapse AI",
+    "The Hallucinators",
+    "Samur_ai",
+    "sphacketti",
+    "DeepAiUG",
+    "RAGù",
+    "Cavalli al trotto",
+    "Prompt in the shell",
+    "Accattoni",
+    "Starrats",
+    "AIS Privè",
+    "Bluers",
+    "Claudio Opuscoli",
+    "Desf-AI",
+    "SPAM!",
+    "EGEnts",
+    "MARADONA",
+    "team 1",
+    "AI Caramba"
+  ]
+}

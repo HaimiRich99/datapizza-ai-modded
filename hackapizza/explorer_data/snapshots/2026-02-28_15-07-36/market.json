@@ -1,0 +1,184 @@
+[
+  {
+    "id": 1,
+    "createdByRestaurantId": 10,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T13:55:12.037Z",
+    "ingredientId": 27,
+    "quantity": 2,
+    "totalPrice": 10,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 27,
+      "name": "Shard di Materia Oscura"
+    }
+  },
+  {
+    "id": 2,
+    "createdByRestaurantId": 6,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T13:55:12.589Z",
+    "ingredientId": 45,
+    "quantity": 1,
+    "totalPrice": 150,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 45,
+      "name": "Radici di Singolarità"
+    }
+  },
+  {
+    "id": 3,
+    "createdByRestaurantId": 10,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T13:55:21.238Z",
+    "ingredientId": 34,
+    "quantity": 2,
+    "totalPrice": 10,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 34,
+      "name": "Polvere di Crononite"
+    }
+  },
+  {
+    "id": 4,
+    "createdByRestaurantId": 6,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T13:57:12.039Z",
+    "ingredientId": 32,
+    "quantity": 1,
+    "totalPrice": 100,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 32,
+      "name": "Uova di Fenice"
+    }
+  },
+  {
+    "id": 5,
+    "createdByRestaurantId": 6,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T13:57:13.563Z",
+    "ingredientId": 36,
+    "quantity": 1,
+    "totalPrice": 200,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 36,
+      "name": "Carne di Drago"
+    }
+  },
+  {
+    "id": 6,
+    "createdByRestaurantId": 6,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T13:58:40.632Z",
+    "ingredientId": 27,
+    "quantity": 1,
+    "totalPrice": 200,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 27,
+      "name": "Shard di Materia Oscura"
+    }
+  },
+  {
+    "id": 8,
+    "createdByRestaurantId": 19,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T14:01:26.747Z",
+    "ingredientId": 27,
+    "quantity": 1,
+    "totalPrice": 300,
+    "status": "closed",
+    "ingredient": {
+      "id": 27,
+      "name": "Shard di Materia Oscura"
+    }
+  },
+  {
+    "id": 7,
+    "createdByRestaurantId": 23,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T14:01:19.462Z",
+    "ingredientId": 32,
+    "quantity": 5,
+    "totalPrice": 400,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 32,
+      "name": "Uova di Fenice"
+    }
+  },
+  {
+    "id": 9,
+    "createdByRestaurantId": 19,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T14:01:32.280Z",
+    "ingredientId": 3,
+    "quantity": 1,
+    "totalPrice": 200,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 3,
+      "name": "Foglie di Nebulosa"
+    }
+  },
+  {
+    "id": 10,
+    "createdByRestaurantId": 20,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T14:04:40.450Z",
+    "ingredientId": 32,
+    "quantity": 1,
+    "totalPrice": 150,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 32,
+      "name": "Uova di Fenice"
+    }
+  },
+  {
+    "id": 11,
+    "createdByRestaurantId": 20,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T14:04:45.019Z",
+    "ingredientId": 1,
+    "quantity": 1,
+    "totalPrice": 100,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 1,
+      "name": "Radici di Gravità"
+    }
+  },
+  {
+    "id": 12,
+    "createdByRestaurantId": 20,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T14:04:49.047Z",
+    "ingredientId": 1,
+    "quantity": 1,
+    "totalPrice": 100,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 1,
+      "name": "Radici di Gravità"
+    }
+  },
+  {
+    "id": 13,
+    "createdByRestaurantId": 23,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T14:04:54.438Z",
+    "ingredientId": 27,
+    "quantity": 1,
+    "totalPrice": 200,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 27,
+      "name": "Shard di Materia Oscura"
+    }
+  }
+]

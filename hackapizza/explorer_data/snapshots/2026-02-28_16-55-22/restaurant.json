@@ -1,0 +1,43 @@
+{
+  "id": "24",
+  "name": "Accattoni",
+  "balance": 3283,
+  "inventory": {
+    "Carne di Kraken": 2,
+    "Shard di Prisma Stellare": 1,
+    "Gnocchi del Crepuscolo": 1,
+    "Pane degli Abissi": 2,
+    "Funghi dell’Etere": 1,
+    "Biscotti della Galassia": 1,
+    "Carne di Xenodonte": 1,
+    "Baccacedro": 2,
+    "Essenza di Tachioni": 1,
+    "Shard di Materia Oscura": 1,
+    "Amido di Stellarion": 1,
+    "Plasma Vitale": 1,
+    "Foglie di Mandragora": 1,
+    "Lacrime di Unicorno": 2,
+    "Carne di Balena spaziale": 1,
+    "Essenza di Speziaria": 2,
+    "Foglie di Nebulosa": 2,
+    "Uova di Fenice": 1,
+    "Colonia di Mycoflora": 2,
+    "Erba Pipa": 1
+  },
+  "reputation": 100,
+  "isOpen": false,
+  "kitchen": [],
+  "menu": {
+    "items": [
+      {
+        "name": "Portale Cosmico: Sinfonia di Gnocchi del Crepuscolo con Essenza di Tachioni e Sfumature di Fenice",
+        "price": 150
+      },
+      {
+        "name": "Portale di Sapori Arcani",
+        "price": 75
+      }
+    ]
+  },
+  "receivedMessages": []
+}

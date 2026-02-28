@@ -1,0 +1,231 @@
+{
+  "Domenicaln": [
+    {
+      "name": "Nebulosa Galattica",
+      "price": 120
+    },
+    {
+      "name": "Il Crepuscolo dell’Unicorno",
+      "price": 130
+    },
+    {
+      "name": "Cosmic Synchrony: Il Destino di Pulsar",
+      "price": 150
+    },
+    {
+      "name": "Sinfonia Cosmica di Proteine Interstellari",
+      "price": 180
+    },
+    {
+      "name": "L'Estasi Cosmica di Nova",
+      "price": 160
+    },
+    {
+      "name": "Galassia di Sapore",
+      "price": 170
+    },
+    {
+      "name": "Sinfonia del Multiverso",
+      "price": 190
+    },
+    {
+      "name": "Sinfonia del Multiverso Nascente",
+      "price": 190
+    },
+    {
+      "name": "Sinfonia di Multiverso: La Danza degli Elementi",
+      "price": 190
+    },
+    {
+      "name": "Sinfonia Cosmica di Luminiscenze e Contrasti",
+      "price": 185
+    },
+    {
+      "name": "Sinfonia Cosmica di Sapore",
+      "price": 175
+    },
+    {
+      "name": "Pizza Fra",
+      "price": 70
+    },
+    {
+      "name": "Pizza Emma",
+      "price": 80
+    }
+  ],
+  "The Transformer guys": [
+    {
+      "name": "Nebulosa Galattica",
+      "price": 50
+    },
+    {
+      "name": "Sinfonia Cosmica di Proteine Interstellari",
+      "price": 50
+    },
+    {
+      "name": "L'Estasi Cosmica di Nova",
+      "price": 50
+    },
+    {
+      "name": "Viaggio Galattico: Sinfonia dei Sensi",
+      "price": 50
+    },
+    {
+      "name": "Cosmic Synchrony: Il Destino di Pulsar",
+      "price": 50
+    }
+  ],
+  "ventre a terra": [
+    {
+      "name": "Sinfonia Temporale di Fenice e Xenodonte su Pane degli Abissi con Colata di Plasma Vitale e Polvere di Crononite",
+      "price": 110
+    },
+    {
+      "name": "Portale Cosmico: Sinfonia di Gnocchi del Crepuscolo con Essenza di Tachioni e Sfumature di Fenice",
+      "price": 115
+    },
+    {
+      "name": "Sinfonia di Multiverso: La Danza degli Elementi",
+      "price": 105
+    },
+    {
+      "name": "Sinfonia Aromatica del Multiverso",
+      "price": 104
+    },
+    {
+      "name": "Viaggio Cosmico nel Multiverso",
+      "price": 104
+    }
+  ],
+  "Siesta dopo pizza": [
+    {
+      "name": "Nebulosa Galattica",
+      "price": 40
+    },
+    {
+      "name": "Sinfonia Cosmica di Proteine Interstellari",
+      "price": 40
+    }
+  ],
+  "The Hallucinators": [],
+  "Samur_ai": [],
+  "Synapse AI": [],
+  "team 2": [],
+  "Neural Nomads": [],
+  "team 1": [],
+  "Piadina as a Service (PaaS)": [],
+  "Desf-AI": [],
+  "Claudio Opuscoli": [
+    {
+      "name": "Portale Cosmico: Sinfonia di Gnocchi del Crepuscolo con Essenza di Tachioni e Sfumature di Fenice",
+      "price": 200
+    },
+    {
+      "name": "Sinfonia Temporale di Fenice e Xenodonte su Pane degli Abissi con Colata di Plasma Vitale e Polvere di Crononite",
+      "price": 200
+    },
+    {
+      "name": "Sinfonia Cosmica di Terracotta",
+      "price": 200
+    }
+  ],
+  "Accattoni": [],
+  "Bluers": [
+    {
+      "name": "Sinfonia Quantica dell'Oceano Interstellare",
+      "price": 180
+    }
+  ],
+  "sphacketti": [
+    {
+      "name": "Galassia di Sapore",
+      "price": 122
+    },
+    {
+      "name": "Il Viaggio Celeste",
+      "price": 98
+    },
+    {
+      "name": "Il Crepuscolo dell’Unicorno",
+      "price": 94
+    },
+    {
+      "name": "Il Risveglio della Fenice sull'Arcobaleno d'Oceano",
+      "price": 94
+    },
+    {
+      "name": "Luce e Ombra di Nomea Spaziale",
+      "price": 80
+    }
+  ],
+  "Cavalli al trotto": [
+    {
+      "name": "Galassie in Epifania: Risotto Celestiale con Preziosi dell'Universo",
+      "price": 146
+    },
+    {
+      "name": "Sinfonia Temporale di Fenice e Xenodonte su Pane degli Abissi con Colata di Plasma Vitale e Polvere di Crononite",
+      "price": 143
+    },
+    {
+      "name": "Sinfonia Quantica dell'Oceano Interstellare",
+      "price": 141
+    },
+    {
+      "name": "Sinfonia Cosmica: La Danza dell'Universo",
+      "price": 144
+    },
+    {
+      "name": "Sinfonia Cosmica di Armonie Terrestri e Celesti",
+      "price": 135
+    }
+  ],
+  "Starrats": [
+    {
+      "name": "Portale Cosmico: Sinfonia di Gnocchi del Crepuscolo con Essenza di Tachioni e Sfumature di Fenice",
+      "price": 300
+    },
+    {
+      "name": "Sinfonia Astrale - Risotto Multiversale con Risacca Celeste",
+      "price": 300
+    }
+  ],
+  "MARADONA": [
+    {
+      "name": "Portale Cosmico: Sinfonia di Gnocchi del Crepuscolo con Essenza di Tachioni e Sfumature di Fenice",
+      "price": 375
+    },
+    {
+      "name": "Sinfonia Temporale di Fenice e Xenodonte su Pane degli Abissi con Colata di Plasma Vitale e Polvere di Crononite",
+      "price": 375
+    },
+    {
+      "name": "Sinfonia di Multiverso: La Danza degli Elementi",
+      "price": 375
+    },
+    {
+      "name": "Sinfonia Aromatica del Multiverso",
+      "price": 300
+    }
+  ],
+  "RAGù": [
+    {
+      "name": "Portale del Cosmo: Sinfonia di Sapori e Tempi",
+      "price": 250
+    },
+    {
+      "name": "Sinfonia Cosmica: Versione Pizza",
+      "price": 230
+    },
+    {
+      "name": "Sinfonia del Multiverso Nascente",
+      "price": 240
+    }
+  ],
+  "Prompt in the shell": [],
+  "DeepAiUG": [],
+  "AI Caramba": [],
+  "SPAM!": [],
+  "EGEnts": [],
+  "AIS Privè": []
+}

@@ -1,0 +1,150 @@
+{
+  "method": "statistical",
+  "turn_id": 99,
+  "timestamp": "2026-02-28T21:48:13.793928",
+  "least_wanted_ingredients": [
+    {
+      "ingredient": "Alghe Bioluminescenti",
+      "n_buyers": 0,
+      "n_bids": 0,
+      "avg_winning_price": null,
+      "status": "not_bid"
+    },
+    {
+      "ingredient": "Amido di Stellarion",
+      "n_buyers": 0,
+      "n_bids": 0,
+      "avg_winning_price": null,
+      "status": "not_bid"
+    },
+    {
+      "ingredient": "Baccacedro",
+      "n_buyers": 0,
+      "n_bids": 0,
+      "avg_winning_price": null,
+      "status": "not_bid"
+    },
+    {
+      "ingredient": "Biscotti della Galassia",
+      "n_buyers": 0,
+      "n_bids": 0,
+      "avg_winning_price": null,
+      "status": "not_bid"
+    },
+    {
+      "ingredient": "Burrobirra",
+      "n_buyers": 0,
+      "n_bids": 0,
+      "avg_winning_price": null,
+      "status": "not_bid"
+    },
+    {
+      "ingredient": "Carne di Balena spaziale",
+      "n_buyers": 0,
+      "n_bids": 0,
+      "avg_winning_price": null,
+      "status": "not_bid"
+    },
+    {
+      "ingredient": "Carne di Drago",
+      "n_buyers": 0,
+      "n_bids": 0,
+      "avg_winning_price": null,
+      "status": "not_bid"
+    },
+    {
+      "ingredient": "Carne di Kraken",
+      "n_buyers": 0,
+      "n_bids": 0,
+      "avg_winning_price": null,
+      "status": "not_bid"
+    },
+    {
+      "ingredient": "Carne di Mucca",
+      "n_buyers": 0,
+      "n_bids": 0,
+      "avg_winning_price": null,
+      "status": "not_bid"
+    },
+    {
+      "ingredient": "Carne di Xenodonte",
+      "n_buyers": 0,
+      "n_bids": 0,
+      "avg_winning_price": null,
+      "status": "not_bid"
+    }
+  ],
+  "recipe_scores": [],
+  "recommendations": {
+    "Radici di Gravita": {
+      "recommended_bid": 44,
+      "n_buyers_last_auction": 2,
+      "avg_winning_price_last_auction": 40.5
+    },
+    "Essenza di Tachioni": {
+      "recommended_bid": 167,
+      "n_buyers_last_auction": 2,
+      "avg_winning_price_last_auction": 152.0
+    },
+    "Polvere di Stelle": {
+      "recommended_bid": 27,
+      "n_buyers_last_auction": 1,
+      "avg_winning_price_last_auction": 25.0
+    },
+    "Alghe Bioluminescenti": {
+      "recommended_bid": 5,
+      "n_buyers_last_auction": 0,
+      "avg_winning_price_last_auction": null
+    },
+    "Amido di Stellarion": {
+      "recommended_bid": 5,
+      "n_buyers_last_auction": 0,
+      "avg_winning_price_last_auction": null
+    },
+    "Baccacedro": {
+      "recommended_bid": 5,
+      "n_buyers_last_auction": 0,
+      "avg_winning_price_last_auction": null
+    },
+    "Biscotti della Galassia": {
+      "recommended_bid": 5,
+      "n_buyers_last_auction": 0,
+      "avg_winning_price_last_auction": null
+    },
+    "Burrobirra": {
+      "recommended_bid": 5,
+      "n_buyers_last_auction": 0,
+      "avg_winning_price_last_auction": null
+    },
+    "Carne di Balena spaziale": {
+      "recommended_bid": 5,
+      "n_buyers_last_auction": 0,
+      "avg_winning_price_last_auction": null
+    },
+    "Carne di Drago": {
+      "recommended_bid": 5,
+      "n_buyers_last_auction": 0,
+      "avg_winning_price_last_auction": null
+    },
+    "Carne di Kraken": {
+      "recommended_bid": 5,
+      "n_buyers_last_auction": 0,
+      "avg_winning_price_last_auction": null
+    },
+    "Carne di Mucca": {
+      "recommended_bid": 5,
+      "n_buyers_last_auction": 0,
+      "avg_winning_price_last_auction": null
+    },
+    "Carne di Xenodonte": {
+      "recommended_bid": 5,
+      "n_buyers_last_auction": 0,
+      "avg_winning_price_last_auction": null
+    }
+  },
+  "low_competition_ingredients": [
+    "Polvere di Stelle"
+  ],
+  "avoid_ingredients": [],
+  "recommended_recipes": []
+}

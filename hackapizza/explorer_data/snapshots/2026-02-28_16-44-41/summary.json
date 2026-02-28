@@ -1,0 +1,14 @@
+{
+  "timestamp": "2026-02-28_16-44-41",
+  "turn_id": 0,
+  "restaurant": {
+    "name": "?",
+    "balance": "?",
+    "is_open": "?",
+    "inventory": {}
+  },
+  "menu_count": 0,
+  "recipes_count": 0,
+  "market_entries": 0,
+  "competitors": []
+}

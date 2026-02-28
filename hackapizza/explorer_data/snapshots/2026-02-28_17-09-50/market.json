@@ -1,0 +1,44 @@
+[
+  {
+    "id": 124,
+    "createdByRestaurantId": 24,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:08:05.141Z",
+    "ingredientId": 10,
+    "quantity": 1,
+    "totalPrice": 25,
+    "status": "active",
+    "ingredient": {
+      "id": 10,
+      "name": "Funghi dell’Etere"
+    }
+  },
+  {
+    "id": 125,
+    "createdByRestaurantId": 24,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:08:05.197Z",
+    "ingredientId": 20,
+    "quantity": 1,
+    "totalPrice": 25,
+    "status": "active",
+    "ingredient": {
+      "id": 20,
+      "name": "Biscotti della Galassia"
+    }
+  },
+  {
+    "id": 126,
+    "createdByRestaurantId": 24,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:08:05.648Z",
+    "ingredientId": 29,
+    "quantity": 2,
+    "totalPrice": 25,
+    "status": "active",
+    "ingredient": {
+      "id": 29,
+      "name": "Colonia di Mycoflora"
+    }
+  }
+]

@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "createdByRestaurantId": 10,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T13:55:12.037Z",
+    "ingredientId": 27,
+    "quantity": 2,
+    "totalPrice": 10,
+    "status": "active",
+    "ingredient": {
+      "id": 27,
+      "name": "Shard di Materia Oscura"
+    }
+  },
+  {
+    "id": 2,
+    "createdByRestaurantId": 6,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T13:55:12.589Z",
+    "ingredientId": 45,
+    "quantity": 1,
+    "totalPrice": 150,
+    "status": "active",
+    "ingredient": {
+      "id": 45,
+      "name": "Radici di Singolarità"
+    }
+  },
+  {
+    "id": 3,
+    "createdByRestaurantId": 10,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T13:55:21.238Z",
+    "ingredientId": 34,
+    "quantity": 2,
+    "totalPrice": 10,
+    "status": "active",
+    "ingredient": {
+      "id": 34,
+      "name": "Polvere di Crononite"
+    }
+  },
+  {
+    "id": 4,
+    "createdByRestaurantId": 6,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T13:57:12.039Z",
+    "ingredientId": 32,
+    "quantity": 1,
+    "totalPrice": 100,
+    "status": "active",
+    "ingredient": {
+      "id": 32,
+      "name": "Uova di Fenice"
+    }
+  },
+  {
+    "id": 5,
+    "createdByRestaurantId": 6,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T13:57:13.563Z",
+    "ingredientId": 36,
+    "quantity": 1,
+    "totalPrice": 200,
+    "status": "active",
+    "ingredient": {
+      "id": 36,
+      "name": "Carne di Drago"
+    }
+  }
+]

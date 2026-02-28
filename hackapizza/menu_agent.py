@@ -34,7 +34,7 @@ REGOLO_API_KEY = os.getenv("REGOLO_API_KEY", "")
 
 MAX_MENU_SIZE = 6
 MARKUP_MIN = 1.4       # markup minimo: prezzo >= costo * 1.4
-MARKUP_TARGET = 2.0    # markup ideale: prezzo >= costo * 2.0
+MARKUP_TARGET = 1.3    # markup ideale: prezzo >= costo * 2.0
 DEFAULT_COST_PER_ING = 25  # costo default se non abbiamo dati
 
 SURPLUS_PATH = Path(__file__).parent / "explorer_data" / "surplus_ingredients.json"

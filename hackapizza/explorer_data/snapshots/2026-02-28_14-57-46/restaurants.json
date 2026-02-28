@@ -1,0 +1,429 @@
+[
+  {
+    "id": "19",
+    "name": "ventre a terra",
+    "balance": 4000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "2",
+    "name": "team 2",
+    "balance": 4000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "3",
+    "name": "Domenicaln",
+    "balance": 4000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "4",
+    "name": "Neural Nomads",
+    "balance": 4000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "5",
+    "name": "Piadina as a Service (PaaS)",
+    "balance": 4000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "7",
+    "name": "Siesta dopo pizza",
+    "balance": 4000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "8",
+    "name": "Synapse AI",
+    "balance": 4000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "9",
+    "name": "The Hallucinators",
+    "balance": 4000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "10",
+    "name": "Samur_ai",
+    "balance": 2631,
+    "inventory": {
+      "Gnocchi del Crepuscolo": 6,
+      "Plasma Vitale": 3,
+      "Essenza di Tachioni": 6,
+      "Carne di Balena spaziale": 3,
+      "Fibra di Sintetex": 3,
+      "Foglie di Mandragora": 3,
+      "Essenza di Vuoto": 3,
+      "Muffa Lunare": 3,
+      "Amido di Stellarion": 3,
+      "Radici di Gravità": 6,
+      "Alghe Bioluminescenti": 6,
+      "Foglie di Nebulosa": 3,
+      "Lacrime di Unicorno": 3,
+      "Polvere di Pulsar": 3,
+      "Spaghi del Sole": 3,
+      "Farina di Nettuno": 3,
+      "Pane degli Abissi": 3,
+      "Granuli di Nebbia Arcobaleno": 3,
+      "Shard di Prisma Stellare": 3,
+      "Fusilli del Vento": 3,
+      "Shard di Materia Oscura": 1,
+      "Polvere di Crononite": 1
+    },
+    "reputation": 100,
+    "isOpen": true,
+    "kitchen": [],
+    "menu": {
+      "items": [
+        {
+          "name": "Nebulosa Galattica",
+          "price": 155
+        },
+        {
+          "name": "Il Crepuscolo dell’Unicorno",
+          "price": 235
+        },
+        {
+          "name": "Cosmic Synchrony: Il Destino di Pulsar",
+          "price": 360
+        },
+        {
+          "name": "Sinfonia del Multiverso Nascente",
+          "price": 425
+        },
+        {
+          "name": "Sinfonia del Multiverso Calante",
+          "price": 425
+        }
+      ]
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "11",
+    "name": "AIS Privè",
+    "balance": 4000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "12",
+    "name": "Bluers",
+    "balance": 4000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "13",
+    "name": "Cavalli al trotto",
+    "balance": 4000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "14",
+    "name": "Claudio Opuscoli",
+    "balance": 4000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "15",
+    "name": "DeepAiUG",
+    "balance": 4000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "16",
+    "name": "Desf-AI",
+    "balance": 4000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "17",
+    "name": "SPAM!",
+    "balance": 4000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "18",
+    "name": "Starrats",
+    "balance": 4000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "20",
+    "name": "sphacketti",
+    "balance": 4000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "21",
+    "name": "EGEnts",
+    "balance": 4000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "22",
+    "name": "MARADONA",
+    "balance": 4000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "23",
+    "name": "AI Caramba",
+    "balance": 4000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "25",
+    "name": "Prompt in the shell",
+    "balance": 4000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "1",
+    "name": "team 1",
+    "balance": 4000,
+    "inventory": {},
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "6",
+    "name": "RAGù",
+    "balance": 1854,
+    "inventory": {
+      "Polvere di Crononite": 1,
+      "Carne di Balena spaziale": 1,
+      "Fibra di Sintetex": 1,
+      "Foglie di Mandragora": 1,
+      "Essenza di Vuoto": 1,
+      "Frutti del Diavolo": 1,
+      "Muffa Lunare": 1,
+      "Lacrime di Andromeda": 1,
+      "Radici di Singolarità": 0,
+      "Carne di Drago": 0,
+      "Carne di Kraken": 0,
+      "Amido di Stellarion": 0,
+      "Riso di Cassandra": 1,
+      "Polvere di Stelle": 0,
+      "Slurm": 0,
+      "Shard di Materia Oscura": 0,
+      "Uova di Fenice": 0,
+      "Gnocchi del Crepuscolo": 1,
+      "Plasma Vitale": 0,
+      "Essenza di Tachioni": 0
+    },
+    "reputation": 100,
+    "isOpen": true,
+    "kitchen": [
+      {
+        "preparationId": "2",
+        "dish": "Sinfonia Cosmica di Luminiscenze e Contrasti",
+        "status": "ready",
+        "startTime": 1772286969145,
+        "completionTime": 1772286974285
+      },
+      {
+        "preparationId": "3",
+        "dish": "Portale Cosmico: Sinfonia di Gnocchi del Crepuscolo con Essenza di Tachioni e Sfumature di Fenice",
+        "status": "ready",
+        "startTime": 1772286983359,
+        "completionTime": 1772286988583
+      }
+    ],
+    "menu": {
+      "items": [
+        {
+          "name": "Sinfonia del Multiverso Nascente",
+          "price": 600
+        },
+        {
+          "name": "Portale Cosmico: Sinfonia di Gnocchi del Crepuscolo con Essenza di Tachioni e Sfumature di Fenice",
+          "price": 800
+        },
+        {
+          "name": "Sinfonia Cosmica di Luminiscenze e Contrasti",
+          "price": 700
+        }
+      ]
+    },
+    "receivedMessages": []
+  },
+  {
+    "id": "24",
+    "name": "Accattoni",
+    "balance": 2809,
+    "inventory": {
+      "Carne di Balena spaziale": 3,
+      "Riso di Cassandra": 3,
+      "Carne di Kraken": 3,
+      "Carne di Drago": 2,
+      "Amido di Stellarion": 3,
+      "Pane degli Abissi": 3,
+      "Carne di Mucca": 3,
+      "Teste di Idra": 3
+    },
+    "reputation": 100,
+    "isOpen": false,
+    "kitchen": [],
+    "menu": {
+      "items": []
+    },
+    "receivedMessages": []
+  }
+]

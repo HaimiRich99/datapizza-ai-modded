@@ -1,0 +1,22 @@
+{
+  "id": "24",
+  "name": "Accattoni",
+  "balance": 1896,
+  "inventory": {
+    "Carne di Drago": 2,
+    "Carne di Balena spaziale": 1,
+    "Carne di Xenodonte": 2,
+    "Uova di Fenice": 1,
+    "Teste di Idra": 3,
+    "Carne di Mucca": 2,
+    "Amido di Stellarion": 1,
+    "Pane di Luce": 2
+  },
+  "reputation": 100,
+  "isOpen": false,
+  "kitchen": [],
+  "menu": {
+    "items": []
+  },
+  "receivedMessages": []
+}

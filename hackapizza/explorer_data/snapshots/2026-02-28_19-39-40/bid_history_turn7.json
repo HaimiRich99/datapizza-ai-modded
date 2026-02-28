@@ -1,0 +1,3282 @@
+[
+  {
+    "id": 4617,
+    "turnId": 7,
+    "restaurantId": 3,
+    "ingredientId": 23,
+    "quantity": 2,
+    "priceForEach": 38,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Domenicaln"
+    },
+    "ingredient": {
+      "id": 23,
+      "name": "Essenza di Speziaria"
+    }
+  },
+  {
+    "id": 4628,
+    "turnId": 7,
+    "restaurantId": 3,
+    "ingredientId": 14,
+    "quantity": 1,
+    "priceForEach": 32,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Domenicaln"
+    },
+    "ingredient": {
+      "id": 14,
+      "name": "Granuli di Nebbia Arcobaleno"
+    }
+  },
+  {
+    "id": 4558,
+    "turnId": 7,
+    "restaurantId": 7,
+    "ingredientId": 30,
+    "quantity": 5,
+    "priceForEach": 5,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Siesta dopo pizza"
+    },
+    "ingredient": {
+      "id": 30,
+      "name": "Lattuga Namecciana"
+    }
+  },
+  {
+    "id": 4513,
+    "turnId": 7,
+    "restaurantId": 24,
+    "ingredientId": 6,
+    "quantity": 1,
+    "priceForEach": 27,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Accattoni"
+    },
+    "ingredient": {
+      "id": 6,
+      "name": "Carne di Balena spaziale"
+    }
+  },
+  {
+    "id": 4573,
+    "turnId": 7,
+    "restaurantId": 22,
+    "ingredientId": 6,
+    "quantity": 6,
+    "priceForEach": 15,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "MARADONA"
+    },
+    "ingredient": {
+      "id": 6,
+      "name": "Carne di Balena spaziale"
+    }
+  },
+  {
+    "id": 4586,
+    "turnId": 7,
+    "restaurantId": 22,
+    "ingredientId": 28,
+    "quantity": 6,
+    "priceForEach": 15,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "MARADONA"
+    },
+    "ingredient": {
+      "id": 28,
+      "name": "Lacrime di Unicorno"
+    }
+  },
+  {
+    "id": 4492,
+    "turnId": 7,
+    "restaurantId": 20,
+    "ingredientId": 28,
+    "quantity": 4,
+    "priceForEach": 1,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "sphacketti"
+    },
+    "ingredient": {
+      "id": 28,
+      "name": "Lacrime di Unicorno"
+    }
+  },
+  {
+    "id": 4534,
+    "turnId": 7,
+    "restaurantId": 8,
+    "ingredientId": 24,
+    "quantity": 3,
+    "priceForEach": 1,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Synapse AI"
+    },
+    "ingredient": {
+      "id": 24,
+      "name": "Spaghi del Sole"
+    }
+  },
+  {
+    "id": 4555,
+    "turnId": 7,
+    "restaurantId": 7,
+    "ingredientId": 38,
+    "quantity": 5,
+    "priceForEach": 5,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Siesta dopo pizza"
+    },
+    "ingredient": {
+      "id": 38,
+      "name": "Fusilli del Vento"
+    }
+  },
+  {
+    "id": 4490,
+    "turnId": 7,
+    "restaurantId": 20,
+    "ingredientId": 38,
+    "quantity": 2,
+    "priceForEach": 1,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "sphacketti"
+    },
+    "ingredient": {
+      "id": 38,
+      "name": "Fusilli del Vento"
+    }
+  },
+  {
+    "id": 4601,
+    "turnId": 7,
+    "restaurantId": 11,
+    "ingredientId": 5,
+    "quantity": 1,
+    "priceForEach": 55,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "AIS Privè"
+    },
+    "ingredient": {
+      "id": 5,
+      "name": "Essenza di Tachioni"
+    }
+  },
+  {
+    "id": 4607,
+    "turnId": 7,
+    "restaurantId": 14,
+    "ingredientId": 5,
+    "quantity": 2,
+    "priceForEach": 15,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Claudio Opuscoli"
+    },
+    "ingredient": {
+      "id": 5,
+      "name": "Essenza di Tachioni"
+    }
+  },
+  {
+    "id": 4642,
+    "turnId": 7,
+    "restaurantId": 13,
+    "ingredientId": 5,
+    "quantity": 5,
+    "priceForEach": 8,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Cavalli al trotto"
+    },
+    "ingredient": {
+      "id": 5,
+      "name": "Essenza di Tachioni"
+    }
+  },
+  {
+    "id": 4473,
+    "turnId": 7,
+    "restaurantId": 9,
+    "ingredientId": 16,
+    "quantity": 1,
+    "priceForEach": 10,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "The Hallucinators"
+    },
+    "ingredient": {
+      "id": 16,
+      "name": "Sale Temporale"
+    }
+  },
+  {
+    "id": 4658,
+    "turnId": 7,
+    "restaurantId": 18,
+    "ingredientId": 34,
+    "quantity": 4,
+    "priceForEach": 108,
+    "status": "INCOMPLETE",
+    "restaurant": {
+      "name": "Starrats"
+    },
+    "ingredient": {
+      "id": 34,
+      "name": "Polvere di Crononite"
+    }
+  },
+  {
+    "id": 4619,
+    "turnId": 7,
+    "restaurantId": 3,
+    "ingredientId": 8,
+    "quantity": 1,
+    "priceForEach": 32,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Domenicaln"
+    },
+    "ingredient": {
+      "id": 8,
+      "name": "Carne di Xenodonte"
+    }
+  },
+  {
+    "id": 4636,
+    "turnId": 7,
+    "restaurantId": 13,
+    "ingredientId": 8,
+    "quantity": 10,
+    "priceForEach": 8,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Cavalli al trotto"
+    },
+    "ingredient": {
+      "id": 8,
+      "name": "Carne di Xenodonte"
+    }
+  },
+  {
+    "id": 4629,
+    "turnId": 7,
+    "restaurantId": 3,
+    "ingredientId": 33,
+    "quantity": 1,
+    "priceForEach": 32,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Domenicaln"
+    },
+    "ingredient": {
+      "id": 33,
+      "name": "Nettare di Sirena"
+    }
+  },
+  {
+    "id": 4667,
+    "turnId": 7,
+    "restaurantId": 18,
+    "ingredientId": 30,
+    "quantity": 20,
+    "priceForEach": 100,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Starrats"
+    },
+    "ingredient": {
+      "id": 30,
+      "name": "Lattuga Namecciana"
+    }
+  },
+  {
+    "id": 4582,
+    "turnId": 7,
+    "restaurantId": 22,
+    "ingredientId": 12,
+    "quantity": 9,
+    "priceForEach": 15,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "MARADONA"
+    },
+    "ingredient": {
+      "id": 12,
+      "name": "Foglie di Mandragora"
+    }
+  },
+  {
+    "id": 4499,
+    "turnId": 7,
+    "restaurantId": 20,
+    "ingredientId": 9,
+    "quantity": 2,
+    "priceForEach": 1,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "sphacketti"
+    },
+    "ingredient": {
+      "id": 9,
+      "name": "Pane degli Abissi"
+    }
+  },
+  {
+    "id": 4603,
+    "turnId": 7,
+    "restaurantId": 14,
+    "ingredientId": 27,
+    "quantity": 4,
+    "priceForEach": 15,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Claudio Opuscoli"
+    },
+    "ingredient": {
+      "id": 27,
+      "name": "Shard di Materia Oscura"
+    }
+  },
+  {
+    "id": 4564,
+    "turnId": 7,
+    "restaurantId": 22,
+    "ingredientId": 27,
+    "quantity": 6,
+    "priceForEach": 15,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "MARADONA"
+    },
+    "ingredient": {
+      "id": 27,
+      "name": "Shard di Materia Oscura"
+    }
+  },
+  {
+    "id": 4491,
+    "turnId": 7,
+    "restaurantId": 20,
+    "ingredientId": 4,
+    "quantity": 2,
+    "priceForEach": 1,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "sphacketti"
+    },
+    "ingredient": {
+      "id": 4,
+      "name": "Gnocchi del Crepuscolo"
+    }
+  },
+  {
+    "id": 4543,
+    "turnId": 7,
+    "restaurantId": 7,
+    "ingredientId": 21,
+    "quantity": 5,
+    "priceForEach": 5,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Siesta dopo pizza"
+    },
+    "ingredient": {
+      "id": 21,
+      "name": "Amido di Stellarion"
+    }
+  },
+  {
+    "id": 4474,
+    "turnId": 7,
+    "restaurantId": 9,
+    "ingredientId": 40,
+    "quantity": 1,
+    "priceForEach": 10,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "The Hallucinators"
+    },
+    "ingredient": {
+      "id": 40,
+      "name": "Teste di Idra"
+    }
+  },
+  {
+    "id": 4535,
+    "turnId": 7,
+    "restaurantId": 8,
+    "ingredientId": 2,
+    "quantity": 3,
+    "priceForEach": 1,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Synapse AI"
+    },
+    "ingredient": {
+      "id": 2,
+      "name": "Alghe Bioluminescenti"
+    }
+  },
+  {
+    "id": 4518,
+    "turnId": 7,
+    "restaurantId": 24,
+    "ingredientId": 41,
+    "quantity": 1,
+    "priceForEach": 27,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Accattoni"
+    },
+    "ingredient": {
+      "id": 41,
+      "name": "Essenza di Vuoto"
+    }
+  },
+  {
+    "id": 4590,
+    "turnId": 7,
+    "restaurantId": 22,
+    "ingredientId": 45,
+    "quantity": 3,
+    "priceForEach": 15,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "MARADONA"
+    },
+    "ingredient": {
+      "id": 45,
+      "name": "Radici di Singolarità"
+    }
+  },
+  {
+    "id": 4630,
+    "turnId": 7,
+    "restaurantId": 3,
+    "ingredientId": 30,
+    "quantity": 1,
+    "priceForEach": 32,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Domenicaln"
+    },
+    "ingredient": {
+      "id": 30,
+      "name": "Lattuga Namecciana"
+    }
+  },
+  {
+    "id": 4579,
+    "turnId": 7,
+    "restaurantId": 22,
+    "ingredientId": 30,
+    "quantity": 3,
+    "priceForEach": 15,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "MARADONA"
+    },
+    "ingredient": {
+      "id": 30,
+      "name": "Lattuga Namecciana"
+    }
+  },
+  {
+    "id": 4505,
+    "turnId": 7,
+    "restaurantId": 20,
+    "ingredientId": 11,
+    "quantity": 2,
+    "priceForEach": 1,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "sphacketti"
+    },
+    "ingredient": {
+      "id": 11,
+      "name": "Polvere di Pulsar"
+    }
+  },
+  {
+    "id": 4554,
+    "turnId": 7,
+    "restaurantId": 7,
+    "ingredientId": 10,
+    "quantity": 5,
+    "priceForEach": 5,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Siesta dopo pizza"
+    },
+    "ingredient": {
+      "id": 10,
+      "name": "Funghi dell’Etere"
+    }
+  },
+  {
+    "id": 4668,
+    "turnId": 7,
+    "restaurantId": 18,
+    "ingredientId": 12,
+    "quantity": 5,
+    "priceForEach": 25,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Starrats"
+    },
+    "ingredient": {
+      "id": 12,
+      "name": "Foglie di Mandragora"
+    }
+  },
+  {
+    "id": 4515,
+    "turnId": 7,
+    "restaurantId": 24,
+    "ingredientId": 29,
+    "quantity": 1,
+    "priceForEach": 27,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Accattoni"
+    },
+    "ingredient": {
+      "id": 29,
+      "name": "Colonia di Mycoflora"
+    }
+  },
+  {
+    "id": 4639,
+    "turnId": 7,
+    "restaurantId": 13,
+    "ingredientId": 29,
+    "quantity": 10,
+    "priceForEach": 8,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Cavalli al trotto"
+    },
+    "ingredient": {
+      "id": 29,
+      "name": "Colonia di Mycoflora"
+    }
+  },
+  {
+    "id": 4519,
+    "turnId": 7,
+    "restaurantId": 24,
+    "ingredientId": 1,
+    "quantity": 1,
+    "priceForEach": 27,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Accattoni"
+    },
+    "ingredient": {
+      "id": 1,
+      "name": "Radici di Gravità"
+    }
+  },
+  {
+    "id": 4494,
+    "turnId": 7,
+    "restaurantId": 20,
+    "ingredientId": 37,
+    "quantity": 2,
+    "priceForEach": 1,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "sphacketti"
+    },
+    "ingredient": {
+      "id": 37,
+      "name": "Muffa Lunare"
+    }
+  },
+  {
+    "id": 4540,
+    "turnId": 7,
+    "restaurantId": 8,
+    "ingredientId": 46,
+    "quantity": 3,
+    "priceForEach": 1,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Synapse AI"
+    },
+    "ingredient": {
+      "id": 46,
+      "name": "Salsa Szechuan"
+    }
+  },
+  {
+    "id": 4475,
+    "turnId": 7,
+    "restaurantId": 9,
+    "ingredientId": 39,
+    "quantity": 1,
+    "priceForEach": 10,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "The Hallucinators"
+    },
+    "ingredient": {
+      "id": 39,
+      "name": "Frammenti di Supernova"
+    }
+  },
+  {
+    "id": 4572,
+    "turnId": 7,
+    "restaurantId": 22,
+    "ingredientId": 17,
+    "quantity": 9,
+    "priceForEach": 15,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "MARADONA"
+    },
+    "ingredient": {
+      "id": 17,
+      "name": "Shard di Prisma Stellare"
+    }
+  },
+  {
+    "id": 4539,
+    "turnId": 7,
+    "restaurantId": 8,
+    "ingredientId": 23,
+    "quantity": 3,
+    "priceForEach": 1,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Synapse AI"
+    },
+    "ingredient": {
+      "id": 23,
+      "name": "Essenza di Speziaria"
+    }
+  },
+  {
+    "id": 4476,
+    "turnId": 7,
+    "restaurantId": 9,
+    "ingredientId": 14,
+    "quantity": 1,
+    "priceForEach": 10,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "The Hallucinators"
+    },
+    "ingredient": {
+      "id": 14,
+      "name": "Granuli di Nebbia Arcobaleno"
+    }
+  },
+  {
+    "id": 4495,
+    "turnId": 7,
+    "restaurantId": 20,
+    "ingredientId": 30,
+    "quantity": 6,
+    "priceForEach": 1,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "sphacketti"
+    },
+    "ingredient": {
+      "id": 30,
+      "name": "Lattuga Namecciana"
+    }
+  },
+  {
+    "id": 4614,
+    "turnId": 7,
+    "restaurantId": 3,
+    "ingredientId": 6,
+    "quantity": 2,
+    "priceForEach": 38,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Domenicaln"
+    },
+    "ingredient": {
+      "id": 6,
+      "name": "Carne di Balena spaziale"
+    }
+  },
+  {
+    "id": 4631,
+    "turnId": 7,
+    "restaurantId": 3,
+    "ingredientId": 3,
+    "quantity": 1,
+    "priceForEach": 32,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Domenicaln"
+    },
+    "ingredient": {
+      "id": 3,
+      "name": "Foglie di Nebulosa"
+    }
+  },
+  {
+    "id": 4611,
+    "turnId": 7,
+    "restaurantId": 14,
+    "ingredientId": 28,
+    "quantity": 2,
+    "priceForEach": 60,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Claudio Opuscoli"
+    },
+    "ingredient": {
+      "id": 28,
+      "name": "Lacrime di Unicorno"
+    }
+  },
+  {
+    "id": 4588,
+    "turnId": 7,
+    "restaurantId": 22,
+    "ingredientId": 38,
+    "quantity": 3,
+    "priceForEach": 15,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "MARADONA"
+    },
+    "ingredient": {
+      "id": 38,
+      "name": "Fusilli del Vento"
+    }
+  },
+  {
+    "id": 4562,
+    "turnId": 7,
+    "restaurantId": 7,
+    "ingredientId": 27,
+    "quantity": 5,
+    "priceForEach": 5,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Siesta dopo pizza"
+    },
+    "ingredient": {
+      "id": 27,
+      "name": "Shard di Materia Oscura"
+    }
+  },
+  {
+    "id": 4640,
+    "turnId": 7,
+    "restaurantId": 13,
+    "ingredientId": 4,
+    "quantity": 5,
+    "priceForEach": 8,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Cavalli al trotto"
+    },
+    "ingredient": {
+      "id": 4,
+      "name": "Gnocchi del Crepuscolo"
+    }
+  },
+  {
+    "id": 4553,
+    "turnId": 7,
+    "restaurantId": 7,
+    "ingredientId": 15,
+    "quantity": 5,
+    "priceForEach": 5,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Siesta dopo pizza"
+    },
+    "ingredient": {
+      "id": 15,
+      "name": "Funghi Orbitali"
+    }
+  },
+  {
+    "id": 4576,
+    "turnId": 7,
+    "restaurantId": 22,
+    "ingredientId": 40,
+    "quantity": 3,
+    "priceForEach": 15,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "MARADONA"
+    },
+    "ingredient": {
+      "id": 40,
+      "name": "Teste di Idra"
+    }
+  },
+  {
+    "id": 4500,
+    "turnId": 7,
+    "restaurantId": 20,
+    "ingredientId": 34,
+    "quantity": 2,
+    "priceForEach": 1,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "sphacketti"
+    },
+    "ingredient": {
+      "id": 34,
+      "name": "Polvere di Crononite"
+    }
+  },
+  {
+    "id": 4665,
+    "turnId": 7,
+    "restaurantId": 18,
+    "ingredientId": 35,
+    "quantity": 1,
+    "priceForEach": 25,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Starrats"
+    },
+    "ingredient": {
+      "id": 35,
+      "name": "Fibra di Sintetex"
+    }
+  },
+  {
+    "id": 4524,
+    "turnId": 7,
+    "restaurantId": 24,
+    "ingredientId": 20,
+    "quantity": 1,
+    "priceForEach": 27,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Accattoni"
+    },
+    "ingredient": {
+      "id": 20,
+      "name": "Biscotti della Galassia"
+    }
+  },
+  {
+    "id": 4584,
+    "turnId": 7,
+    "restaurantId": 22,
+    "ingredientId": 23,
+    "quantity": 6,
+    "priceForEach": 15,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "MARADONA"
+    },
+    "ingredient": {
+      "id": 23,
+      "name": "Essenza di Speziaria"
+    }
+  },
+  {
+    "id": 4549,
+    "turnId": 7,
+    "restaurantId": 7,
+    "ingredientId": 8,
+    "quantity": 5,
+    "priceForEach": 5,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Siesta dopo pizza"
+    },
+    "ingredient": {
+      "id": 8,
+      "name": "Carne di Xenodonte"
+    }
+  },
+  {
+    "id": 4496,
+    "turnId": 7,
+    "restaurantId": 20,
+    "ingredientId": 8,
+    "quantity": 2,
+    "priceForEach": 1,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "sphacketti"
+    },
+    "ingredient": {
+      "id": 8,
+      "name": "Carne di Xenodonte"
+    }
+  },
+  {
+    "id": 4546,
+    "turnId": 7,
+    "restaurantId": 7,
+    "ingredientId": 6,
+    "quantity": 5,
+    "priceForEach": 5,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Siesta dopo pizza"
+    },
+    "ingredient": {
+      "id": 6,
+      "name": "Carne di Balena spaziale"
+    }
+  },
+  {
+    "id": 4616,
+    "turnId": 7,
+    "restaurantId": 3,
+    "ingredientId": 11,
+    "quantity": 2,
+    "priceForEach": 38,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Domenicaln"
+    },
+    "ingredient": {
+      "id": 11,
+      "name": "Polvere di Pulsar"
+    }
+  },
+  {
+    "id": 4632,
+    "turnId": 7,
+    "restaurantId": 3,
+    "ingredientId": 28,
+    "quantity": 1,
+    "priceForEach": 32,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Domenicaln"
+    },
+    "ingredient": {
+      "id": 28,
+      "name": "Lacrime di Unicorno"
+    }
+  },
+  {
+    "id": 4503,
+    "turnId": 7,
+    "restaurantId": 20,
+    "ingredientId": 13,
+    "quantity": 2,
+    "priceForEach": 1,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "sphacketti"
+    },
+    "ingredient": {
+      "id": 13,
+      "name": "Pane di Luce"
+    }
+  },
+  {
+    "id": 4600,
+    "turnId": 7,
+    "restaurantId": 11,
+    "ingredientId": 27,
+    "quantity": 1,
+    "priceForEach": 55,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "AIS Privè"
+    },
+    "ingredient": {
+      "id": 27,
+      "name": "Shard di Materia Oscura"
+    }
+  },
+  {
+    "id": 4477,
+    "turnId": 7,
+    "restaurantId": 9,
+    "ingredientId": 19,
+    "quantity": 1,
+    "priceForEach": 10,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "The Hallucinators"
+    },
+    "ingredient": {
+      "id": 19,
+      "name": "Carne di Kraken"
+    }
+  },
+  {
+    "id": 4521,
+    "turnId": 7,
+    "restaurantId": 24,
+    "ingredientId": 37,
+    "quantity": 1,
+    "priceForEach": 27,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Accattoni"
+    },
+    "ingredient": {
+      "id": 37,
+      "name": "Muffa Lunare"
+    }
+  },
+  {
+    "id": 4612,
+    "turnId": 7,
+    "restaurantId": 14,
+    "ingredientId": 34,
+    "quantity": 2,
+    "priceForEach": 15,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Claudio Opuscoli"
+    },
+    "ingredient": {
+      "id": 34,
+      "name": "Polvere di Crononite"
+    }
+  },
+  {
+    "id": 4578,
+    "turnId": 7,
+    "restaurantId": 22,
+    "ingredientId": 50,
+    "quantity": 3,
+    "priceForEach": 15,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "MARADONA"
+    },
+    "ingredient": {
+      "id": 50,
+      "name": "Petali di Eco"
+    }
+  },
+  {
+    "id": 4608,
+    "turnId": 7,
+    "restaurantId": 14,
+    "ingredientId": 8,
+    "quantity": 2,
+    "priceForEach": 15,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Claudio Opuscoli"
+    },
+    "ingredient": {
+      "id": 8,
+      "name": "Carne di Xenodonte"
+    }
+  },
+  {
+    "id": 4618,
+    "turnId": 7,
+    "restaurantId": 3,
+    "ingredientId": 7,
+    "quantity": 1,
+    "priceForEach": 32,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Domenicaln"
+    },
+    "ingredient": {
+      "id": 7,
+      "name": "Carne di Mucca"
+    }
+  },
+  {
+    "id": 4583,
+    "turnId": 7,
+    "restaurantId": 22,
+    "ingredientId": 7,
+    "quantity": 3,
+    "priceForEach": 15,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "MARADONA"
+    },
+    "ingredient": {
+      "id": 7,
+      "name": "Carne di Mucca"
+    }
+  },
+  {
+    "id": 4622,
+    "turnId": 7,
+    "restaurantId": 3,
+    "ingredientId": 24,
+    "quantity": 1,
+    "priceForEach": 32,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Domenicaln"
+    },
+    "ingredient": {
+      "id": 24,
+      "name": "Spaghi del Sole"
+    }
+  },
+  {
+    "id": 4633,
+    "turnId": 7,
+    "restaurantId": 3,
+    "ingredientId": 38,
+    "quantity": 1,
+    "priceForEach": 32,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Domenicaln"
+    },
+    "ingredient": {
+      "id": 38,
+      "name": "Fusilli del Vento"
+    }
+  },
+  {
+    "id": 4666,
+    "turnId": 7,
+    "restaurantId": 18,
+    "ingredientId": 26,
+    "quantity": 8,
+    "priceForEach": 216,
+    "status": "INCOMPLETE",
+    "restaurant": {
+      "name": "Starrats"
+    },
+    "ingredient": {
+      "id": 26,
+      "name": "Plasma Vitale"
+    }
+  },
+  {
+    "id": 4599,
+    "turnId": 7,
+    "restaurantId": 11,
+    "ingredientId": 26,
+    "quantity": 2,
+    "priceForEach": 35,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "AIS Privè"
+    },
+    "ingredient": {
+      "id": 26,
+      "name": "Plasma Vitale"
+    }
+  },
+  {
+    "id": 4641,
+    "turnId": 7,
+    "restaurantId": 13,
+    "ingredientId": 26,
+    "quantity": 5,
+    "priceForEach": 8,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Cavalli al trotto"
+    },
+    "ingredient": {
+      "id": 26,
+      "name": "Plasma Vitale"
+    }
+  },
+  {
+    "id": 4551,
+    "turnId": 7,
+    "restaurantId": 7,
+    "ingredientId": 5,
+    "quantity": 5,
+    "priceForEach": 5,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Siesta dopo pizza"
+    },
+    "ingredient": {
+      "id": 5,
+      "name": "Essenza di Tachioni"
+    }
+  },
+  {
+    "id": 4536,
+    "turnId": 7,
+    "restaurantId": 8,
+    "ingredientId": 5,
+    "quantity": 3,
+    "priceForEach": 1,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Synapse AI"
+    },
+    "ingredient": {
+      "id": 5,
+      "name": "Essenza di Tachioni"
+    }
+  },
+  {
+    "id": 4609,
+    "turnId": 7,
+    "restaurantId": 14,
+    "ingredientId": 9,
+    "quantity": 2,
+    "priceForEach": 60,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Claudio Opuscoli"
+    },
+    "ingredient": {
+      "id": 9,
+      "name": "Pane degli Abissi"
+    }
+  },
+  {
+    "id": 4598,
+    "turnId": 7,
+    "restaurantId": 11,
+    "ingredientId": 9,
+    "quantity": 1,
+    "priceForEach": 30,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "AIS Privè"
+    },
+    "ingredient": {
+      "id": 9,
+      "name": "Pane degli Abissi"
+    }
+  },
+  {
+    "id": 4638,
+    "turnId": 7,
+    "restaurantId": 13,
+    "ingredientId": 1,
+    "quantity": 5,
+    "priceForEach": 8,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Cavalli al trotto"
+    },
+    "ingredient": {
+      "id": 1,
+      "name": "Radici di Gravità"
+    }
+  },
+  {
+    "id": 4561,
+    "turnId": 7,
+    "restaurantId": 7,
+    "ingredientId": 1,
+    "quantity": 5,
+    "priceForEach": 5,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Siesta dopo pizza"
+    },
+    "ingredient": {
+      "id": 1,
+      "name": "Radici di Gravità"
+    }
+  },
+  {
+    "id": 4501,
+    "turnId": 7,
+    "restaurantId": 20,
+    "ingredientId": 1,
+    "quantity": 2,
+    "priceForEach": 1,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "sphacketti"
+    },
+    "ingredient": {
+      "id": 1,
+      "name": "Radici di Gravità"
+    }
+  },
+  {
+    "id": 4514,
+    "turnId": 7,
+    "restaurantId": 24,
+    "ingredientId": 18,
+    "quantity": 1,
+    "priceForEach": 27,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Accattoni"
+    },
+    "ingredient": {
+      "id": 18,
+      "name": "Baccacedro"
+    }
+  },
+  {
+    "id": 4478,
+    "turnId": 7,
+    "restaurantId": 9,
+    "ingredientId": 22,
+    "quantity": 1,
+    "priceForEach": 10,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "The Hallucinators"
+    },
+    "ingredient": {
+      "id": 22,
+      "name": "Riso di Cassandra"
+    }
+  },
+  {
+    "id": 4661,
+    "turnId": 7,
+    "restaurantId": 18,
+    "ingredientId": 17,
+    "quantity": 1,
+    "priceForEach": 25,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Starrats"
+    },
+    "ingredient": {
+      "id": 17,
+      "name": "Shard di Prisma Stellare"
+    }
+  },
+  {
+    "id": 4498,
+    "turnId": 7,
+    "restaurantId": 20,
+    "ingredientId": 17,
+    "quantity": 2,
+    "priceForEach": 1,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "sphacketti"
+    },
+    "ingredient": {
+      "id": 17,
+      "name": "Shard di Prisma Stellare"
+    }
+  },
+  {
+    "id": 4594,
+    "turnId": 7,
+    "restaurantId": 22,
+    "ingredientId": 43,
+    "quantity": 3,
+    "priceForEach": 15,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "MARADONA"
+    },
+    "ingredient": {
+      "id": 43,
+      "name": "Lacrime di Andromeda"
+    }
+  },
+  {
+    "id": 4587,
+    "turnId": 7,
+    "restaurantId": 22,
+    "ingredientId": 14,
+    "quantity": 3,
+    "priceForEach": 15,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "MARADONA"
+    },
+    "ingredient": {
+      "id": 14,
+      "name": "Granuli di Nebbia Arcobaleno"
+    }
+  },
+  {
+    "id": 4570,
+    "turnId": 7,
+    "restaurantId": 22,
+    "ingredientId": 8,
+    "quantity": 3,
+    "priceForEach": 15,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "MARADONA"
+    },
+    "ingredient": {
+      "id": 8,
+      "name": "Carne di Xenodonte"
+    }
+  },
+  {
+    "id": 4497,
+    "turnId": 7,
+    "restaurantId": 20,
+    "ingredientId": 33,
+    "quantity": 2,
+    "priceForEach": 1,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "sphacketti"
+    },
+    "ingredient": {
+      "id": 33,
+      "name": "Nettare di Sirena"
+    }
+  },
+  {
+    "id": 4493,
+    "turnId": 7,
+    "restaurantId": 20,
+    "ingredientId": 3,
+    "quantity": 2,
+    "priceForEach": 1,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "sphacketti"
+    },
+    "ingredient": {
+      "id": 3,
+      "name": "Foglie di Nebulosa"
+    }
+  },
+  {
+    "id": 4531,
+    "turnId": 7,
+    "restaurantId": 8,
+    "ingredientId": 11,
+    "quantity": 6,
+    "priceForEach": 2,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Synapse AI"
+    },
+    "ingredient": {
+      "id": 11,
+      "name": "Polvere di Pulsar"
+    }
+  },
+  {
+    "id": 4625,
+    "turnId": 7,
+    "restaurantId": 3,
+    "ingredientId": 26,
+    "quantity": 1,
+    "priceForEach": 32,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Domenicaln"
+    },
+    "ingredient": {
+      "id": 26,
+      "name": "Plasma Vitale"
+    }
+  },
+  {
+    "id": 4634,
+    "turnId": 7,
+    "restaurantId": 3,
+    "ingredientId": 13,
+    "quantity": 1,
+    "priceForEach": 32,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Domenicaln"
+    },
+    "ingredient": {
+      "id": 13,
+      "name": "Pane di Luce"
+    }
+  },
+  {
+    "id": 4523,
+    "turnId": 7,
+    "restaurantId": 24,
+    "ingredientId": 13,
+    "quantity": 1,
+    "priceForEach": 27,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Accattoni"
+    },
+    "ingredient": {
+      "id": 13,
+      "name": "Pane di Luce"
+    }
+  },
+  {
+    "id": 4604,
+    "turnId": 7,
+    "restaurantId": 14,
+    "ingredientId": 32,
+    "quantity": 4,
+    "priceForEach": 15,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Claudio Opuscoli"
+    },
+    "ingredient": {
+      "id": 32,
+      "name": "Uova di Fenice"
+    }
+  },
+  {
+    "id": 4602,
+    "turnId": 7,
+    "restaurantId": 11,
+    "ingredientId": 4,
+    "quantity": 1,
+    "priceForEach": 30,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "AIS Privè"
+    },
+    "ingredient": {
+      "id": 4,
+      "name": "Gnocchi del Crepuscolo"
+    }
+  },
+  {
+    "id": 4556,
+    "turnId": 7,
+    "restaurantId": 7,
+    "ingredientId": 4,
+    "quantity": 5,
+    "priceForEach": 5,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Siesta dopo pizza"
+    },
+    "ingredient": {
+      "id": 4,
+      "name": "Gnocchi del Crepuscolo"
+    }
+  },
+  {
+    "id": 4548,
+    "turnId": 7,
+    "restaurantId": 7,
+    "ingredientId": 19,
+    "quantity": 5,
+    "priceForEach": 5,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Siesta dopo pizza"
+    },
+    "ingredient": {
+      "id": 19,
+      "name": "Carne di Kraken"
+    }
+  },
+  {
+    "id": 4637,
+    "turnId": 7,
+    "restaurantId": 13,
+    "ingredientId": 40,
+    "quantity": 10,
+    "priceForEach": 8,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Cavalli al trotto"
+    },
+    "ingredient": {
+      "id": 40,
+      "name": "Teste di Idra"
+    }
+  },
+  {
+    "id": 4479,
+    "turnId": 7,
+    "restaurantId": 9,
+    "ingredientId": 31,
+    "quantity": 1,
+    "priceForEach": 10,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "The Hallucinators"
+    },
+    "ingredient": {
+      "id": 31,
+      "name": "Erba Pipa"
+    }
+  },
+  {
+    "id": 4664,
+    "turnId": 7,
+    "restaurantId": 18,
+    "ingredientId": 17,
+    "quantity": 1,
+    "priceForEach": 25,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Starrats"
+    },
+    "ingredient": {
+      "id": 17,
+      "name": "Shard di Prisma Stellare"
+    }
+  },
+  {
+    "id": 4552,
+    "turnId": 7,
+    "restaurantId": 7,
+    "ingredientId": 3,
+    "quantity": 5,
+    "priceForEach": 5,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Siesta dopo pizza"
+    },
+    "ingredient": {
+      "id": 3,
+      "name": "Foglie di Nebulosa"
+    }
+  },
+  {
+    "id": 4557,
+    "turnId": 7,
+    "restaurantId": 7,
+    "ingredientId": 28,
+    "quantity": 5,
+    "priceForEach": 5,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Siesta dopo pizza"
+    },
+    "ingredient": {
+      "id": 28,
+      "name": "Lacrime di Unicorno"
+    }
+  },
+  {
+    "id": 4510,
+    "turnId": 7,
+    "restaurantId": 24,
+    "ingredientId": 5,
+    "quantity": 1,
+    "priceForEach": 190,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Accattoni"
+    },
+    "ingredient": {
+      "id": 5,
+      "name": "Essenza di Tachioni"
+    }
+  },
+  {
+    "id": 4624,
+    "turnId": 7,
+    "restaurantId": 3,
+    "ingredientId": 5,
+    "quantity": 1,
+    "priceForEach": 32,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Domenicaln"
+    },
+    "ingredient": {
+      "id": 5,
+      "name": "Essenza di Tachioni"
+    }
+  },
+  {
+    "id": 4527,
+    "turnId": 7,
+    "restaurantId": 8,
+    "ingredientId": 25,
+    "quantity": 9,
+    "priceForEach": 3,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Synapse AI"
+    },
+    "ingredient": {
+      "id": 25,
+      "name": "Farina di Nettuno"
+    }
+  },
+  {
+    "id": 4502,
+    "turnId": 7,
+    "restaurantId": 20,
+    "ingredientId": 32,
+    "quantity": 2,
+    "priceForEach": 1,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "sphacketti"
+    },
+    "ingredient": {
+      "id": 32,
+      "name": "Uova di Fenice"
+    }
+  },
+  {
+    "id": 4655,
+    "turnId": 7,
+    "restaurantId": 18,
+    "ingredientId": 1,
+    "quantity": 39,
+    "priceForEach": 100,
+    "status": "INCOMPLETE",
+    "restaurant": {
+      "name": "Starrats"
+    },
+    "ingredient": {
+      "id": 1,
+      "name": "Radici di Gravità"
+    }
+  },
+  {
+    "id": 4592,
+    "turnId": 7,
+    "restaurantId": 22,
+    "ingredientId": 19,
+    "quantity": 3,
+    "priceForEach": 15,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "MARADONA"
+    },
+    "ingredient": {
+      "id": 19,
+      "name": "Carne di Kraken"
+    }
+  },
+  {
+    "id": 4580,
+    "turnId": 7,
+    "restaurantId": 22,
+    "ingredientId": 48,
+    "quantity": 3,
+    "priceForEach": 15,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "MARADONA"
+    },
+    "ingredient": {
+      "id": 48,
+      "name": "Spore Quantiche"
+    }
+  },
+  {
+    "id": 4480,
+    "turnId": 7,
+    "restaurantId": 20,
+    "ingredientId": 36,
+    "quantity": 2,
+    "priceForEach": 1,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "sphacketti"
+    },
+    "ingredient": {
+      "id": 36,
+      "name": "Carne di Drago"
+    }
+  },
+  {
+    "id": 4643,
+    "turnId": 7,
+    "restaurantId": 13,
+    "ingredientId": 39,
+    "quantity": 5,
+    "priceForEach": 8,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Cavalli al trotto"
+    },
+    "ingredient": {
+      "id": 39,
+      "name": "Frammenti di Supernova"
+    }
+  },
+  {
+    "id": 4597,
+    "turnId": 7,
+    "restaurantId": 11,
+    "ingredientId": 34,
+    "quantity": 1,
+    "priceForEach": 30,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "AIS Privè"
+    },
+    "ingredient": {
+      "id": 34,
+      "name": "Polvere di Crononite"
+    }
+  },
+  {
+    "id": 4525,
+    "turnId": 7,
+    "restaurantId": 24,
+    "ingredientId": 44,
+    "quantity": 1,
+    "priceForEach": 27,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Accattoni"
+    },
+    "ingredient": {
+      "id": 44,
+      "name": "Nduja Fritta Tanto"
+    }
+  },
+  {
+    "id": 4644,
+    "turnId": 7,
+    "restaurantId": 13,
+    "ingredientId": 3,
+    "quantity": 10,
+    "priceForEach": 8,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Cavalli al trotto"
+    },
+    "ingredient": {
+      "id": 3,
+      "name": "Foglie di Nebulosa"
+    }
+  },
+  {
+    "id": 4517,
+    "turnId": 7,
+    "restaurantId": 24,
+    "ingredientId": 10,
+    "quantity": 1,
+    "priceForEach": 27,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Accattoni"
+    },
+    "ingredient": {
+      "id": 10,
+      "name": "Funghi dell’Etere"
+    }
+  },
+  {
+    "id": 4650,
+    "turnId": 7,
+    "restaurantId": 6,
+    "ingredientId": 27,
+    "quantity": 4,
+    "priceForEach": 130,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "RAGù"
+    },
+    "ingredient": {
+      "id": 27,
+      "name": "Shard di Materia Oscura"
+    }
+  },
+  {
+    "id": 4504,
+    "turnId": 7,
+    "restaurantId": 20,
+    "ingredientId": 27,
+    "quantity": 2,
+    "priceForEach": 1,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "sphacketti"
+    },
+    "ingredient": {
+      "id": 27,
+      "name": "Shard di Materia Oscura"
+    }
+  },
+  {
+    "id": 4538,
+    "turnId": 7,
+    "restaurantId": 8,
+    "ingredientId": 4,
+    "quantity": 3,
+    "priceForEach": 1,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Synapse AI"
+    },
+    "ingredient": {
+      "id": 4,
+      "name": "Gnocchi del Crepuscolo"
+    }
+  },
+  {
+    "id": 4563,
+    "turnId": 7,
+    "restaurantId": 7,
+    "ingredientId": 40,
+    "quantity": 5,
+    "priceForEach": 5,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Siesta dopo pizza"
+    },
+    "ingredient": {
+      "id": 40,
+      "name": "Teste di Idra"
+    }
+  },
+  {
+    "id": 4482,
+    "turnId": 7,
+    "restaurantId": 20,
+    "ingredientId": 2,
+    "quantity": 2,
+    "priceForEach": 1,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "sphacketti"
+    },
+    "ingredient": {
+      "id": 2,
+      "name": "Alghe Bioluminescenti"
+    }
+  },
+  {
+    "id": 4541,
+    "turnId": 7,
+    "restaurantId": 8,
+    "ingredientId": 57,
+    "quantity": 3,
+    "priceForEach": 1,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Synapse AI"
+    },
+    "ingredient": {
+      "id": 57,
+      "name": "Frutti del Diavolo"
+    }
+  },
+  {
+    "id": 4574,
+    "turnId": 7,
+    "restaurantId": 22,
+    "ingredientId": 36,
+    "quantity": 3,
+    "priceForEach": 15,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "MARADONA"
+    },
+    "ingredient": {
+      "id": 36,
+      "name": "Carne di Drago"
+    }
+  },
+  {
+    "id": 4660,
+    "turnId": 7,
+    "restaurantId": 18,
+    "ingredientId": 17,
+    "quantity": 1,
+    "priceForEach": 25,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Starrats"
+    },
+    "ingredient": {
+      "id": 17,
+      "name": "Shard di Prisma Stellare"
+    }
+  },
+  {
+    "id": 4547,
+    "turnId": 7,
+    "restaurantId": 7,
+    "ingredientId": 7,
+    "quantity": 5,
+    "priceForEach": 5,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Siesta dopo pizza"
+    },
+    "ingredient": {
+      "id": 7,
+      "name": "Carne di Mucca"
+    }
+  },
+  {
+    "id": 4621,
+    "turnId": 7,
+    "restaurantId": 3,
+    "ingredientId": 10,
+    "quantity": 1,
+    "priceForEach": 32,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Domenicaln"
+    },
+    "ingredient": {
+      "id": 10,
+      "name": "Funghi dell’Etere"
+    }
+  },
+  {
+    "id": 4526,
+    "turnId": 7,
+    "restaurantId": 8,
+    "ingredientId": 12,
+    "quantity": 12,
+    "priceForEach": 4,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Synapse AI"
+    },
+    "ingredient": {
+      "id": 12,
+      "name": "Foglie di Mandragora"
+    }
+  },
+  {
+    "id": 4484,
+    "turnId": 7,
+    "restaurantId": 20,
+    "ingredientId": 29,
+    "quantity": 4,
+    "priceForEach": 1,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "sphacketti"
+    },
+    "ingredient": {
+      "id": 29,
+      "name": "Colonia di Mycoflora"
+    }
+  },
+  {
+    "id": 4506,
+    "turnId": 7,
+    "restaurantId": 24,
+    "ingredientId": 32,
+    "quantity": 1,
+    "priceForEach": 190,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Accattoni"
+    },
+    "ingredient": {
+      "id": 32,
+      "name": "Uova di Fenice"
+    }
+  },
+  {
+    "id": 4656,
+    "turnId": 7,
+    "restaurantId": 18,
+    "ingredientId": 4,
+    "quantity": 5,
+    "priceForEach": 30,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Starrats"
+    },
+    "ingredient": {
+      "id": 4,
+      "name": "Gnocchi del Crepuscolo"
+    }
+  },
+  {
+    "id": 4566,
+    "turnId": 7,
+    "restaurantId": 22,
+    "ingredientId": 4,
+    "quantity": 6,
+    "priceForEach": 15,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "MARADONA"
+    },
+    "ingredient": {
+      "id": 4,
+      "name": "Gnocchi del Crepuscolo"
+    }
+  },
+  {
+    "id": 4645,
+    "turnId": 7,
+    "restaurantId": 13,
+    "ingredientId": 18,
+    "quantity": 5,
+    "priceForEach": 8,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Cavalli al trotto"
+    },
+    "ingredient": {
+      "id": 18,
+      "name": "Baccacedro"
+    }
+  },
+  {
+    "id": 4591,
+    "turnId": 7,
+    "restaurantId": 22,
+    "ingredientId": 57,
+    "quantity": 3,
+    "priceForEach": 15,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "MARADONA"
+    },
+    "ingredient": {
+      "id": 57,
+      "name": "Frutti del Diavolo"
+    }
+  },
+  {
+    "id": 4520,
+    "turnId": 7,
+    "restaurantId": 24,
+    "ingredientId": 45,
+    "quantity": 1,
+    "priceForEach": 27,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Accattoni"
+    },
+    "ingredient": {
+      "id": 45,
+      "name": "Radici di Singolarità"
+    }
+  },
+  {
+    "id": 4581,
+    "turnId": 7,
+    "restaurantId": 22,
+    "ingredientId": 16,
+    "quantity": 9,
+    "priceForEach": 15,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "MARADONA"
+    },
+    "ingredient": {
+      "id": 16,
+      "name": "Sale Temporale"
+    }
+  },
+  {
+    "id": 4610,
+    "turnId": 7,
+    "restaurantId": 14,
+    "ingredientId": 22,
+    "quantity": 2,
+    "priceForEach": 15,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Claudio Opuscoli"
+    },
+    "ingredient": {
+      "id": 22,
+      "name": "Riso di Cassandra"
+    }
+  },
+  {
+    "id": 4485,
+    "turnId": 7,
+    "restaurantId": 20,
+    "ingredientId": 23,
+    "quantity": 4,
+    "priceForEach": 1,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "sphacketti"
+    },
+    "ingredient": {
+      "id": 23,
+      "name": "Essenza di Speziaria"
+    }
+  },
+  {
+    "id": 4606,
+    "turnId": 7,
+    "restaurantId": 14,
+    "ingredientId": 26,
+    "quantity": 4,
+    "priceForEach": 15,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Claudio Opuscoli"
+    },
+    "ingredient": {
+      "id": 26,
+      "name": "Plasma Vitale"
+    }
+  },
+  {
+    "id": 4567,
+    "turnId": 7,
+    "restaurantId": 22,
+    "ingredientId": 26,
+    "quantity": 9,
+    "priceForEach": 15,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "MARADONA"
+    },
+    "ingredient": {
+      "id": 26,
+      "name": "Plasma Vitale"
+    }
+  },
+  {
+    "id": 4568,
+    "turnId": 7,
+    "restaurantId": 22,
+    "ingredientId": 5,
+    "quantity": 3,
+    "priceForEach": 15,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "MARADONA"
+    },
+    "ingredient": {
+      "id": 5,
+      "name": "Essenza di Tachioni"
+    }
+  },
+  {
+    "id": 4620,
+    "turnId": 7,
+    "restaurantId": 3,
+    "ingredientId": 12,
+    "quantity": 1,
+    "priceForEach": 32,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Domenicaln"
+    },
+    "ingredient": {
+      "id": 12,
+      "name": "Foglie di Mandragora"
+    }
+  },
+  {
+    "id": 4595,
+    "turnId": 7,
+    "restaurantId": 11,
+    "ingredientId": 32,
+    "quantity": 2,
+    "priceForEach": 55,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "AIS Privè"
+    },
+    "ingredient": {
+      "id": 32,
+      "name": "Uova di Fenice"
+    }
+  },
+  {
+    "id": 4507,
+    "turnId": 7,
+    "restaurantId": 24,
+    "ingredientId": 27,
+    "quantity": 1,
+    "priceForEach": 190,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Accattoni"
+    },
+    "ingredient": {
+      "id": 27,
+      "name": "Shard di Materia Oscura"
+    }
+  },
+  {
+    "id": 4652,
+    "turnId": 7,
+    "restaurantId": 6,
+    "ingredientId": 4,
+    "quantity": 4,
+    "priceForEach": 130,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "RAGù"
+    },
+    "ingredient": {
+      "id": 4,
+      "name": "Gnocchi del Crepuscolo"
+    }
+  },
+  {
+    "id": 4532,
+    "turnId": 7,
+    "restaurantId": 8,
+    "ingredientId": 21,
+    "quantity": 3,
+    "priceForEach": 2,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Synapse AI"
+    },
+    "ingredient": {
+      "id": 21,
+      "name": "Amido di Stellarion"
+    }
+  },
+  {
+    "id": 4593,
+    "turnId": 7,
+    "restaurantId": 22,
+    "ingredientId": 15,
+    "quantity": 3,
+    "priceForEach": 15,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "MARADONA"
+    },
+    "ingredient": {
+      "id": 15,
+      "name": "Funghi Orbitali"
+    }
+  },
+  {
+    "id": 4533,
+    "turnId": 7,
+    "restaurantId": 8,
+    "ingredientId": 18,
+    "quantity": 3,
+    "priceForEach": 1,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Synapse AI"
+    },
+    "ingredient": {
+      "id": 18,
+      "name": "Baccacedro"
+    }
+  },
+  {
+    "id": 4646,
+    "turnId": 7,
+    "restaurantId": 13,
+    "ingredientId": 50,
+    "quantity": 5,
+    "priceForEach": 8,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Cavalli al trotto"
+    },
+    "ingredient": {
+      "id": 50,
+      "name": "Petali di Eco"
+    }
+  },
+  {
+    "id": 4662,
+    "turnId": 7,
+    "restaurantId": 18,
+    "ingredientId": 17,
+    "quantity": 1,
+    "priceForEach": 25,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Starrats"
+    },
+    "ingredient": {
+      "id": 17,
+      "name": "Shard di Prisma Stellare"
+    }
+  },
+  {
+    "id": 4654,
+    "turnId": 7,
+    "restaurantId": 6,
+    "ingredientId": 5,
+    "quantity": 4,
+    "priceForEach": 130,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "RAGù"
+    },
+    "ingredient": {
+      "id": 5,
+      "name": "Essenza di Tachioni"
+    }
+  },
+  {
+    "id": 4560,
+    "turnId": 7,
+    "restaurantId": 7,
+    "ingredientId": 9,
+    "quantity": 5,
+    "priceForEach": 5,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Siesta dopo pizza"
+    },
+    "ingredient": {
+      "id": 9,
+      "name": "Pane degli Abissi"
+    }
+  },
+  {
+    "id": 4657,
+    "turnId": 7,
+    "restaurantId": 18,
+    "ingredientId": 32,
+    "quantity": 8,
+    "priceForEach": 216,
+    "status": "INCOMPLETE",
+    "restaurant": {
+      "name": "Starrats"
+    },
+    "ingredient": {
+      "id": 32,
+      "name": "Uova di Fenice"
+    }
+  },
+  {
+    "id": 4508,
+    "turnId": 7,
+    "restaurantId": 24,
+    "ingredientId": 4,
+    "quantity": 1,
+    "priceForEach": 190,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Accattoni"
+    },
+    "ingredient": {
+      "id": 4,
+      "name": "Gnocchi del Crepuscolo"
+    }
+  },
+  {
+    "id": 4545,
+    "turnId": 7,
+    "restaurantId": 7,
+    "ingredientId": 18,
+    "quantity": 5,
+    "priceForEach": 5,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Siesta dopo pizza"
+    },
+    "ingredient": {
+      "id": 18,
+      "name": "Baccacedro"
+    }
+  },
+  {
+    "id": 4575,
+    "turnId": 7,
+    "restaurantId": 22,
+    "ingredientId": 41,
+    "quantity": 3,
+    "priceForEach": 15,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "MARADONA"
+    },
+    "ingredient": {
+      "id": 41,
+      "name": "Essenza di Vuoto"
+    }
+  },
+  {
+    "id": 4528,
+    "turnId": 7,
+    "restaurantId": 8,
+    "ingredientId": 45,
+    "quantity": 6,
+    "priceForEach": 2,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Synapse AI"
+    },
+    "ingredient": {
+      "id": 45,
+      "name": "Radici di Singolarità"
+    }
+  },
+  {
+    "id": 4647,
+    "turnId": 7,
+    "restaurantId": 13,
+    "ingredientId": 16,
+    "quantity": 5,
+    "priceForEach": 8,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Cavalli al trotto"
+    },
+    "ingredient": {
+      "id": 16,
+      "name": "Sale Temporale"
+    }
+  },
+  {
+    "id": 4522,
+    "turnId": 7,
+    "restaurantId": 24,
+    "ingredientId": 35,
+    "quantity": 1,
+    "priceForEach": 27,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Accattoni"
+    },
+    "ingredient": {
+      "id": 35,
+      "name": "Fibra di Sintetex"
+    }
+  },
+  {
+    "id": 4486,
+    "turnId": 7,
+    "restaurantId": 20,
+    "ingredientId": 35,
+    "quantity": 2,
+    "priceForEach": 1,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "sphacketti"
+    },
+    "ingredient": {
+      "id": 35,
+      "name": "Fibra di Sintetex"
+    }
+  },
+  {
+    "id": 4613,
+    "turnId": 7,
+    "restaurantId": 14,
+    "ingredientId": 23,
+    "quantity": 2,
+    "priceForEach": 60,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Claudio Opuscoli"
+    },
+    "ingredient": {
+      "id": 23,
+      "name": "Essenza di Speziaria"
+    }
+  },
+  {
+    "id": 4516,
+    "turnId": 7,
+    "restaurantId": 24,
+    "ingredientId": 14,
+    "quantity": 1,
+    "priceForEach": 27,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Accattoni"
+    },
+    "ingredient": {
+      "id": 14,
+      "name": "Granuli di Nebbia Arcobaleno"
+    }
+  },
+  {
+    "id": 4648,
+    "turnId": 7,
+    "restaurantId": 13,
+    "ingredientId": 30,
+    "quantity": 5,
+    "priceForEach": 8,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Cavalli al trotto"
+    },
+    "ingredient": {
+      "id": 30,
+      "name": "Lattuga Namecciana"
+    }
+  },
+  {
+    "id": 4577,
+    "turnId": 7,
+    "restaurantId": 22,
+    "ingredientId": 3,
+    "quantity": 6,
+    "priceForEach": 15,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "MARADONA"
+    },
+    "ingredient": {
+      "id": 3,
+      "name": "Foglie di Nebulosa"
+    }
+  },
+  {
+    "id": 4509,
+    "turnId": 7,
+    "restaurantId": 24,
+    "ingredientId": 26,
+    "quantity": 1,
+    "priceForEach": 190,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Accattoni"
+    },
+    "ingredient": {
+      "id": 26,
+      "name": "Plasma Vitale"
+    }
+  },
+  {
+    "id": 4653,
+    "turnId": 7,
+    "restaurantId": 6,
+    "ingredientId": 26,
+    "quantity": 4,
+    "priceForEach": 130,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "RAGù"
+    },
+    "ingredient": {
+      "id": 26,
+      "name": "Plasma Vitale"
+    }
+  },
+  {
+    "id": 4659,
+    "turnId": 7,
+    "restaurantId": 18,
+    "ingredientId": 5,
+    "quantity": 4,
+    "priceForEach": 108,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Starrats"
+    },
+    "ingredient": {
+      "id": 5,
+      "name": "Essenza di Tachioni"
+    }
+  },
+  {
+    "id": 4623,
+    "turnId": 7,
+    "restaurantId": 3,
+    "ingredientId": 25,
+    "quantity": 1,
+    "priceForEach": 32,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Domenicaln"
+    },
+    "ingredient": {
+      "id": 25,
+      "name": "Farina di Nettuno"
+    }
+  },
+  {
+    "id": 4669,
+    "turnId": 7,
+    "restaurantId": 18,
+    "ingredientId": 9,
+    "quantity": 7,
+    "priceForEach": 140,
+    "status": "INCOMPLETE",
+    "restaurant": {
+      "name": "Starrats"
+    },
+    "ingredient": {
+      "id": 9,
+      "name": "Pane degli Abissi"
+    }
+  },
+  {
+    "id": 4544,
+    "turnId": 7,
+    "restaurantId": 7,
+    "ingredientId": 2,
+    "quantity": 5,
+    "priceForEach": 5,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Siesta dopo pizza"
+    },
+    "ingredient": {
+      "id": 2,
+      "name": "Alghe Bioluminescenti"
+    }
+  },
+  {
+    "id": 4635,
+    "turnId": 7,
+    "restaurantId": 13,
+    "ingredientId": 41,
+    "quantity": 10,
+    "priceForEach": 8,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Cavalli al trotto"
+    },
+    "ingredient": {
+      "id": 41,
+      "name": "Essenza di Vuoto"
+    }
+  },
+  {
+    "id": 4550,
+    "turnId": 7,
+    "restaurantId": 7,
+    "ingredientId": 41,
+    "quantity": 5,
+    "priceForEach": 5,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Siesta dopo pizza"
+    },
+    "ingredient": {
+      "id": 41,
+      "name": "Essenza di Vuoto"
+    }
+  },
+  {
+    "id": 4585,
+    "turnId": 7,
+    "restaurantId": 22,
+    "ingredientId": 22,
+    "quantity": 6,
+    "priceForEach": 15,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "MARADONA"
+    },
+    "ingredient": {
+      "id": 22,
+      "name": "Riso di Cassandra"
+    }
+  },
+  {
+    "id": 4483,
+    "turnId": 7,
+    "restaurantId": 20,
+    "ingredientId": 31,
+    "quantity": 4,
+    "priceForEach": 1,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "sphacketti"
+    },
+    "ingredient": {
+      "id": 31,
+      "name": "Erba Pipa"
+    }
+  },
+  {
+    "id": 4511,
+    "turnId": 7,
+    "restaurantId": 24,
+    "ingredientId": 17,
+    "quantity": 1,
+    "priceForEach": 27,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Accattoni"
+    },
+    "ingredient": {
+      "id": 17,
+      "name": "Shard di Prisma Stellare"
+    }
+  },
+  {
+    "id": 4649,
+    "turnId": 7,
+    "restaurantId": 13,
+    "ingredientId": 11,
+    "quantity": 5,
+    "priceForEach": 8,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Cavalli al trotto"
+    },
+    "ingredient": {
+      "id": 11,
+      "name": "Polvere di Pulsar"
+    }
+  },
+  {
+    "id": 4537,
+    "turnId": 7,
+    "restaurantId": 8,
+    "ingredientId": 26,
+    "quantity": 6,
+    "priceForEach": 2,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Synapse AI"
+    },
+    "ingredient": {
+      "id": 26,
+      "name": "Plasma Vitale"
+    }
+  },
+  {
+    "id": 4651,
+    "turnId": 7,
+    "restaurantId": 6,
+    "ingredientId": 32,
+    "quantity": 4,
+    "priceForEach": 130,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "RAGù"
+    },
+    "ingredient": {
+      "id": 32,
+      "name": "Uova di Fenice"
+    }
+  },
+  {
+    "id": 4565,
+    "turnId": 7,
+    "restaurantId": 22,
+    "ingredientId": 32,
+    "quantity": 6,
+    "priceForEach": 15,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "MARADONA"
+    },
+    "ingredient": {
+      "id": 32,
+      "name": "Uova di Fenice"
+    }
+  },
+  {
+    "id": 4663,
+    "turnId": 7,
+    "restaurantId": 18,
+    "ingredientId": 27,
+    "quantity": 8,
+    "priceForEach": 216,
+    "status": "INCOMPLETE",
+    "restaurant": {
+      "name": "Starrats"
+    },
+    "ingredient": {
+      "id": 27,
+      "name": "Shard di Materia Oscura"
+    }
+  },
+  {
+    "id": 4530,
+    "turnId": 7,
+    "restaurantId": 8,
+    "ingredientId": 27,
+    "quantity": 6,
+    "priceForEach": 2,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Synapse AI"
+    },
+    "ingredient": {
+      "id": 27,
+      "name": "Shard di Materia Oscura"
+    }
+  },
+  {
+    "id": 4487,
+    "turnId": 7,
+    "restaurantId": 20,
+    "ingredientId": 19,
+    "quantity": 4,
+    "priceForEach": 1,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "sphacketti"
+    },
+    "ingredient": {
+      "id": 19,
+      "name": "Carne di Kraken"
+    }
+  },
+  {
+    "id": 4569,
+    "turnId": 7,
+    "restaurantId": 22,
+    "ingredientId": 34,
+    "quantity": 9,
+    "priceForEach": 15,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "MARADONA"
+    },
+    "ingredient": {
+      "id": 34,
+      "name": "Polvere di Crononite"
+    }
+  },
+  {
+    "id": 4670,
+    "turnId": 7,
+    "restaurantId": 18,
+    "ingredientId": 14,
+    "quantity": 1,
+    "priceForEach": 25,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Starrats"
+    },
+    "ingredient": {
+      "id": 14,
+      "name": "Granuli di Nebbia Arcobaleno"
+    }
+  },
+  {
+    "id": 4529,
+    "turnId": 7,
+    "restaurantId": 8,
+    "ingredientId": 14,
+    "quantity": 6,
+    "priceForEach": 2,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Synapse AI"
+    },
+    "ingredient": {
+      "id": 14,
+      "name": "Granuli di Nebbia Arcobaleno"
+    }
+  },
+  {
+    "id": 4596,
+    "turnId": 7,
+    "restaurantId": 11,
+    "ingredientId": 8,
+    "quantity": 1,
+    "priceForEach": 35,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "AIS Privè"
+    },
+    "ingredient": {
+      "id": 8,
+      "name": "Carne di Xenodonte"
+    }
+  },
+  {
+    "id": 4488,
+    "turnId": 7,
+    "restaurantId": 20,
+    "ingredientId": 6,
+    "quantity": 4,
+    "priceForEach": 1,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "sphacketti"
+    },
+    "ingredient": {
+      "id": 6,
+      "name": "Carne di Balena spaziale"
+    }
+  },
+  {
+    "id": 4615,
+    "turnId": 7,
+    "restaurantId": 3,
+    "ingredientId": 9,
+    "quantity": 2,
+    "priceForEach": 38,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Domenicaln"
+    },
+    "ingredient": {
+      "id": 9,
+      "name": "Pane degli Abissi"
+    }
+  },
+  {
+    "id": 4626,
+    "turnId": 7,
+    "restaurantId": 3,
+    "ingredientId": 29,
+    "quantity": 1,
+    "priceForEach": 32,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Domenicaln"
+    },
+    "ingredient": {
+      "id": 29,
+      "name": "Colonia di Mycoflora"
+    }
+  },
+  {
+    "id": 4605,
+    "turnId": 7,
+    "restaurantId": 14,
+    "ingredientId": 4,
+    "quantity": 4,
+    "priceForEach": 15,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Claudio Opuscoli"
+    },
+    "ingredient": {
+      "id": 4,
+      "name": "Gnocchi del Crepuscolo"
+    }
+  },
+  {
+    "id": 4589,
+    "turnId": 7,
+    "restaurantId": 22,
+    "ingredientId": 1,
+    "quantity": 3,
+    "priceForEach": 15,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "MARADONA"
+    },
+    "ingredient": {
+      "id": 1,
+      "name": "Radici di Gravità"
+    }
+  },
+  {
+    "id": 4559,
+    "turnId": 7,
+    "restaurantId": 7,
+    "ingredientId": 37,
+    "quantity": 5,
+    "priceForEach": 5,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Siesta dopo pizza"
+    },
+    "ingredient": {
+      "id": 37,
+      "name": "Muffa Lunare"
+    }
+  },
+  {
+    "id": 4489,
+    "turnId": 7,
+    "restaurantId": 20,
+    "ingredientId": 14,
+    "quantity": 2,
+    "priceForEach": 1,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "sphacketti"
+    },
+    "ingredient": {
+      "id": 14,
+      "name": "Granuli di Nebbia Arcobaleno"
+    }
+  },
+  {
+    "id": 4472,
+    "turnId": 7,
+    "restaurantId": 9,
+    "ingredientId": 33,
+    "quantity": 1,
+    "priceForEach": 10,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "The Hallucinators"
+    },
+    "ingredient": {
+      "id": 33,
+      "name": "Nettare di Sirena"
+    }
+  },
+  {
+    "id": 4469,
+    "turnId": 7,
+    "restaurantId": 9,
+    "ingredientId": 6,
+    "quantity": 2,
+    "priceForEach": 10,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "The Hallucinators"
+    },
+    "ingredient": {
+      "id": 6,
+      "name": "Carne di Balena spaziale"
+    }
+  },
+  {
+    "id": 4471,
+    "turnId": 7,
+    "restaurantId": 9,
+    "ingredientId": 38,
+    "quantity": 1,
+    "priceForEach": 10,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "The Hallucinators"
+    },
+    "ingredient": {
+      "id": 38,
+      "name": "Fusilli del Vento"
+    }
+  },
+  {
+    "id": 4470,
+    "turnId": 7,
+    "restaurantId": 9,
+    "ingredientId": 13,
+    "quantity": 1,
+    "priceForEach": 10,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "The Hallucinators"
+    },
+    "ingredient": {
+      "id": 13,
+      "name": "Pane di Luce"
+    }
+  },
+  {
+    "id": 4512,
+    "turnId": 7,
+    "restaurantId": 24,
+    "ingredientId": 9,
+    "quantity": 1,
+    "priceForEach": 27,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Accattoni"
+    },
+    "ingredient": {
+      "id": 9,
+      "name": "Pane degli Abissi"
+    }
+  },
+  {
+    "id": 4571,
+    "turnId": 7,
+    "restaurantId": 22,
+    "ingredientId": 9,
+    "quantity": 6,
+    "priceForEach": 15,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "MARADONA"
+    },
+    "ingredient": {
+      "id": 9,
+      "name": "Pane degli Abissi"
+    }
+  },
+  {
+    "id": 4627,
+    "turnId": 7,
+    "restaurantId": 3,
+    "ingredientId": 32,
+    "quantity": 1,
+    "priceForEach": 32,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Domenicaln"
+    },
+    "ingredient": {
+      "id": 32,
+      "name": "Uova di Fenice"
+    }
+  },
+  {
+    "id": 4481,
+    "turnId": 7,
+    "restaurantId": 20,
+    "ingredientId": 21,
+    "quantity": 4,
+    "priceForEach": 1,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "sphacketti"
+    },
+    "ingredient": {
+      "id": 21,
+      "name": "Amido di Stellarion"
+    }
+  },
+  {
+    "id": 4466,
+    "turnId": 7,
+    "restaurantId": 9,
+    "ingredientId": 45,
+    "quantity": 1,
+    "priceForEach": 10,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "The Hallucinators"
+    },
+    "ingredient": {
+      "id": 45,
+      "name": "Radici di Singolarità"
+    }
+  },
+  {
+    "id": 4542,
+    "turnId": 7,
+    "restaurantId": 8,
+    "ingredientId": 48,
+    "quantity": 3,
+    "priceForEach": 1,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "Synapse AI"
+    },
+    "ingredient": {
+      "id": 48,
+      "name": "Spore Quantiche"
+    }
+  },
+  {
+    "id": 4467,
+    "turnId": 7,
+    "restaurantId": 9,
+    "ingredientId": 52,
+    "quantity": 1,
+    "priceForEach": 10,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "The Hallucinators"
+    },
+    "ingredient": {
+      "id": 52,
+      "name": "Cristalli di Memoria"
+    }
+  },
+  {
+    "id": 4468,
+    "turnId": 7,
+    "restaurantId": 9,
+    "ingredientId": 36,
+    "quantity": 1,
+    "priceForEach": 10,
+    "status": "COMPLETED",
+    "restaurant": {
+      "name": "The Hallucinators"
+    },
+    "ingredient": {
+      "id": 36,
+      "name": "Carne di Drago"
+    }
+  }
+]

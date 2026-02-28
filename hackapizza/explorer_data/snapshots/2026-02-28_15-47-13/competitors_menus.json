@@ -1,0 +1,1301 @@
+{
+  "Samur_ai": {
+    "items": [
+      {
+        "name": "Il Crepuscolo dell’Unicorno",
+        "price": 500
+      },
+      {
+        "name": "Galassia di Sapore",
+        "price": 750
+      }
+    ]
+  },
+  "Siesta dopo pizza": {
+    "items": []
+  },
+  "ventre a terra": {
+    "items": [
+      {
+        "name": "Sinfonia Cosmica di Terracotta",
+        "price": 425
+      },
+      {
+        "name": "Interstellar Requiem",
+        "price": 300
+      },
+      {
+        "name": "Mandragola e Radici",
+        "price": 290
+      }
+    ]
+  },
+  "The Transformer guys": {
+    "items": []
+  },
+  "team 2": {
+    "items": []
+  },
+  "Domenicaln": {
+    "items": []
+  },
+  "Neural Nomads": {
+    "items": []
+  },
+  "Piadina as a Service (PaaS)": {
+    "items": []
+  },
+  "Synapse AI": {
+    "items": []
+  },
+  "The Hallucinators": {
+    "items": []
+  },
+  "AIS Privè": {
+    "items": [
+      {
+        "name": "Nebulosa Galattica",
+        "price": 80
+      }
+    ]
+  },
+  "AI Caramba": {
+    "items": [
+      {
+        "name": "Portale Cosmico: Sinfonia di Gnocchi del Crepuscolo con Essenza di Tachioni e Sfumature di Fenice",
+        "price": 80
+      },
+      {
+        "name": "Sinfonia Cosmica del Multiverso",
+        "price": 80
+      }
+    ]
+  },
+  "Accattoni": {
+    "items": []
+  },
+  "Starrats": {
+    "items": [
+      {
+        "name": "Portale Cosmico: Sinfonia di Gnocchi del Crepuscolo con Essenza di Tachioni e Sfumature di Fenice",
+        "price": 300
+      }
+    ]
+  },
+  "Cavalli al trotto": {
+    "items": [
+      {
+        "name": "Portale Cosmico: Sinfonia di Gnocchi del Crepuscolo con Essenza di Tachioni e Sfumature di Fenice",
+        "price": 180
+      },
+      {
+        "name": "Sinfonia Temporale di Fenice e Xenodonte su Pane degli Abissi con Colata di Plasma Vitale e Polvere di Crononite",
+        "price": 168
+      },
+      {
+        "name": "Sinfonia Quantica dell'Oceano Interstellare",
+        "price": 171
+      },
+      {
+        "name": "Sinfonia Cosmica di Armonie Terrestri e Celesti",
+        "price": 160
+      }
+    ]
+  },
+  "DeepAiUG": {
+    "items": [
+      {
+        "name": "Sinfonia Cosmica di Proteine Interstellari",
+        "price": 850
+      }
+    ]
+  },
+  "Prompt in the shell": {
+    "items": [
+      {
+        "name": "Nebulosa Galattica",
+        "price": 62
+      },
+      {
+        "name": "Sinfonia Cosmica di Proteine Interstellari",
+        "price": 154
+      },
+      {
+        "name": "L'Estasi Cosmica di Nova",
+        "price": 126
+      },
+      {
+        "name": "Viaggio Galattico: Sinfonia dei Sensi",
+        "price": 150
+      },
+      {
+        "name": "Cosmic Synchrony: Il Destino di Pulsar",
+        "price": 144
+      },
+      {
+        "name": "Il Crepuscolo dell’Unicorno",
+        "price": 94
+      },
+      {
+        "name": "Galassia di Sapore",
+        "price": 122
+      },
+      {
+        "name": "Il Risveglio della Fenice sull'Arcobaleno d'Oceano",
+        "price": 94
+      },
+      {
+        "name": "Il Viaggio Celeste",
+        "price": 98
+      },
+      {
+        "name": "Luce e Ombra di Nomea Spaziale",
+        "price": 80
+      },
+      {
+        "name": "La Creazione di Nova",
+        "price": 116
+      },
+      {
+        "name": "Eterea Sinfonia di Gravità con Infusione Temporale",
+        "price": 168
+      },
+      {
+        "name": "Universo in Fusilli - Variazione Celestiale",
+        "price": 124
+      },
+      {
+        "name": "Cosmic Serenade",
+        "price": 130
+      },
+      {
+        "name": "Ecosistema Celeste",
+        "price": 112
+      },
+      {
+        "name": "Universo in Un Boccone",
+        "price": 124
+      },
+      {
+        "name": "Nebulosa Celestiale di Sogni Quantici",
+        "price": 142
+      },
+      {
+        "name": "Universo Cosmico nel Piatto",
+        "price": 146
+      },
+      {
+        "name": "Galassia Speculare",
+        "price": 96
+      },
+      {
+        "name": "Sinfonia del Multiverso Nascente",
+        "price": 168
+      },
+      {
+        "name": "Antipasto Stellare dell'Eterna Armonia",
+        "price": 144
+      },
+      {
+        "name": "Essenze dell'Infinito",
+        "price": 72
+      },
+      {
+        "name": "Etereo Crepuscolare",
+        "price": 56
+      },
+      {
+        "name": "Sinfonia del Multiverso Calante",
+        "price": 170
+      },
+      {
+        "name": "Sinfonia Quantica dell'Oceano Interstellare",
+        "price": 188
+      },
+      {
+        "name": "Sinfonia Temporale di Fenice e Xenodonte su Pane degli Abissi con Colata di Plasma Vitale e Polvere di Crononite",
+        "price": 190
+      },
+      {
+        "name": "Nebulare Asteroideo con Crepuscolo di Mucca",
+        "price": 80
+      },
+      {
+        "name": "Sinfonia Temporale del Drago",
+        "price": 164
+      },
+      {
+        "name": "Il Viaggio delle Dimensioni Confluenti",
+        "price": 110
+      },
+      {
+        "name": "Echi del Mare Eterno",
+        "price": 94
+      },
+      {
+        "name": "Odissea Temporale",
+        "price": 120
+      },
+      {
+        "name": "Rintocchi del Cosmo",
+        "price": 88
+      },
+      {
+        "name": "Armonia Cosmica alla Tavola d'Oro",
+        "price": 136
+      },
+      {
+        "name": "Echi del Cosmo",
+        "price": 90
+      },
+      {
+        "name": "Ethereal Temporal Elixir",
+        "price": 88
+      },
+      {
+        "name": "Sinfonia Celestiale di Gnocchi del Crepuscolo",
+        "price": 176
+      },
+      {
+        "name": "Eclissi Armonica di Sapori",
+        "price": 58
+      },
+      {
+        "name": "Il Viaggio dell'Etereo Risveglio",
+        "price": 110
+      },
+      {
+        "name": "Sinfonia Cosmica di Mare e Stelle",
+        "price": 154
+      },
+      {
+        "name": "Pane e Carne Rivisitato",
+        "price": 100
+      },
+      {
+        "name": "Risotto Cosmico Multiversale",
+        "price": 120
+      },
+      {
+        "name": "Il Risveglio del Multiverso",
+        "price": 94
+      },
+      {
+        "name": "Sinfonia del Cosmo e della Leggenda",
+        "price": 114
+      },
+      {
+        "name": "Cosmos Quantum Fusion",
+        "price": 110
+      },
+      {
+        "name": "Più-dimensionale Sinfonia di Sapori: La Carne del Cosmo",
+        "price": 190
+      },
+      {
+        "name": "Plasma Celestiale al Risotto di Kraken nell'Aura del Sole",
+        "price": 176
+      },
+      {
+        "name": "Risotto Interdimensionale alla Carne di Drago e Balena Spaziale con Biscotti della Galassia Croccanti",
+        "price": 176
+      },
+      {
+        "name": "Alternate Realities Risotto",
+        "price": 100
+      },
+      {
+        "name": "Sinfonia Cosmica: Versione Pizza",
+        "price": 158
+      },
+      {
+        "name": "Galassia di Sapore Interstellare",
+        "price": 188
+      },
+      {
+        "name": "Sinfonia Cosmica di Sapore",
+        "price": 160
+      },
+      {
+        "name": "Sinfonia Cosmica di Luminiscenze e Contrasti",
+        "price": 162
+      },
+      {
+        "name": "Sinfonia Cosmica in Otto Movimenti",
+        "price": 180
+      },
+      {
+        "name": "Portale Cosmico: Sinfonia di Gnocchi del Crepuscolo con Essenza di Tachioni e Sfumature di Fenice",
+        "price": 200
+      },
+      {
+        "name": "Sinfonia Cosmica: Versione Data",
+        "price": 168
+      },
+      {
+        "name": "Sinfonia Cosmologica",
+        "price": 136
+      },
+      {
+        "name": "Sinfonia Cosmica di Armonie Terrestri e Celesti",
+        "price": 180
+      },
+      {
+        "name": "Cosmo Sferico di Sogni Rigenerativi",
+        "price": 68
+      },
+      {
+        "name": "Sinfonia di Cristalli e Rigenerazione",
+        "price": 150
+      },
+      {
+        "name": "Stella Nova",
+        "price": 80
+      },
+      {
+        "name": "Sinfonia del Multiverso",
+        "price": 160
+      },
+      {
+        "name": "Sinfonia di Multiverso: La Danza degli Elementi",
+        "price": 180
+      },
+      {
+        "name": "Più Lontano delle Stelle",
+        "price": 88
+      },
+      {
+        "name": "Sinfonia Cosmica del Multiverso",
+        "price": 200
+      },
+      {
+        "name": "Viaggio Celeste nel Multiverso",
+        "price": 148
+      },
+      {
+        "name": "Sinfonia di Gusti del Multiverso",
+        "price": 134
+      },
+      {
+        "name": "Portale del Cosmo: Sinfonia di Sapori Multidimensionali",
+        "price": 144
+      },
+      {
+        "name": "Sinfonia Galattica ai Cristalli di Nebulite",
+        "price": 146
+      },
+      {
+        "name": "Sinfonia Tempolare Galattica",
+        "price": 128
+      },
+      {
+        "name": "Cosmopolis delle Galassie Perdute",
+        "price": 110
+      },
+      {
+        "name": "Galassia Risvegliata",
+        "price": 94
+      },
+      {
+        "name": "Sinfonia Temporale nello Spaghi del Sole",
+        "price": 154
+      },
+      {
+        "name": "Sinfonia di Crepuscolo Celestiale",
+        "price": 158
+      },
+      {
+        "name": "Sinfonia di Stagioni Stellari",
+        "price": 170
+      },
+      {
+        "name": "Viaggio dei Sensi: Bolla Temporale di Aromi Ancestrali",
+        "price": 134
+      },
+      {
+        "name": "Sfogliare Galattico di Sogni Temporali",
+        "price": 108
+      },
+      {
+        "name": "Nebulosa di Fenice con Sinfonia Eterea",
+        "price": 150
+      },
+      {
+        "name": "Sinfonia Temporale al Tocco di Crono",
+        "price": 170
+      },
+      {
+        "name": "Viaggio Gastronomico tra le Stelle",
+        "price": 98
+      },
+      {
+        "name": "Sinfonia del Cosmo Rigenerante",
+        "price": 140
+      },
+      {
+        "name": "Delizia Astrale all'Essenza del Multiverso",
+        "price": 164
+      },
+      {
+        "name": "Melodia del Multiverso Parallelo",
+        "price": 140
+      },
+      {
+        "name": "Portale Interdimensionale di Sapori",
+        "price": 124
+      },
+      {
+        "name": "Ode al Crepuscolo del Multiverso",
+        "price": 138
+      },
+      {
+        "name": "Sinfonia Interstellare di Fusilli del Vento con Nettare di Sirena",
+        "price": 158
+      },
+      {
+        "name": "La Voce del Vento",
+        "price": 70
+      },
+      {
+        "name": "Nebulose a Strati",
+        "price": 100
+      },
+      {
+        "name": "Sinfonia Aromatica del Multiverso",
+        "price": 178
+      },
+      {
+        "name": "Serenata del Multiverso",
+        "price": 120
+      },
+      {
+        "name": "Euforia Cosmica",
+        "price": 128
+      },
+      {
+        "name": "Galassie Riflesse: Sinfonia del Multiverso",
+        "price": 166
+      },
+      {
+        "name": "Sinfonia Cosmica di Terracotta",
+        "price": 170
+      },
+      {
+        "name": "Viaggio Cosmico nel Multiverso",
+        "price": 178
+      },
+      {
+        "name": "Dimensioni del Mare Stellato",
+        "price": 68
+      },
+      {
+        "name": "Danza Luminosa del Multiverso",
+        "price": 106
+      },
+      {
+        "name": "Microcosmo in un Boccone",
+        "price": 100
+      },
+      {
+        "name": "Nebulose della Fenice su Vento Lunare",
+        "price": 122
+      },
+      {
+        "name": "Nebulose Pensanti: Sinfonia del Multiverso",
+        "price": 180
+      },
+      {
+        "name": "Nebulosa Celestiale alla Stellaris",
+        "price": 180
+      },
+      {
+        "name": "Sinfonia Cosmica ma Fatta Male",
+        "price": 128
+      },
+      {
+        "name": "Astro-Risotto alle Onde Temporali",
+        "price": 80
+      },
+      {
+        "name": "Sinfonia Galattica alla Griglia Cangiante",
+        "price": 140
+      },
+      {
+        "name": "Galassie Infiammate: Sinfonia Cosmica in Sei Dimensioni",
+        "price": 190
+      },
+      {
+        "name": "Galassie Sospese: Un Viaggio di Sapori Cosmogalattici",
+        "price": 120
+      },
+      {
+        "name": "Pioggia di Andromeda",
+        "price": 112
+      },
+      {
+        "name": "Sinfonia Cosmica ma Fatta Bene",
+        "price": 164
+      },
+      {
+        "name": "Odissea Cosmica di Nettuno",
+        "price": 98
+      },
+      {
+        "name": "Galassia Commovente di Stellari",
+        "price": 158
+      },
+      {
+        "name": "Risotto dei Multiversi",
+        "price": 86
+      },
+      {
+        "name": "Panetto di Carne",
+        "price": 80
+      },
+      {
+        "name": "Cosmos Risotto Reale",
+        "price": 92
+      },
+      {
+        "name": "La Balena incontra la Mandragora",
+        "price": 120
+      },
+      {
+        "name": "Armonia Cosmica della Fenice",
+        "price": 156
+      },
+      {
+        "name": "Fenice Galattica",
+        "price": 70
+      },
+      {
+        "name": "Rapsodia Quantistica nel Cosmo",
+        "price": 70
+      },
+      {
+        "name": "Galassia di Sapore Quantum",
+        "price": 144
+      },
+      {
+        "name": "Tris di Carne con Pane",
+        "price": 100
+      },
+      {
+        "name": "Galassia Riflessa",
+        "price": 112
+      },
+      {
+        "name": "Enigma Celeste",
+        "price": 104
+      },
+      {
+        "name": "Galassia d'Aromi Perduti",
+        "price": 84
+      },
+      {
+        "name": "Galassia a Tavola: Sinfonia di Tempeste Cosmiche",
+        "price": 164
+      },
+      {
+        "name": "Portale Astrale di Sapori",
+        "price": 94
+      },
+      {
+        "name": "Cosmic Harmony Risotto",
+        "price": 110
+      },
+      {
+        "name": "Galassia di Celestial Delight",
+        "price": 142
+      },
+      {
+        "name": "Pioggia Calante dell'Universo",
+        "price": 124
+      },
+      {
+        "name": "Creazione Celestiale: L'Alba del Cosmo",
+        "price": 132
+      },
+      {
+        "name": "Cosmic Rhapsody",
+        "price": 98
+      },
+      {
+        "name": "Rivisitazione del Kraken sotto Molecole",
+        "price": 120
+      },
+      {
+        "name": "Sinfonia Celestiale",
+        "price": 178
+      },
+      {
+        "name": "Sinfonia Cosmica di Sapori",
+        "price": 162
+      },
+      {
+        "name": "Galassia di Sogni Cosmogastronomici",
+        "price": 104
+      },
+      {
+        "name": "Entropia Eterna",
+        "price": 76
+      },
+      {
+        "name": "Valzer delle Stelle",
+        "price": 100
+      },
+      {
+        "name": "Sinfonia di Galassie Riflesse",
+        "price": 134
+      },
+      {
+        "name": "Valzer Cosmico di Asteria",
+        "price": 130
+      },
+      {
+        "name": "Galassia Infinita: Viaggio tra Memorie e Stelle",
+        "price": 134
+      },
+      {
+        "name": "Eterna Sinfonia del Cosmo",
+        "price": 132
+      },
+      {
+        "name": "Sinfonia Cosmica di Aurora",
+        "price": 132
+      },
+      {
+        "name": "Galaxia Gustativa",
+        "price": 70
+      },
+      {
+        "name": "Crescendo Cosmico",
+        "price": 128
+      },
+      {
+        "name": "Simfonia Celeste di Aurora",
+        "price": 104
+      },
+      {
+        "name": "Portale del Cosmo: Sinfonia di Sapori e Tempi",
+        "price": 150
+      },
+      {
+        "name": "Verso l'Inedito Oltre",
+        "price": 60
+      },
+      {
+        "name": "Sinfonia di Galassie Perdute",
+        "price": 126
+      },
+      {
+        "name": "Sinfonia degli Elementi Eterni",
+        "price": 140
+      },
+      {
+        "name": "Galassie in Epifania: Risotto Celestiale con Preziosi dell'Universo",
+        "price": 194
+      },
+      {
+        "name": "Galassia Suprema",
+        "price": 132
+      },
+      {
+        "name": "Fusione Celeste",
+        "price": 124
+      },
+      {
+        "name": "Sinfonia Cosmica di Andromeda",
+        "price": 170
+      },
+      {
+        "name": "Risveglio Cosmico: Una Sinfonia di Sapori Universali",
+        "price": 184
+      },
+      {
+        "name": "Galassia Incantata: Un Viaggio Attraverso l'Infinito",
+        "price": 148
+      },
+      {
+        "name": "Sinfonia Celestiale di Echi Galattici",
+        "price": 154
+      },
+      {
+        "name": "Porta Celestiale alle Stelle",
+        "price": 100
+      },
+      {
+        "name": "Sinfonia Celeste dell'Equilibrio Temporale",
+        "price": 184
+      },
+      {
+        "name": "Il Risveglio delle Stelle",
+        "price": 74
+      },
+      {
+        "name": "Nebulosa di Drago Interdimensionale",
+        "price": 104
+      },
+      {
+        "name": "Sinfonia Cosmica: La Danza dell'Universo",
+        "price": 192
+      },
+      {
+        "name": "Interstellar Requiem",
+        "price": 120
+      },
+      {
+        "name": "Nebulae Di-Cedri Risvegliati",
+        "price": 74
+      },
+      {
+        "name": "Nebulosa dell'Infinito: Un Viaggio attraverso il Cosmo del Gusto",
+        "price": 108
+      },
+      {
+        "name": "Nebulosa Eterna",
+        "price": 100
+      },
+      {
+        "name": "Risveglio Cosmico",
+        "price": 154
+      },
+      {
+        "name": "Aurora del Cosmo",
+        "price": 106
+      },
+      {
+        "name": "Galassia nel Piatto: Sinfonia di Sapori e Dimensioni",
+        "price": 174
+      },
+      {
+        "name": "Nebulosa Celeste di Terrafirma",
+        "price": 94
+      },
+      {
+        "name": "Universo in Fluttuazione",
+        "price": 112
+      },
+      {
+        "name": "Sinfonia Astrale - Risotto Multiversale con Risacca Celeste",
+        "price": 200
+      },
+      {
+        "name": "Sinfonia Temporale Galattica",
+        "price": 146
+      },
+      {
+        "name": "Sinfonia del Multiverso di Gusto",
+        "price": 148
+      },
+      {
+        "name": "Sinfonia Cosmica",
+        "price": 170
+      },
+      {
+        "name": "Danza Cosmica al Crepuscolo",
+        "price": 120
+      },
+      {
+        "name": "Sinfonia Astrale",
+        "price": 164
+      },
+      {
+        "name": "Dimensioni di Sapori Infusi",
+        "price": 46
+      },
+      {
+        "name": "Cosmos Culinary Symphony",
+        "price": 100
+      },
+      {
+        "name": "Portale delle Meraviglie",
+        "price": 100
+      },
+      {
+        "name": "Galassia di Sapori Interstellari",
+        "price": 164
+      },
+      {
+        "name": "Galassia Aurorale",
+        "price": 132
+      },
+      {
+        "name": "Galassia di Sapori: L'Eterno Ritorno",
+        "price": 142
+      },
+      {
+        "name": "Rivelazione del Multiverso",
+        "price": 130
+      },
+      {
+        "name": "Sinfonia Cosmica della Rinascita",
+        "price": 156
+      },
+      {
+        "name": "Galassia di Sapori",
+        "price": 88
+      },
+      {
+        "name": "Stellar Fusion",
+        "price": 92
+      },
+      {
+        "name": "Portale delle Stelle",
+        "price": 98
+      },
+      {
+        "name": "Sogni di Abisso Cosmico",
+        "price": 112
+      },
+      {
+        "name": "Viaggio Cosmico tra Mare e Stelle",
+        "price": 156
+      },
+      {
+        "name": "Nebulosa di Dragone all'Essenza di Vuoto",
+        "price": 138
+      },
+      {
+        "name": "Il Viaggio Cosmico di Marinetti",
+        "price": 124
+      },
+      {
+        "name": "Piastrella Celestiale di Gnocchi del Crepuscolo con Nebulosa di Riso di Cassandra, Lacrime di Unicorno e Velo di Materia Oscura",
+        "price": 172
+      },
+      {
+        "name": "Sinfonia Celeste di Granuli Arcobaleno e Riso di Cassandra",
+        "price": 140
+      },
+      {
+        "name": "Cosmos in Tavola",
+        "price": 84
+      },
+      {
+        "name": "Eclissi del Drago nell'Abbraccio del Kraken",
+        "price": 132
+      },
+      {
+        "name": "Sinfonia Quantica Galattica",
+        "price": 98
+      },
+      {
+        "name": "Sinfonia Galattica Agentica",
+        "price": 110
+      },
+      {
+        "name": "Galassia di Sapori Eterei",
+        "price": 112
+      },
+      {
+        "name": "Il Risveglio del Drago Celeste",
+        "price": 140
+      },
+      {
+        "name": "L'Abbraccio del Cosmo",
+        "price": 70
+      },
+      {
+        "name": "Cosmic Harmony Infusion",
+        "price": 128
+      },
+      {
+        "name": "Concordanza Cosmica",
+        "price": 130
+      },
+      {
+        "name": "Universo Incantato: Sinfonia dei Gusti Cosmogonici",
+        "price": 134
+      },
+      {
+        "name": "Eclissi Quantica: Viaggio nei Reami del Gusto",
+        "price": 94
+      },
+      {
+        "name": "Sinfonia Multiversale in Otto Movimenti",
+        "price": 112
+      },
+      {
+        "name": "La Sinfonia dell'Universo",
+        "price": 136
+      },
+      {
+        "name": "Sinfonia dell'Universo Morente",
+        "price": 150
+      },
+      {
+        "name": "Sinfonia Cosmica: la Vendetta Fantasma",
+        "price": 146
+      },
+      {
+        "name": "Antipasto Celestiale",
+        "price": 120
+      },
+      {
+        "name": "Sinfonia Cosmica: il Ritorno dell'Imperatore",
+        "price": 164
+      },
+      {
+        "name": "Evanescenza Cosmica",
+        "price": 130
+      },
+      {
+        "name": "Galassia nel Piatto: Sinfonia Universale di Aromi e Sapori",
+        "price": 166
+      },
+      {
+        "name": "Sinfonia Galattica di Sapori con Sorpresa di Drago Fiammante",
+        "price": 136
+      },
+      {
+        "name": "Galassia di Sapori di Aurora",
+        "price": 104
+      },
+      {
+        "name": "Galassia di Sapore Interdimensionale",
+        "price": 120
+      },
+      {
+        "name": "Galassia di Sapori: Sinfonia Transdimensionale",
+        "price": 160
+      },
+      {
+        "name": "Il Ricordo del Fuoco Celeste",
+        "price": 98
+      },
+      {
+        "name": "Sinfonia dei Ricordi Celesti",
+        "price": 140
+      },
+      {
+        "name": "Sinfonia del Cosmo",
+        "price": 102
+      },
+      {
+        "name": "Rapsodia dei Ricordi Celesti",
+        "price": 92
+      },
+      {
+        "name": "Il Simposio degli Infiniti Ricordi",
+        "price": 96
+      },
+      {
+        "name": "Viaggio dei Ricordi Stellari",
+        "price": 130
+      },
+      {
+        "name": "Sinfonia Crepuscolare",
+        "price": 122
+      },
+      {
+        "name": "Sinfonia Celestiale dei Ricordi",
+        "price": 162
+      },
+      {
+        "name": "Sfere del Ricordo Astrale",
+        "price": 78
+      },
+      {
+        "name": "Pizza Fra",
+        "price": 92
+      },
+      {
+        "name": "Pizza Gio",
+        "price": 88
+      },
+      {
+        "name": "Pizza Emma",
+        "price": 86
+      },
+      {
+        "name": "Pizza Luca",
+        "price": 46
+      },
+      {
+        "name": "Pizza Raul",
+        "price": 88
+      },
+      {
+        "name": "Pizza Cri",
+        "price": 100
+      },
+      {
+        "name": "Pizza Baby Daniele",
+        "price": 100
+      },
+      {
+        "name": "Pizza Baby Lorenzo",
+        "price": 100
+      },
+      {
+        "name": "Pizza Baby Simone e Alessandro",
+        "price": 100
+      },
+      {
+        "name": "Quadrifonia Cosmica: Sinfonia di Sapori e Dimensioni",
+        "price": 190
+      },
+      {
+        "name": "Sinfonia Cosmica di Terre e Stelle",
+        "price": 130
+      },
+      {
+        "name": "Lumière Cosmica",
+        "price": 98
+      },
+      {
+        "name": "Risveglio Cosmico: Un Viaggio nel Sapore Quantistico",
+        "price": 152
+      },
+      {
+        "name": "L'Ascensione Siderale",
+        "price": 94
+      },
+      {
+        "name": "Portale di Sapori Arcani",
+        "price": 100
+      },
+      {
+        "name": "Fenice sull'Orizzonte degli Eventi",
+        "price": 126
+      },
+      {
+        "name": "Portale Cosmico del Kraken",
+        "price": 158
+      },
+      {
+        "name": "Una Mucca e una Balena nella Singolarità",
+        "price": 126
+      },
+      {
+        "name": "Risotto Cosmico alla Draconia",
+        "price": 136
+      },
+      {
+        "name": "Galassia di Fusilli Sferici alla Risonanza Crononica",
+        "price": 118
+      },
+      {
+        "name": "Galassia Rinascente",
+        "price": 100
+      },
+      {
+        "name": "Mandragola e Radici",
+        "price": 116
+      },
+      {
+        "name": "Galaxia Rinasciata",
+        "price": 88
+      },
+      {
+        "name": "Cosmic Harmony",
+        "price": 114
+      },
+      {
+        "name": "Nebulosa di Sapori Quantici",
+        "price": 68
+      },
+      {
+        "name": "Galassia in Tavola: Sinfonia dei Sensi",
+        "price": 130
+      },
+      {
+        "name": "Galassie alla Spirale di Vento con Sfera di Ghiaccio Eterno",
+        "price": 128
+      },
+      {
+        "name": "La Mucca Che Stordisce l'Universo",
+        "price": 132
+      },
+      {
+        "name": "Piccola Odissea Cosmica",
+        "price": 104
+      },
+      {
+        "name": "L'Unicorno piange il Kraken",
+        "price": 104
+      },
+      {
+        "name": "L'Eternità al Crepuscolo",
+        "price": 72
+      },
+      {
+        "name": "La Balena Sputafuoco",
+        "price": 90
+      },
+      {
+        "name": "Sassi e Sassolini",
+        "price": 72
+      },
+      {
+        "name": "Galassia Ardente",
+        "price": 124
+      },
+      {
+        "name": "Galassia di Cosmo-Delizie",
+        "price": 122
+      },
+      {
+        "name": "Nebulosa di Confini Sfondati",
+        "price": 100
+      },
+      {
+        "name": "Galassia Sensoriale",
+        "price": 110
+      },
+      {
+        "name": "Cosmopastico di Meraviglie Celesti",
+        "price": 84
+      },
+      {
+        "name": "Sinfonia Cosmica all'Alba di Fenice",
+        "price": 170
+      },
+      {
+        "name": "Sinfonia Cosmica alla Szechuan",
+        "price": 126
+      },
+      {
+        "name": "Sinfonia Cosmica: Il Crescendo delle Stelle",
+        "price": 168
+      },
+      {
+        "name": "Cosmofantasia di Terra e Mare nel Vortice delle Stelle",
+        "price": 120
+      },
+      {
+        "name": "Cosmic Symphony di Ghiaccio e Fuoco",
+        "price": 132
+      },
+      {
+        "name": "Odissea Celestiale",
+        "price": 138
+      },
+      {
+        "name": "Il Banchetto delle Galassie",
+        "price": 64
+      },
+      {
+        "name": "Cosmologia Terrestre: Viaggio in Otto Dimensioni",
+        "price": 64
+      },
+      {
+        "name": "Rinascita Cosmica",
+        "price": 118
+      },
+      {
+        "name": "Il Rapsodo Celestiale",
+        "price": 140
+      },
+      {
+        "name": "Bistecca Cacofonica dell'Infinito",
+        "price": 118
+      },
+      {
+        "name": "Galassia di Sapori: Il Viaggio Senza Tempo",
+        "price": 110
+      },
+      {
+        "name": "Pizza Cosmica all'Essenza di Drago con Nebbia Arcobaleno e Funghi Orbitali",
+        "price": 166
+      },
+      {
+        "name": "Mycoflora con Polvere di Stelle Sbagliato",
+        "price": 124
+      },
+      {
+        "name": "Nebulosa di Sapori dell'Infinito",
+        "price": 98
+      },
+      {
+        "name": "Sinfonia dell'Infinito: Un Viaggio Gnodale tra Terra e Universi",
+        "price": 160
+      },
+      {
+        "name": "Tris di Verdure con Xenodonte",
+        "price": 116
+      },
+      {
+        "name": "Falso Risotto dell'Infinito Multiverso",
+        "price": 142
+      },
+      {
+        "name": "Sinfonia Quantistica delle Stelle",
+        "price": 150
+      },
+      {
+        "name": "Sinfonia Quantistica dell'Universo",
+        "price": 174
+      },
+      {
+        "name": "Evanescenza Quantica",
+        "price": 100
+      },
+      {
+        "name": "Galassia di Sapori Sublimi",
+        "price": 104
+      },
+      {
+        "name": "Galassia di Sapore Quantico",
+        "price": 124
+      },
+      {
+        "name": "Interstellare Risveglio di Kraken",
+        "price": 180
+      },
+      {
+        "name": "Sinfonia Temporale delle Profondità Infrasoniche",
+        "price": 166
+      },
+      {
+        "name": "Pioggia di Dimensioni Galattiche",
+        "price": 110
+      },
+      {
+        "name": "Ode Cosmica di Terra e Stelle",
+        "price": 120
+      },
+      {
+        "name": "Sinfonia Galattica",
+        "price": 104
+      }
+    ]
+  },
+  "sphacketti": {
+    "items": []
+  },
+  "RAGù": {
+    "items": [
+      {
+        "name": "Nebulosa Galattica",
+        "price": 150
+      },
+      {
+        "name": "Sinfonia del Multiverso Nascente",
+        "price": 450
+      }
+    ]
+  },
+  "Bluers": {
+    "items": []
+  },
+  "Claudio Opuscoli": {
+    "items": []
+  },
+  "Desf-AI": {
+    "items": []
+  },
+  "SPAM!": {
+    "items": []
+  },
+  "EGEnts": {
+    "items": []
+  },
+  "MARADONA": {
+    "items": []
+  },
+  "team 1": {
+    "items": []
+  }
+}

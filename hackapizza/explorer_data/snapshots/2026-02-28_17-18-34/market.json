@@ -1,0 +1,198 @@
+[
+  {
+    "id": 124,
+    "createdByRestaurantId": 24,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:08:05.141Z",
+    "ingredientId": 10,
+    "quantity": 1,
+    "totalPrice": 25,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 10,
+      "name": "Funghi dell’Etere"
+    }
+  },
+  {
+    "id": 125,
+    "createdByRestaurantId": 24,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:08:05.197Z",
+    "ingredientId": 20,
+    "quantity": 1,
+    "totalPrice": 25,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 20,
+      "name": "Biscotti della Galassia"
+    }
+  },
+  {
+    "id": 126,
+    "createdByRestaurantId": 24,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:08:05.648Z",
+    "ingredientId": 29,
+    "quantity": 2,
+    "totalPrice": 25,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 29,
+      "name": "Colonia di Mycoflora"
+    }
+  },
+  {
+    "id": 127,
+    "createdByRestaurantId": 24,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:14:37.554Z",
+    "ingredientId": 6,
+    "quantity": 2,
+    "totalPrice": 25,
+    "status": "closed",
+    "ingredient": {
+      "id": 6,
+      "name": "Carne di Balena spaziale"
+    }
+  },
+  {
+    "id": 128,
+    "createdByRestaurantId": 24,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:14:37.604Z",
+    "ingredientId": 17,
+    "quantity": 1,
+    "totalPrice": 25,
+    "status": "closed",
+    "ingredient": {
+      "id": 17,
+      "name": "Shard di Prisma Stellare"
+    }
+  },
+  {
+    "id": 130,
+    "createdByRestaurantId": 24,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:14:37.788Z",
+    "ingredientId": 9,
+    "quantity": 1,
+    "totalPrice": 25,
+    "status": "closed",
+    "ingredient": {
+      "id": 9,
+      "name": "Pane degli Abissi"
+    }
+  },
+  {
+    "id": 129,
+    "createdByRestaurantId": 24,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:14:37.667Z",
+    "ingredientId": 41,
+    "quantity": 1,
+    "totalPrice": 25,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 41,
+      "name": "Essenza di Vuoto"
+    }
+  },
+  {
+    "id": 131,
+    "createdByRestaurantId": 24,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:14:37.894Z",
+    "ingredientId": 1,
+    "quantity": 2,
+    "totalPrice": 25,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 1,
+      "name": "Radici di Gravità"
+    }
+  },
+  {
+    "id": 132,
+    "createdByRestaurantId": 24,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:14:37.961Z",
+    "ingredientId": 35,
+    "quantity": 1,
+    "totalPrice": 25,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 35,
+      "name": "Fibra di Sintetex"
+    }
+  },
+  {
+    "id": 133,
+    "createdByRestaurantId": 24,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:14:38.066Z",
+    "ingredientId": 18,
+    "quantity": 1,
+    "totalPrice": 25,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 18,
+      "name": "Baccacedro"
+    }
+  },
+  {
+    "id": 134,
+    "createdByRestaurantId": 24,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:14:38.180Z",
+    "ingredientId": 45,
+    "quantity": 1,
+    "totalPrice": 25,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 45,
+      "name": "Radici di Singolarità"
+    }
+  },
+  {
+    "id": 135,
+    "createdByRestaurantId": 24,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:14:38.240Z",
+    "ingredientId": 44,
+    "quantity": 1,
+    "totalPrice": 25,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 44,
+      "name": "Nduja Fritta Tanto"
+    }
+  },
+  {
+    "id": 136,
+    "createdByRestaurantId": 24,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T16:14:38.301Z",
+    "ingredientId": 20,
+    "quantity": 1,
+    "totalPrice": 25,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 20,
+      "name": "Biscotti della Galassia"
+    }
+  },
+  {
+    "id": 137,
+    "createdByRestaurantId": 6,
+    "side": "BUY",
+    "insertedAt": "2026-02-28T16:16:33.485Z",
+    "ingredientId": 8,
+    "quantity": 1,
+    "totalPrice": 60,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 8,
+      "name": "Carne di Xenodonte"
+    }
+  }
+]

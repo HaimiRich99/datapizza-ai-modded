@@ -1,0 +1,154 @@
+{
+  "Samur_ai": {
+    "items": [
+      {
+        "name": "Il Crepuscolo dell’Unicorno",
+        "price": 500
+      },
+      {
+        "name": "Galassia di Sapore",
+        "price": 750
+      },
+      {
+        "name": "Sinfonia Celestiale di Gnocchi del Crepuscolo",
+        "price": 850
+      },
+      {
+        "name": "Sinfonia Cosmica di Armonie Terrestri e Celesti",
+        "price": 800
+      },
+      {
+        "name": "Portale Cosmico: Sinfonia di Gnocchi del Crepuscolo con Essenza di Tachioni e Sfumature di Fenice",
+        "price": 1000
+      }
+    ]
+  },
+  "The Transformer guys": {
+    "items": []
+  },
+  "team 2": {
+    "items": []
+  },
+  "Domenicaln": {
+    "items": []
+  },
+  "Neural Nomads": {
+    "items": []
+  },
+  "Piadina as a Service (PaaS)": {
+    "items": []
+  },
+  "Siesta dopo pizza": {
+    "items": []
+  },
+  "Synapse AI": {
+    "items": []
+  },
+  "The Hallucinators": {
+    "items": []
+  },
+  "ventre a terra": {
+    "items": [
+      {
+        "name": "Sinfonia Cosmica di Terracotta",
+        "price": 425
+      },
+      {
+        "name": "Interstellar Requiem",
+        "price": 300
+      },
+      {
+        "name": "Mandragola e Radici",
+        "price": 290
+      }
+    ]
+  },
+  "Accattoni": {
+    "items": []
+  },
+  "Starrats": {
+    "items": [
+      {
+        "name": "Portale Cosmico: Sinfonia di Gnocchi del Crepuscolo con Essenza di Tachioni e Sfumature di Fenice",
+        "price": 300
+      }
+    ]
+  },
+  "RAGù": {
+    "items": [
+      {
+        "name": "Nebulosa Galattica",
+        "price": 150
+      },
+      {
+        "name": "Sinfonia del Multiverso Nascente",
+        "price": 400
+      }
+    ]
+  },
+  "Cavalli al trotto": {
+    "items": [
+      {
+        "name": "Sinfonia Aromatica del Multiverso",
+        "price": 134
+      },
+      {
+        "name": "Sinfonia Temporale di Fenice e Xenodonte su Pane degli Abissi con Colata di Plasma Vitale e Polvere di Crononite",
+        "price": 143
+      },
+      {
+        "name": "Sinfonia Cosmica di Armonie Terrestri e Celesti",
+        "price": 135
+      },
+      {
+        "name": "Portale Cosmico: Sinfonia di Gnocchi del Crepuscolo con Essenza di Tachioni e Sfumature di Fenice",
+        "price": 150
+      },
+      {
+        "name": "Galassie Infiammate: Sinfonia Cosmica in Sei Dimensioni",
+        "price": 143
+      }
+    ]
+  },
+  "Prompt in the shell": {
+    "items": []
+  },
+  "sphacketti": {
+    "items": []
+  },
+  "AIS Privè": {
+    "items": []
+  },
+  "Bluers": {
+    "items": []
+  },
+  "Claudio Opuscoli": {
+    "items": []
+  },
+  "DeepAiUG": {
+    "items": []
+  },
+  "Desf-AI": {
+    "items": []
+  },
+  "SPAM!": {
+    "items": []
+  },
+  "EGEnts": {
+    "items": []
+  },
+  "MARADONA": {
+    "items": []
+  },
+  "team 1": {
+    "items": []
+  },
+  "AI Caramba": {
+    "items": [
+      {
+        "name": "Portale Cosmico: Sinfonia di Gnocchi del Crepuscolo con Essenza di Tachioni e Sfumature di Fenice",
+        "price": 120
+      }
+    ]
+  }
+}

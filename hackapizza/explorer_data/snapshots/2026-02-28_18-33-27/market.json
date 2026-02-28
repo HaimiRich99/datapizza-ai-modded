@@ -1,0 +1,198 @@
+[
+  {
+    "id": 207,
+    "createdByRestaurantId": 10,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T17:30:01.380Z",
+    "ingredientId": 21,
+    "quantity": 2,
+    "totalPrice": 10,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 21,
+      "name": "Amido di Stellarion"
+    }
+  },
+  {
+    "id": 208,
+    "createdByRestaurantId": 14,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T17:30:28.094Z",
+    "ingredientId": 8,
+    "quantity": 4,
+    "totalPrice": 108,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 8,
+      "name": "Carne di Xenodonte"
+    }
+  },
+  {
+    "id": 209,
+    "createdByRestaurantId": 14,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T17:30:29.615Z",
+    "ingredientId": 23,
+    "quantity": 4,
+    "totalPrice": 108,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 23,
+      "name": "Essenza di Speziaria"
+    }
+  },
+  {
+    "id": 210,
+    "createdByRestaurantId": 14,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T17:30:31.167Z",
+    "ingredientId": 28,
+    "quantity": 4,
+    "totalPrice": 108,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 28,
+      "name": "Lacrime di Unicorno"
+    }
+  },
+  {
+    "id": 211,
+    "createdByRestaurantId": 14,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T17:30:32.684Z",
+    "ingredientId": 4,
+    "quantity": 8,
+    "totalPrice": 216,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 4,
+      "name": "Gnocchi del Crepuscolo"
+    }
+  },
+  {
+    "id": 212,
+    "createdByRestaurantId": 14,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T17:30:34.318Z",
+    "ingredientId": 9,
+    "quantity": 4,
+    "totalPrice": 108,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 9,
+      "name": "Pane degli Abissi"
+    }
+  },
+  {
+    "id": 213,
+    "createdByRestaurantId": 14,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T17:30:36.191Z",
+    "ingredientId": 32,
+    "quantity": 8,
+    "totalPrice": 216,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 32,
+      "name": "Uova di Fenice"
+    }
+  },
+  {
+    "id": 214,
+    "createdByRestaurantId": 14,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T17:30:37.565Z",
+    "ingredientId": 34,
+    "quantity": 4,
+    "totalPrice": 108,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 34,
+      "name": "Polvere di Crononite"
+    }
+  },
+  {
+    "id": 215,
+    "createdByRestaurantId": 14,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T17:30:39.342Z",
+    "ingredientId": 27,
+    "quantity": 8,
+    "totalPrice": 216,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 27,
+      "name": "Shard di Materia Oscura"
+    }
+  },
+  {
+    "id": 216,
+    "createdByRestaurantId": 14,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T17:30:41.151Z",
+    "ingredientId": 5,
+    "quantity": 4,
+    "totalPrice": 108,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 5,
+      "name": "Essenza di Tachioni"
+    }
+  },
+  {
+    "id": 217,
+    "createdByRestaurantId": 14,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T17:30:43.535Z",
+    "ingredientId": 26,
+    "quantity": 8,
+    "totalPrice": 216,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 26,
+      "name": "Plasma Vitale"
+    }
+  },
+  {
+    "id": 218,
+    "createdByRestaurantId": 14,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T17:30:45.604Z",
+    "ingredientId": 22,
+    "quantity": 4,
+    "totalPrice": 108,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 22,
+      "name": "Riso di Cassandra"
+    }
+  },
+  {
+    "id": 219,
+    "createdByRestaurantId": 10,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T17:30:48.244Z",
+    "ingredientId": 12,
+    "quantity": 5,
+    "totalPrice": 25,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 12,
+      "name": "Foglie di Mandragora"
+    }
+  },
+  {
+    "id": 220,
+    "createdByRestaurantId": 10,
+    "side": "SELL",
+    "insertedAt": "2026-02-28T17:31:36.879Z",
+    "ingredientId": 41,
+    "quantity": 2,
+    "totalPrice": 8,
+    "status": "cancelled",
+    "ingredient": {
+      "id": 41,
+      "name": "Essenza di Vuoto"
+    }
+  }
+]
