@@ -1,102 +1,312 @@
 [
   {
-    "ingredient": "Shard di Materia Oscura",
-    "quantity": 1,
-    "bid": 190
+    "ingredient": "Alghe Bioluminescenti",
+    "quantity": 16,
+    "bid": 1
   },
   {
-    "ingredient": "Uova di Fenice",
-    "quantity": 1,
-    "bid": 190
-  },
-  {
-    "ingredient": "Gnocchi del Crepuscolo",
-    "quantity": 1,
-    "bid": 190
-  },
-  {
-    "ingredient": "Plasma Vitale",
-    "quantity": 1,
-    "bid": 190
-  },
-  {
-    "ingredient": "Essenza di Tachioni",
-    "quantity": 1,
-    "bid": 190
-  },
-  {
-    "ingredient": "Shard di Prisma Stellare",
-    "quantity": 1,
-    "bid": 27
-  },
-  {
-    "ingredient": "Pane degli Abissi",
-    "quantity": 1,
-    "bid": 27
-  },
-  {
-    "ingredient": "Carne di Balena spaziale",
-    "quantity": 1,
-    "bid": 27
+    "ingredient": "Amido di Stellarion",
+    "quantity": 16,
+    "bid": 1
   },
   {
     "ingredient": "Baccacedro",
-    "quantity": 1,
-    "bid": 27
-  },
-  {
-    "ingredient": "Colonia di Mycoflora",
-    "quantity": 1,
-    "bid": 27
-  },
-  {
-    "ingredient": "Granuli di Nebbia Arcobaleno",
-    "quantity": 1,
-    "bid": 27
-  },
-  {
-    "ingredient": "Funghi dell’Etere",
-    "quantity": 1,
-    "bid": 27
-  },
-  {
-    "ingredient": "Essenza di Vuoto",
-    "quantity": 1,
-    "bid": 27
-  },
-  {
-    "ingredient": "Radici di Gravità",
-    "quantity": 1,
-    "bid": 27
-  },
-  {
-    "ingredient": "Radici di Singolarità",
-    "quantity": 1,
-    "bid": 27
-  },
-  {
-    "ingredient": "Muffa Lunare",
-    "quantity": 1,
-    "bid": 27
-  },
-  {
-    "ingredient": "Fibra di Sintetex",
-    "quantity": 1,
-    "bid": 27
-  },
-  {
-    "ingredient": "Pane di Luce",
-    "quantity": 1,
-    "bid": 27
+    "quantity": 16,
+    "bid": 1
   },
   {
     "ingredient": "Biscotti della Galassia",
-    "quantity": 1,
-    "bid": 27
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Burrobirra",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Carne di Balena spaziale",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Carne di Drago",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Carne di Kraken",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Carne di Mucca",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Carne di Xenodonte",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Chocobo Wings",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Cioccorane",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Colonia di Mycoflora",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Cristalli di Memoria",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Cristalli di Nebulite",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Erba Pipa",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Essenza di Speziaria",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Essenza di Tachioni",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Essenza di Vuoto",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Farina di Nettuno",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Fibra di Sintetex",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Foglie di Mandragora",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Foglie di Nebulosa",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Frammenti di Supernova",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Frutti del Diavolo",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Funghi Orbitali",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Funghi dell’Etere",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Fusilli del Vento",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Gnocchi del Crepuscolo",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Granuli di Nebbia Arcobaleno",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Lacrime di Andromeda",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Lacrime di Unicorno",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Latte+",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Lattuga Namecciana",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Liane di Plasmodio",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Muffa Lunare",
+    "quantity": 16,
+    "bid": 1
   },
   {
     "ingredient": "Nduja Fritta Tanto",
-    "quantity": 1,
-    "bid": 27
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Nettare di Sirena",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Pane degli Abissi",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Pane di Luce",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Petali di Eco",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Pickle Rick Croccante",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Plasma Vitale",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Polvere di Crononite",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Polvere di Pulsar",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Polvere di Stelle",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Radici di Gravità",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Radici di Singolarità",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Ravioli al Vaporeon",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Riso di Cassandra",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Sale Temporale",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Salsa Szechuan",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Sashimi di Magikarp",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Shard di Materia Oscura",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Shard di Prisma Stellare",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Slurm",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Spaghi del Sole",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Spezie Melange",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Spore Quantiche",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Teste di Idra",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Uova di Fenice",
+    "quantity": 16,
+    "bid": 1
+  },
+  {
+    "ingredient": "Vero Ghiaccio",
+    "quantity": 16,
+    "bid": 1
   }
 ]

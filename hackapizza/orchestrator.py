@@ -2,11 +2,11 @@
 Orchestratore — ascolta gli eventi SSE e lancia l'agente giusto per ogni fase.
 
 Fasi e agenti:
-  speaking    → strategy_agent (avvio anticipato) + snapshot
+  speaking    → strategy_agent (avvio anticipato)
   closed_bid  → bid_agent legge strategy.json già pronto
   waiting     → menu_agent → market_agent   (compone menu, compra/vende)
   serving     → serving_agent               (apre ristorante, prepara e serve)
-  stopped     → snapshot finale del turno
+  stopped 
 
 Esegui: python orchestrator.py
 """
@@ -27,7 +27,6 @@ from market_agent import run_market_agent
 from menu_agent import run_menu_agent
 from server_client import HackapizzaClient
 import serving_agent as _serving
-from snapshot import main as run_snapshot
 from strategy_agent import run_strategy_agent
 
 load_dotenv()
@@ -87,14 +86,11 @@ def _run(coro) -> None:
 
 async def on_speaking() -> None:
     global _strategy_task
-    log("PHASE", "speaking — avvio anticipato strategy + snapshot")
+    log("PHASE", "speaking — avvio anticipato strategy ")
     # Avvia la strategy subito come task indipendente (non cancellata da _cancel_running)
     if _strategy_task and not _strategy_task.done():
         _strategy_task.cancel()
     _strategy_task = asyncio.create_task(run_strategy_agent())
-    # Snapshot in parallelo (può essere cancellato senza problemi)
-    await run_snapshot(current_turn_id)
-
 
 async def on_closed_bid() -> None:
     global _strategy_task
@@ -138,17 +134,15 @@ async def on_closed_bid() -> None:
 
 
 async def on_waiting() -> None:
-    log("PHASE", "waiting — market (vendi+compra) → menu (componi) → apri → market (compra mancanti)")
-    await run_market_agent(sell=True)   # 1. vendi surplus + compra loop (ricette più vicine)
-    await run_menu_agent()              # 2. componi menu con inventario aggiornato
-    # 3. apri il ristorante subito dopo aver composto il menu
+    log("PHASE", "waiting — menu (componi) → apri")
+    await run_menu_agent()              # 1. componi menu con inventario corrente
+    # 2. apri il ristorante subito dopo aver composto il menu
     async with HackapizzaClient(BASE_URL, TEAM_API_KEY, TEAM_ID) as client:
         try:
             await client.update_restaurant_is_open(True)
             log("WAIT", "ristorante aperto")
         except Exception as exc:
             log("WAIT", f"WARN apertura ristorante: {exc}")
-    await run_market_agent(sell=False)  # 4. secondo pass acquisti mirati (no vendita)
 
 
 async def on_serving() -> None:
@@ -161,8 +155,7 @@ async def on_serving() -> None:
 async def on_stopped() -> None:
     global _in_serving
     _in_serving = False
-    log("PHASE", "stopped — snapshot fine turno")
-    await run_snapshot(current_turn_id)
+    log("PHASE", "stopped")
 
 
 # ---------------------------------------------------------------------------

@@ -1,4 +1,50 @@
 {
   "purchased": [],
-  "sold": []
+  "sold": [
+    {
+      "ingredient": "Carne di Balena spaziale",
+      "quantity": 1,
+      "price": 25.0
+    },
+    {
+      "ingredient": "Pane di Luce",
+      "quantity": 1,
+      "price": 25.0
+    },
+    {
+      "ingredient": "Funghi dell’Etere",
+      "quantity": 1,
+      "price": 25.0
+    },
+    {
+      "ingredient": "Radici di Gravità",
+      "quantity": 1,
+      "price": 25.0
+    },
+    {
+      "ingredient": "Essenza di Vuoto",
+      "quantity": 1,
+      "price": 25.0
+    },
+    {
+      "ingredient": "Radici di Singolarità",
+      "quantity": 1,
+      "price": 25.0
+    },
+    {
+      "ingredient": "Fibra di Sintetex",
+      "quantity": 1,
+      "price": 25.0
+    },
+    {
+      "ingredient": "Shard di Prisma Stellare",
+      "quantity": 1,
+      "price": 25.0
+    },
+    {
+      "ingredient": "Nduja Fritta Tanto",
+      "quantity": 1,
+      "price": 25.0
+    }
+  ]
 }
