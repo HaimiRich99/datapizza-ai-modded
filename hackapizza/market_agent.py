@@ -42,20 +42,43 @@ BUDGET_FRACTION = 0.7
 SELL_PRICE = 25.0
 
 SURPLUS_PATH = Path(__file__).parent / "explorer_data" / "surplus_ingredients.json"
+STRATEGY_PATH = Path(__file__).parent / "explorer_data" / "strategy.json"
 
-TOP_TARGET_RECIPES = 5   # quante ricette "prossime al completamento" consideriamo
+TOP_TARGET_RECIPES = 5   # usato solo nel fallback senza strategy
 MAX_BUY_ROUNDS = 5       # massimo numero di round di polling del mercato
 
 
-def find_nearest_recipes(
+def load_focus_strategy() -> tuple[list[str], int]:
+    """
+    Legge strategy.json e ritorna (focus_recipe_names, copies_target).
+    Fallback: lista vuota, copies_target=1.
+    """
+    if not STRATEGY_PATH.exists():
+        return [], 1
+    try:
+        data = json.loads(STRATEGY_PATH.read_text(encoding="utf-8"))
+        return data.get("focus_recipes", []), data.get("copies_target", 1)
+    except Exception:
+        return [], 1
+
+
+def find_target_recipes(
     recipes: list[dict],
     inventory: dict[str, int],
 ) -> list[dict]:
     """
-    Ritorna le ricette con la maggiore frazione di ingredienti già coperti
-    dall'inventario, ordinate per (coverage desc, prestige desc).
-    Con inventario vuoto, prende le ricette con meno ingredienti totali.
+    Ritorna le ricette focus dalla strategy.
+    Fallback: ricette più vicine al completamento.
     """
+    focus_names, _ = load_focus_strategy()
+
+    if focus_names:
+        recipe_map = {r["name"]: r for r in recipes}
+        targets = [recipe_map[name] for name in focus_names if name in recipe_map]
+        if targets:
+            return targets
+
+    # Fallback: ricette con maggiore copertura inventario
     def coverage(recipe):
         needed = recipe.get("ingredients", {})
         if not needed:
@@ -65,25 +88,29 @@ def find_nearest_recipes(
 
     if inventory:
         scored = sorted(recipes, key=lambda r: (-coverage(r), -r.get("prestige", 0)))
-        # prendi solo quelle con almeno un ingrediente già coperto
         candidates = [r for r in scored if coverage(r) > 0]
         if candidates:
             return candidates[:TOP_TARGET_RECIPES]
-    # fallback: ricette con meno ingredienti distinti (più facili da completare)
+
     return sorted(recipes, key=lambda r: len(r.get("ingredients", {})))[:TOP_TARGET_RECIPES]
 
 
 def compute_missing(
     target_recipes: list[dict],
     inventory: dict[str, int],
+    copies_target: int = 1,
 ) -> dict[str, int]:
-    """Calcola gli ingredienti mancanti aggregati su tutte le ricette target."""
+    """
+    Calcola gli ingredienti mancanti per fare copies_target copie
+    di ciascuna ricetta target.
+    """
     missing: dict[str, int] = defaultdict(int)
     for recipe in target_recipes:
-        for ing, qty_needed in recipe.get("ingredients", {}).items():
+        for ing, qty_per_copy in recipe.get("ingredients", {}).items():
+            total_needed = qty_per_copy * copies_target
             have = inventory.get(ing, 0)
-            if have < qty_needed:
-                missing[ing] = max(missing[ing], qty_needed - have)
+            if have < total_needed:
+                missing[ing] = max(missing[ing], total_needed - have)
     return dict(missing)
 
 
@@ -186,12 +213,15 @@ async def run_market_agent(dry_run: bool = False, sell: bool = True) -> list[dic
         print(f"[MARKET] saldo: {balance} | inventario: {inventory or '(vuoto)'}")
 
         recipes = await client.get_recipes()
-        targets = find_nearest_recipes(recipes, inventory)
-        print(f"[MARKET] ricette target ({len(targets)}):")
+        targets = find_target_recipes(recipes, inventory)
+        _, copies_target = load_focus_strategy()
+        copies_target = max(1, copies_target)
+
+        print(f"[MARKET] ricette target ({len(targets)}) | copie target: {copies_target}:")
         for r in targets:
             needed = r.get("ingredients", {})
-            covered = sum(1 for ing, qty in needed.items() if inventory.get(ing, 0) >= qty)
-            print(f"  - {r['name']} | {covered}/{len(needed)} ingredienti coperti | prestige={r.get('prestige')}")
+            covered = sum(1 for ing, qty in needed.items() if inventory.get(ing, 0) >= qty * copies_target)
+            print(f"  - {r['name']} | {covered}/{len(needed)} ingredienti coperti x{copies_target} | prestige={r.get('prestige')}")
 
         # --- 1. Vendi surplus UNA sola volta (solo se sell=True) ---
         sold: list[dict] = []
@@ -207,7 +237,7 @@ async def run_market_agent(dry_run: bool = False, sell: bool = True) -> list[dic
         budget = balance * BUDGET_FRACTION
 
         for round_num in range(1, MAX_BUY_ROUNDS + 1):
-            missing = compute_missing(targets, virtual_inv)
+            missing = compute_missing(targets, virtual_inv, copies_target)
             if not missing:
                 print(f"[MARKET] round {round_num}: inventario completo — stop")
                 break

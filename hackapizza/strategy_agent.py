@@ -1,15 +1,15 @@
 """
-Agente Strategia — Ricetta Primaria + Cluster LLM/Jaccard
+Agente Strategia — Focus su 1-2 ricette da ripetere più volte.
 
-Garantisce almeno 1 ricetta completabile concentrando il budget sulla ricetta
-più vicina al completamento ("ricetta primaria"), poi aggiunge ingredienti del
-cluster secondario per massimizzare le opportunità.
+Logica:
+  1. Scegli la ricetta con il miglior rapporto prestige/n_ingredienti (LLM o fallback)
+  2. Punta a produrre N_COPIES_TARGET copie di quella ricetta
+  3. Aggiungi opzionalmente una ricetta di backup (stessi ingredienti il più possibile)
+  4. Output: ingredient_quantities {ing: qty_necessaria_totale} per bid_agent
 
 Return type: tuple[list[str], int]
-  - list[str]: ingredienti target (primari prima, secondari dopo)
-  - int: quanti dei primi N ingredienti sono "primari" (ricetta garantita)
-
-Fallback automatico: clustering Jaccard puro se REGOLO_API_KEY mancante.
+  - list[str]: ingredienti target (focus prima, backup dopo)
+  - int: quanti dei primi N sono "primari" (focus recipe)
 
 Esegui standalone: python strategy_agent.py [--bid]
 """
@@ -18,7 +18,6 @@ import asyncio
 import json
 import os
 import sys
-from collections import Counter
 from pathlib import Path
 from typing import Optional
 
@@ -33,6 +32,8 @@ TEAM_ID = 24
 BASE_URL = "https://hackapizza.datapizza.tech"
 API_KEY = os.getenv("TEAM_API_KEY", "")
 
+N_COPIES_TARGET = 3  # quante copie della ricetta focus vogliamo preparare
+
 # ---------------------------------------------------------------------------
 # Setup datapizza framework paths
 # ---------------------------------------------------------------------------
@@ -46,75 +47,80 @@ try:
     _LLM_AVAILABLE = True
 except ImportError:
     _LLM_AVAILABLE = False
-    print("[STRATEGY] WARN: datapizza framework non trovato — solo fallback Jaccard")
+    print("[STRATEGY] WARN: datapizza framework non trovato — solo fallback algoritmico")
 
 # ---------------------------------------------------------------------------
-# Pydantic models per structured_response
+# Pydantic models per LLM
 # ---------------------------------------------------------------------------
 
 
-class IngredientPriority(BaseModel):
-    name: str = Field(description="Nome esatto dell'ingrediente come appare nelle ricette")
-    used_by: int = Field(description="Numero di ricette del cluster che usano questo ingrediente")
-
-
-class StrategyPlan(BaseModel):
-    target_recipes: list[str] = Field(
-        description="Nomi delle 5-8 ricette nel cluster scelto (simili tra loro, massima efficienza prestige/ingredienti)"
+class FocusStrategyPlan(BaseModel):
+    focus_recipe_name: str = Field(
+        description="Nome ESATTO della ricetta principale da ripetere più volte (alta prestige, pochi ingredienti unici)"
     )
-    ingredients: list[IngredientPriority] = Field(
-        description="Ingredienti da comprare all'asta, ordinati per priorità decrescente (prima quelli condivisi da più ricette del cluster)"
+    backup_recipe_name: Optional[str] = Field(
+        None,
+        description="Nome ESATTO di una ricetta secondaria opzionale (preferibilmente con ingredienti sovrapposti alla focus). None se non serve."
+    )
+    copies_target: int = Field(
+        description="Numero di copie da preparare per la ricetta focus (tipicamente 2-4, in base al budget stimato)"
     )
     reasoning: str = Field(
-        description="Spiegazione in 1-2 righe della strategia scelta"
+        description="Spiegazione della scelta in 1-2 righe"
     )
 
 
 # ---------------------------------------------------------------------------
-# LLM call (sincrona — viene eseguita in asyncio.to_thread)
+# LLM call
 # ---------------------------------------------------------------------------
 
 _SYSTEM_PROMPT = """\
-Sei un agente strategico per un gioco di ristorante galattico.
+Sei un agente strategico per un gioco di ristorante galattico con aste chiuse.
 
-Ricevi:
-- L'inventario attuale del ristorante
-- La lista completa delle ricette con ingredienti e punteggio prestige
+Ricevi l'inventario attuale e la lista delle ricette (con ingredienti e prestige).
 
-Obiettivo: trovare il CLUSTER OTTIMALE di 5-8 ricette simili (che condividono molti ingredienti)
-che massimizza: prestige_totale / n_ingredienti_unici_da_comprare.
+OBIETTIVO: identificare 1 ricetta da produrre più volte (massimizzare le copie vendute),
+più opzionalmente 1 ricetta di backup con ingredienti sovrapposti.
 
-Regole:
-- Privilegia ricette che già condividono ingredienti con l'inventario attuale
-- Ingredienti già in inventario non vanno comprati (non includerli come priorità alta)
-- Nella lista ingredients, metti prima gli ingredienti usati da più ricette del cluster
-- Usa i nomi esatti degli ingredienti come appaiono nel JSON
+Criteri di selezione della ricetta focus:
+- Alta prestige (più punti per serving)
+- Pochi ingredienti unici da comprare (meno costi di approvvigionamento)
+- Rapporto prestige/n_ingredienti_mancanti il più alto possibile
+- Ingredienti già parzialmente in inventario = bonus
+
+Criteri del backup:
+- Ingredienti il più sovrapposti possibile con la focus (condivisione ingredienti = efficienza)
+- Buona prestige
+
+copies_target: stima quante copie della focus possiamo permetterci.
+Se il saldo stimato è alto (>2000) → 3-4 copie. Se basso (<1000) → 2 copie.
 """
 
 
-def _compact_recipes(recipes: list[dict]) -> list[dict]:
-    """Riduce ogni ricetta ai campi essenziali per il prompt LLM."""
-    return [
-        {
+def _compact_recipes(recipes: list[dict], inventory: dict[str, int]) -> list[dict]:
+    out = []
+    for r in recipes:
+        ings = r.get("ingredients", {})
+        missing = [ing for ing, qty in ings.items() if inventory.get(ing, 0) < qty]
+        out.append({
             "name": r["name"],
             "prestige": r.get("prestige", 0),
-            "ingredients": list(r.get("ingredients", {}).keys()),
-        }
-        for r in recipes
-    ]
+            "ingredients": list(ings.keys()),
+            "missing": missing,
+            "score": round(r.get("prestige", 0) / max(1, len(missing)), 1),
+        })
+    # Ordina per score decrescente per aiutare l'LLM
+    out.sort(key=lambda x: -x["score"])
+    return out
 
 
 def _call_llm_sync(
     recipes: list[dict],
     inventory: dict[str, int],
-) -> Optional[StrategyPlan]:
-    """
-    Chiama l'LLM in modo sincrono.
-    Eseguita tramite asyncio.to_thread per non bloccare l'event loop.
-    """
+    balance: float,
+) -> Optional[FocusStrategyPlan]:
     regolo_key = os.getenv("REGOLO_API_KEY")
     if not regolo_key:
-        print("[STRATEGY] REGOLO_API_KEY non trovata — uso fallback Jaccard")
         return None
 
     client = OpenAILikeClient(
@@ -124,126 +130,148 @@ def _call_llm_sync(
         system_prompt=_SYSTEM_PROMPT,
     )
 
+    compact = _compact_recipes(recipes, inventory)
     prompt = (
+        f"Saldo stimato: {balance}\n"
         f"Inventario attuale: {json.dumps(inventory, ensure_ascii=False) if inventory else '(vuoto)'}\n\n"
-        f"Ricette disponibili:\n"
-        f"{json.dumps(_compact_recipes(recipes), ensure_ascii=False, indent=2)}"
+        f"Ricette disponibili (ordinate per score prestige/ingredienti_mancanti):\n"
+        f"{json.dumps(compact[:40], ensure_ascii=False, indent=2)}"
     )
 
     print("[STRATEGY] LLM in elaborazione...")
-    response = client.structured_response(
-        input=prompt,
-        output_cls=StrategyPlan,
-    )
+    response = client.structured_response(input=prompt, output_cls=FocusStrategyPlan)
 
     raw = response.structured_data
-    if isinstance(raw, StrategyPlan):
+    if isinstance(raw, FocusStrategyPlan):
         return raw
     if isinstance(raw, list) and raw:
         item = raw[0]
-        if isinstance(item, StrategyPlan):
+        if isinstance(item, FocusStrategyPlan):
             return item
         if isinstance(item, dict):
-            return StrategyPlan(**item)
+            return FocusStrategyPlan(**item)
     if isinstance(raw, dict):
-        return StrategyPlan(**raw)
+        return FocusStrategyPlan(**raw)
     return None
 
 
 # ---------------------------------------------------------------------------
-# Fallback: clustering Jaccard puro (nessuna dipendenza LLM)
+# Fallback algoritmico
 # ---------------------------------------------------------------------------
 
-_SEED_COUNT = 40
-_MAX_CLUSTER = 8
-_MIN_SIM = 0.25
-
-
-def _jaccard(a: set, b: set) -> float:
-    if not a or not b:
-        return 0.0
-    return len(a & b) / len(a | b)
-
-
-def _fallback_cluster(recipes: list[dict], inventory: dict[str, int]) -> list[str]:
-    seeds = sorted(recipes, key=lambda r: -r.get("prestige", 0))[:_SEED_COUNT]
-    best_cluster: list[dict] = []
+def _best_recipe_by_score(
+    recipes: list[dict],
+    inventory: dict[str, int],
+    exclude: set[str] | None = None,
+) -> dict:
+    """Sceglie la ricetta con score = prestige / n_ingredienti_mancanti più alto."""
+    exclude = exclude or set()
+    best = None
     best_score = -1.0
 
-    for seed in seeds:
-        seed_ings = set(seed.get("ingredients", {}).keys())
-        candidates = [
-            (r, _jaccard(seed_ings, set(r.get("ingredients", {}).keys())))
-            for r in recipes if r is not seed
-        ]
-        candidates = sorted(
-            [(r, s) for r, s in candidates if s >= _MIN_SIM],
-            key=lambda x: (-x[1], -x[0].get("prestige", 0)),
-        )
-        cluster = [seed] + [r for r, _ in candidates[:_MAX_CLUSTER - 1]]
-
-        unique_ings: set[str] = set()
-        total_prestige = 0
-        for r in cluster:
-            unique_ings.update(r.get("ingredients", {}).keys())
-            total_prestige += r.get("prestige", 0)
-        to_buy = unique_ings - set(inventory.keys())
-        score = total_prestige / max(1, len(to_buy))
-
+    for r in recipes:
+        if r["name"] in exclude:
+            continue
+        ings = r.get("ingredients", {})
+        missing = [ing for ing, qty in ings.items() if inventory.get(ing, 0) < qty]
+        score = r.get("prestige", 0) / max(1, len(missing))
         if score > best_score:
             best_score = score
-            best_cluster = cluster
+            best = r
 
-    freq: Counter = Counter()
-    for r in best_cluster:
-        for ing in r.get("ingredients", {}):
-            freq[ing] += 1
+    return best  # type: ignore
 
-    print(f"[STRATEGY] cluster Jaccard ({len(best_cluster)} ricette | score={best_score:.1f}):")
-    for r in best_cluster:
-        ings = r.get("ingredients", {})
-        covered = sum(1 for ing in ings if ing in inventory)
-        print(f"  - {r['name']} | prestige={r.get('prestige')} | {covered}/{len(ings)} in inventario")
 
-    return [ing for ing, _ in freq.most_common()]
+def _overlap_score(recipe_a: dict, recipe_b: dict) -> float:
+    """Frazione di ingredienti condivisi tra due ricette."""
+    ings_a = set(recipe_a.get("ingredients", {}).keys())
+    ings_b = set(recipe_b.get("ingredients", {}).keys())
+    if not ings_a or not ings_b:
+        return 0.0
+    return len(ings_a & ings_b) / len(ings_a | ings_b)
+
+
+def _fallback_plan(
+    recipes: list[dict],
+    inventory: dict[str, int],
+) -> FocusStrategyPlan:
+    focus = _best_recipe_by_score(recipes, inventory)
+    print(f"[STRATEGY] focus algoritmico: {focus['name']!r} | prestige={focus.get('prestige')}")
+
+    # Backup: massima sovrapposizione con focus e buona prestige
+    focus_ings = set(focus.get("ingredients", {}).keys())
+    backup = None
+    best_backup_score = -1.0
+
+    for r in recipes:
+        if r["name"] == focus["name"]:
+            continue
+        overlap = _overlap_score(focus, r)
+        combined = overlap * 0.6 + r.get("prestige", 0) / 100 * 0.4
+        if combined > best_backup_score:
+            best_backup_score = combined
+            backup = r
+
+    backup_name = backup["name"] if backup and best_backup_score > 0.2 else None
+    if backup_name:
+        print(f"[STRATEGY] backup algoritmico: {backup_name!r}")
+
+    return FocusStrategyPlan(
+        focus_recipe_name=focus["name"],
+        backup_recipe_name=backup_name,
+        copies_target=N_COPIES_TARGET,
+        reasoning="Selezione algoritmica per massimo prestige/ingredienti_mancanti",
+    )
 
 
 # ---------------------------------------------------------------------------
-# Post-processing: normalizza nomi ingredienti
+# Costruzione ingredient_quantities
 # ---------------------------------------------------------------------------
 
-def _normalize(plan: StrategyPlan, valid_ings: set[str]) -> list[str]:
-    """Filtra/corregge i nomi restituiti dall'LLM contro i nomi reali."""
-    result = []
-    for item in plan.ingredients:
-        name = item.name
-        if name in valid_ings:
-            result.append(name)
-        else:
-            # Prova match case-insensitive
-            match = next((v for v in valid_ings if v.lower() == name.lower()), None)
-            if match:
-                result.append(match)
-            else:
-                print(f"[STRATEGY] WARN ingrediente LLM non trovato: {name!r} — ignorato")
-    return result
-
-
-# ---------------------------------------------------------------------------
-# Ricetta primaria: la più vicina al completamento
-# ---------------------------------------------------------------------------
-
-
-def find_primary_recipe(recipes: list[dict], inventory: dict[str, int]) -> dict:
+def build_ingredient_quantities(
+    focus_recipe: dict,
+    backup_recipe: Optional[dict],
+    inventory: dict[str, int],
+    copies_target: int,
+) -> tuple[dict[str, int], list[str], int]:
     """
-    Sceglie la ricetta più vicina al completamento (meno ingredienti mancanti).
-    Tiebreak: prestige decrescente.
+    Calcola le quantità di ingredienti da comprare.
+    Ritorna:
+      - ingredient_quantities: {ing: qty_totale_da_comprare}
+      - target_ings: lista ordinata (focus prima, backup dopo)
+      - primary_count: n ingredienti focus
     """
-    def missing_count(recipe: dict) -> int:
-        ings = recipe.get("ingredients", {})
-        return sum(1 for ing, qty in ings.items() if inventory.get(ing, 0) < qty)
+    quantities: dict[str, int] = {}
 
-    return min(recipes, key=lambda r: (missing_count(r), -r.get("prestige", 0)))
+    # Focus: copies_target copie, meno quello che già abbiamo
+    focus_ings_ordered: list[str] = []
+    for ing, qty_per_copy in focus_recipe.get("ingredients", {}).items():
+        total_needed = qty_per_copy * copies_target
+        already_have = inventory.get(ing, 0)
+        to_buy = max(0, total_needed - already_have)
+        if to_buy > 0:
+            quantities[ing] = to_buy
+            focus_ings_ordered.append(ing)
+
+    primary_count = len(focus_ings_ordered)
+
+    # Backup: 1-2 copie, ingredienti non già coperti dalla focus
+    backup_ings_ordered: list[str] = []
+    if backup_recipe:
+        backup_copies = max(1, copies_target - 1)
+        for ing, qty_per_copy in backup_recipe.get("ingredients", {}).items():
+            total_needed = qty_per_copy * backup_copies
+            already_have = inventory.get(ing, 0)
+            # Considera anche quello che acquistiamo per la focus
+            already_getting = quantities.get(ing, 0)
+            to_buy = max(0, total_needed - already_have - already_getting)
+            if to_buy > 0:
+                quantities[ing] = quantities.get(ing, 0) + to_buy
+                if ing not in focus_ings_ordered:
+                    backup_ings_ordered.append(ing)
+
+    target_ings = focus_ings_ordered + backup_ings_ordered
+    return quantities, target_ings, primary_count
 
 
 # ---------------------------------------------------------------------------
@@ -252,74 +280,111 @@ def find_primary_recipe(recipes: list[dict], inventory: dict[str, int]) -> dict:
 
 async def run_strategy_agent() -> tuple[list[str], int]:
     """
-    Ritorna (list[str], int): ingredienti target ordinati per priorità e
-    quanti dei primi sono "primari" (ingredienti della ricetta garantita).
+    Ritorna (list[str], int): ingredienti target e quanti sono "primari".
     """
     async with HackapizzaClient(BASE_URL, API_KEY, TEAM_ID) as client:
         recipes = await client.get_recipes()
         restaurant = await client.get_restaurant()
 
     inventory: dict[str, int] = restaurant.get("inventory", {})
-    balance = restaurant.get("balance", 0)
-    print(f"[STRATEGY] ricette: {len(recipes)} | saldo: {balance} | "
+    balance = float(restaurant.get("balance", 0))
+    print(f"[STRATEGY] ricette: {len(recipes)} | saldo: {balance:.0f} | "
           f"inventario: {len(inventory)} ingredienti")
 
-    all_ings: set[str] = {
-        ing for r in recipes for ing in r.get("ingredients", {}).keys()
-    }
+    recipe_map: dict[str, dict] = {r["name"]: r for r in recipes}
+    all_ings: set[str] = {ing for r in recipes for ing in r.get("ingredients", {}).keys()}
 
-    # --- Ricetta primaria: garantisce almeno 1 completabile ---
-    primary = find_primary_recipe(recipes, inventory)
-    primary_missing = [
-        ing for ing, qty in primary.get("ingredients", {}).items()
-        if inventory.get(ing, 0) < qty
-    ]
-    print(
-        f"[STRATEGY] ricetta primaria: {primary['name']!r} | "
-        f"prestige={primary.get('prestige')} | mancanti: {primary_missing}"
-    )
-
-    # --- Cluster secondario (LLM o Jaccard) ---
-    plan: Optional[StrategyPlan] = None
+    # --- LLM o fallback ---
+    plan: Optional[FocusStrategyPlan] = None
 
     if _LLM_AVAILABLE:
         try:
-            plan = await asyncio.to_thread(_call_llm_sync, recipes, inventory)
+            plan = await asyncio.to_thread(_call_llm_sync, recipes, inventory, balance)
         except Exception as exc:
-            print(f"[STRATEGY] LLM errore: {exc} — uso fallback Jaccard")
-            plan = None
+            print(f"[STRATEGY] LLM errore: {exc} — uso fallback")
 
-    if plan is not None:
-        print(f"\n[STRATEGY] cluster LLM ({len(plan.target_recipes)} ricette):")
-        for r in plan.target_recipes:
-            print(f"  - {r}")
-        print(f"[STRATEGY] reasoning: {plan.reasoning}")
-        cluster_ings = _normalize(plan, all_ings)
-    else:
-        print("[STRATEGY] uso clustering Jaccard (fallback)")
-        cluster_ings = _fallback_cluster(recipes, inventory)
+    if plan is None:
+        plan = _fallback_plan(recipes, inventory)
 
-    # --- Merge: primari prima, poi cluster (deduplicati) ---
-    seen: set[str] = set(primary_missing)
-    extra = [ing for ing in cluster_ings if ing not in seen]
-    target_ings = primary_missing + extra
-    primary_count = len(primary_missing)
+    # Valida nomi ricette
+    focus_name = plan.focus_recipe_name
+    if focus_name not in recipe_map:
+        # Cerca case-insensitive
+        match = next((n for n in recipe_map if n.lower() == focus_name.lower()), None)
+        if match:
+            focus_name = match
+        else:
+            print(f"[STRATEGY] WARN ricetta focus non trovata: {focus_name!r} — uso fallback")
+            focus_name = _fallback_plan(recipes, inventory).focus_recipe_name
 
-    print(f"\n[STRATEGY] ingredienti target ({len(target_ings)}) | primari: {primary_count}:")
+    backup_name = plan.backup_recipe_name
+    if backup_name and backup_name not in recipe_map:
+        match = next((n for n in recipe_map if n.lower() == backup_name.lower()), None)
+        backup_name = match  # None se non trovato
+
+    focus_recipe = recipe_map[focus_name]
+    backup_recipe = recipe_map.get(backup_name) if backup_name else None
+    copies_target = max(1, plan.copies_target)
+
+    print(f"\n[STRATEGY] FOCUS: {focus_name!r} | prestige={focus_recipe.get('prestige')} | copie={copies_target}")
+    if backup_recipe:
+        print(f"[STRATEGY] BACKUP: {backup_name!r} | prestige={backup_recipe.get('prestige')}")
+    print(f"[STRATEGY] reasoning: {plan.reasoning}")
+
+    # --- Calcola ingredienti e quantità ---
+    ingredient_quantities, target_ings, primary_count = build_ingredient_quantities(
+        focus_recipe, backup_recipe, inventory, copies_target
+    )
+
+    print(f"\n[STRATEGY] ingredienti da comprare ({len(target_ings)}) | primari focus: {primary_count}:")
     for i, ing in enumerate(target_ings, 1):
-        have = "✓" if ing in inventory else " "
-        tag = "P" if i <= primary_count else " "
-        print(f"  {i:2}. [{have}][{tag}] {ing}")
+        qty = ingredient_quantities.get(ing, 0)
+        have = inventory.get(ing, 0)
+        tag = "FOCUS" if i <= primary_count else "BACK"
+        print(f"  {i:2}. [{tag}] {ing}: vuoi={qty + have} | hai={have} | compra={qty}")
+
+    # --- Leggi raccomandazioni prezzi dall'auction analyst ---
+    _recommendations_path = Path(__file__).parent / "explorer_data" / "bid_recommendations.json"
+    price_hints: dict[str, int] = {}
+    avoid_ings: set[str] = set()
+    if _recommendations_path.exists():
+        try:
+            rec_data = json.loads(_recommendations_path.read_text(encoding="utf-8"))
+            method = rec_data.get("method", "")
+            if method == "llm":
+                for r in rec_data.get("recommendations", []):
+                    ing = r.get("ingredient")
+                    bid = r.get("recommended_bid")
+                    if ing and bid:
+                        price_hints[ing] = bid
+                avoid_ings = set(rec_data.get("avoid_ingredients", []))
+            else:
+                for ing, data in rec_data.get("recommendations", {}).items():
+                    bid = data.get("recommended_bid")
+                    if bid:
+                        price_hints[ing] = bid
+                avoid_ings = set(rec_data.get("avoid_ingredients", []))
+            if price_hints:
+                print(f"[STRATEGY] price_hints da auction analyst: {len(price_hints)} ingredienti")
+        except Exception as exc:
+            print(f"[STRATEGY] WARN lettura bid_recommendations: {exc}")
+
+    # --- Salva output ---
+    focus_recipes_list = [focus_name]
+    if backup_name:
+        focus_recipes_list.append(backup_name)
 
     out: dict = {
-        "method": "llm" if plan is not None else "jaccard_fallback",
-        "primary_recipe": primary.get("name"),
+        "method": "llm" if not isinstance(plan, FocusStrategyPlan) or _LLM_AVAILABLE else "algorithmic",
+        "focus_recipes": focus_recipes_list,
+        "copies_target": copies_target,
+        "primary_recipe": focus_name,
         "primary_count": primary_count,
         "target_ingredients": target_ings,
+        "ingredient_quantities": ingredient_quantities,
+        "price_hints": price_hints,
+        "avoid_ingredients": list(avoid_ings),
     }
-    if plan is not None:
-        out["target_recipes"] = plan.target_recipes
-        out["reasoning"] = plan.reasoning
 
     out_path = Path(__file__).parent / "explorer_data" / "strategy.json"
     out_path.parent.mkdir(exist_ok=True)

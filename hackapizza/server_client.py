@@ -42,10 +42,10 @@ class HackapizzaClient:
     # HTTP GET endpoints
     # -------------------------------------------------------------------------
 
-    async def get_meals(self, turn_id: int) -> list[dict[str, Any]]:
+    async def get_meals(self, turn_id: int, restaurant_id: int) -> list[dict[str, Any]]:
         """GET /meals — richieste clienti per turno e ristorante."""
         session = self._require_session()
-        params = {"turn_id": turn_id, "restaurant_id": self.restaurant_id}
+        params = {"turn_id": turn_id, "restaurant_id": restaurant_id}
         async with session.get(
             f"{self.base_url}/meals", headers=self._headers, params=params
         ) as resp:

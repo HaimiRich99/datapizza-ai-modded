@@ -112,13 +112,25 @@ async def _set_open(is_open: bool) -> None:
 
 
 def _meal_name(meal: dict) -> str:
-    """Estrae il nome cliente dal record /meals (prova camelCase e snake_case)."""
+    """
+    Estrae il nome cliente dal record /meals.
+    Struttura reale: {"customer": {"name": "..."}, ...}
+    """
+    customer = meal.get("customer")
+    if isinstance(customer, dict):
+        name = customer.get("name", "")
+        if name:
+            return name
+    # Fallback per altri formati
     return meal.get("clientName") or meal.get("client_name") or ""
 
 
 def _meal_id(meal: dict) -> str:
-    """Estrae l'ID numerico dal record /meals."""
-    return str(meal.get("id") or meal.get("clientId") or "")
+    """
+    Estrae il customerId dal record /meals.
+    Struttura reale: {"customerId": 147, ...}
+    """
+    return str(meal.get("customerId") or meal.get("clientId") or meal.get("id") or "")
 
 
 def _update_name_to_id(meals: list[dict]) -> None:
@@ -130,20 +142,36 @@ def _update_name_to_id(meals: list[dict]) -> None:
             _name_to_id[cname] = cid
 
 
-async def _resolve_numeric_id(client_name: str) -> str | None:
+async def _resolve_numeric_id(client_name: str, max_attempts: int = 3) -> str | None:
     """
     Cerca l'ID numerico del cliente in _name_to_id; se mancante interroga /meals.
+    Ritenta fino a max_attempts volte con breve pausa tra i tentativi.
     Ritorna l'ID come stringa oppure None.
     """
     if client_name in _name_to_id:
         return _name_to_id[client_name]
-    try:
-        async with HackapizzaClient(BASE_URL, API_KEY, TEAM_ID) as c:
-            meals = await c.get_meals(_current_turn_id)
-        _update_name_to_id(meals)
-    except Exception as exc:
-        print(f"[SERVING] WARN risoluzione id per {client_name!r}: {exc}")
-    return _name_to_id.get(client_name)
+
+    for attempt in range(1, max_attempts + 1):
+        try:
+            async with HackapizzaClient(BASE_URL, API_KEY, TEAM_ID) as c:
+                meals = await c.get_meals(_current_turn_id, TEAM_ID)
+            print(f"[SERVING] /meals turn={_current_turn_id}: {len(meals)} record (tentativo {attempt})")
+            if meals:
+                # Log campi disponibili al primo tentativo per debug
+                if attempt == 1:
+                    print(f"[SERVING] meal fields: {list(meals[0].keys())}")
+                _update_name_to_id(meals)
+        except Exception as exc:
+            print(f"[SERVING] WARN /meals tentativo {attempt}: {exc}")
+
+        if client_name in _name_to_id:
+            return _name_to_id[client_name]
+
+        if attempt < max_attempts:
+            await asyncio.sleep(1.0)
+
+    print(f"[SERVING] ID non trovato per {client_name!r} dopo {max_attempts} tentativi")
+    return None
 
 
 # ---------------------------------------------------------------------------
@@ -159,9 +187,15 @@ async def handle_new_client(data: dict[str, Any]) -> None:
     client_name = data.get("clientName", "")
     order_text = data.get("orderText", "")
 
+    # Log campi extra dell'evento (debug: per vedere se server manda già clientId)
+    extra = {k: v for k, v in data.items() if k not in ("clientName", "orderText")}
+    if extra:
+        print(f"[SERVING] client_spawned extra fields: {extra}")
+
     # Aggiorna cache nome→id se l'evento contiene già un ID numerico
-    numeric_id = str(data.get("clientId") or data.get("id") or "")
-    if numeric_id and numeric_id.isdigit():
+    numeric_id = str(data.get("clientId") or data.get("id") or data.get("client_id") or "")
+    if numeric_id and str(numeric_id).lstrip("-").isdigit():
+        print(f"[SERVING] ID numerico trovato nell'evento SSE: {client_name} → {numeric_id}")
         _name_to_id[client_name] = numeric_id
 
     if not client_name:
@@ -224,8 +258,9 @@ async def handle_dish_ready(data: dict[str, Any]) -> None:
     # Risolvi l'ID numerico richiesto da serve_dish
     serve_id = await _resolve_numeric_id(client_name)
     if not serve_id:
-        print(f"[SERVING] WARN: ID numerico non trovato per {client_name!r}, uso nome come fallback")
-        serve_id = client_name
+        print(f"[SERVING] ERRORE: ID numerico non trovato per {client_name!r} — piatto non servito")
+        print(f"[SERVING] DEBUG: _name_to_id attuale = {_name_to_id}")
+        return
 
     async with HackapizzaClient(BASE_URL, API_KEY, TEAM_ID) as client:
         try:
@@ -275,7 +310,7 @@ async def run_serving_agent(turn_id: int = 0) -> None:
             await asyncio.sleep(POLL_INTERVAL)
             try:
                 async with HackapizzaClient(BASE_URL, API_KEY, TEAM_ID) as client:
-                    meals = await client.get_meals(turn_id)
+                    meals = await client.get_meals(turn_id, TEAM_ID)
 
                 # Aggiorna sempre la cache nome→id (serve per serve_dish)
                 _update_name_to_id(meals)
@@ -284,10 +319,12 @@ async def run_serving_agent(turn_id: int = 0) -> None:
                 for meal in meals:
                     cname = _meal_name(meal)
                     if cname and cname not in _seen_clients:
+                        # Struttura reale: order_text è in "request"
+                        order = meal.get("request") or meal.get("orderText") or meal.get("order_text") or ""
                         await handle_new_client({
                             "clientId": _meal_id(meal),
                             "clientName": cname,
-                            "orderText": meal.get("orderText", meal.get("order_text", "")),
+                            "orderText": order,
                         })
 
             except asyncio.CancelledError:

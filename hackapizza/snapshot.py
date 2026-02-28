@@ -143,7 +143,7 @@ async def main(turn_id: int | None = None) -> None:
         # --- Meals del turno ---
         print(f"\n[6] meals turno {turn_id}...")
         if turn_id is not None:
-            meals_result = await fetch("meals", client.get_meals(turn_id))
+            meals_result = await fetch("meals", client.get_meals(turn_id, TEAM_ID))
             if meals_result is not None:
                 save(folder, f"meals_turn{turn_id}.json", meals_result)
                 print(f"    clienti: {len(meals_result)}")

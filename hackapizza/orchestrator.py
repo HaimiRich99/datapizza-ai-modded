@@ -21,6 +21,7 @@ from typing import Any
 import aiohttp
 from dotenv import load_dotenv
 
+from auction_analyst import run_auction_analyst
 from bid_agent import run_bid_agent
 from market_agent import run_market_agent
 from menu_agent import run_menu_agent
@@ -221,6 +222,21 @@ async def on_new_message(data: dict[str, Any]) -> None:
 
 async def on_message(data: dict[str, Any]) -> None:
     log("MSG", str(data))
+    # Rileva il messaggio server con i risultati dell'asta (arriva dopo closed_bid)
+    sender = data.get("sender", "")
+    payload = data.get("payload", "")
+    if sender == "server" and "try to buy:" in payload and "result:" in payload:
+        log("AUCTION", "risultati asta ricevuti — avvio analisi in background")
+        asyncio.create_task(
+            _safe_auction_analysis(payload, current_turn_id)
+        )
+
+
+async def _safe_auction_analysis(text: str, turn_id: int) -> None:
+    try:
+        await run_auction_analyst(text, turn_id)
+    except Exception as exc:
+        log("AUCTION", f"analisi fallita: {exc}")
 
 
 EVENT_HANDLERS: dict[str, Any] = {
