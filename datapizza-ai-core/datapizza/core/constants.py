@@ -1,3 +1,0 @@
-CAPTIONER_DEFAULT_USER_PROMPT_FIGURES = "Describe the image in Italian with as much detail as possible. Focus on every element you see, including colors, shapes, objects, people, actions, emotions, and the setting. Be vivid and descriptive in your explanation."
-CAPTIONER_DEFAULT_USER_PROMPT_TABLES = "Describe the table in Italian with as much detail as possible. Focus on every element you notice, including the structure, headings, rows, columns, values, patterns, and any notable trends or anomalies. Be precise and descriptive in your explanation."
-DEFAULT_SYSTEM_PROMPT = "You are a helpful assistant."

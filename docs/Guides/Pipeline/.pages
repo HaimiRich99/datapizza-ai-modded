@@ -1,5 +1,0 @@
-
-nav:
-    - ingestion_pipeline.md
-    - retrieval_pipeline.md
-    - functional_pipeline.md
