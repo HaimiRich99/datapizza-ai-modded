@@ -211,3 +211,6 @@ __marimo__/
 
 # dotenv
 client_template/.env
+
+# Hackapizza explore output
+hackapizza/explorer_data/

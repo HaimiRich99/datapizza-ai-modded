@@ -92,9 +92,13 @@ class HackapizzaClient:
 
     async def get_menu(self) -> list[dict[str, Any]]:
         """GET /restaurant/:id/menu — voci del menu del proprio ristorante."""
+        return await self.get_menu_by_id(self.restaurant_id)
+
+    async def get_menu_by_id(self, restaurant_id: int) -> list[dict[str, Any]]:
+        """GET /restaurant/:id/menu — voci del menu di qualsiasi ristorante."""
         session = self._require_session()
         async with session.get(
-            f"{self.base_url}/restaurant/{self.restaurant_id}/menu",
+            f"{self.base_url}/restaurant/{restaurant_id}/menu",
             headers=self._headers,
         ) as resp:
             resp.raise_for_status()
