@@ -6,9 +6,15 @@ Logica:
 2. All'arrivo di ogni cliente (client_spawned, via orchestratore):
    - Abbina l'orderText a un piatto nel menu
    - Avvia la preparazione (prepare_dish)
-4. Quando il piatto è pronto (preparation_complete, via orchestratore):
+3. Quando il piatto è pronto (preparation_complete, via orchestratore):
+   - Risolve l'ID numerico del cliente via /meals (serve_dish richiede l'ID numerico)
    - Serve il piatto al cliente (serve_dish)
-5. Alla cancellazione del task (fase terminata): chiude il ristorante
+4. Alla cancellazione del task (fase terminata): chiude il ristorante
+
+Nota sull'ID cliente:
+  L'evento SSE client_spawned contiene solo clientName, non l'ID numerico.
+  L'endpoint /meals restituisce l'ID numerico. Il dict _name_to_id fa da cache
+  nome→id e viene aggiornato ad ogni ciclo di polling.
 
 L'agente espone due callback asincrone pensate per essere chiamate
 dall'orchestratore sugli eventi SSE:
@@ -39,17 +45,23 @@ POLL_INTERVAL = 5.0   # secondi tra polling fallback dei meals
 # Stato condiviso per la fase serving
 # ---------------------------------------------------------------------------
 
-# {client_id: {"name": str, "order_text": str, "dish": str}}
+# {client_name: {"name": str, "order_text": str, "dish": str}}
 _pending_clients: dict[str, dict] = {}
 
-# {dish_name: [client_id, ...]}  — FIFO: il primo in lista è il prossimo da servire
+# {dish_name: [client_name, ...]}  — FIFO: il primo in lista è il prossimo da servire
 _dish_queue: dict[str, list[str]] = {}
 
 # piatti nel menu: {nome_lowercase: nome_originale}
 _menu_names: dict[str, str] = {}
 
-# client_id già processati (per evitare duplicati dal polling)
+# clientName già processati (per evitare duplicati SSE/polling)
 _seen_clients: set[str] = set()
+
+# clientName → ID numerico recuperato da /meals (serve per serve_dish)
+_name_to_id: dict[str, str] = {}
+
+# turno corrente (usato per /meals nel fallback di risoluzione ID)
+_current_turn_id: int = 0
 
 
 # ---------------------------------------------------------------------------
@@ -99,6 +111,41 @@ async def _set_open(is_open: bool) -> None:
             print(f"[SERVING] WARN update_restaurant_is_open({is_open}): {exc}")
 
 
+def _meal_name(meal: dict) -> str:
+    """Estrae il nome cliente dal record /meals (prova camelCase e snake_case)."""
+    return meal.get("clientName") or meal.get("client_name") or ""
+
+
+def _meal_id(meal: dict) -> str:
+    """Estrae l'ID numerico dal record /meals."""
+    return str(meal.get("id") or meal.get("clientId") or "")
+
+
+def _update_name_to_id(meals: list[dict]) -> None:
+    """Aggiorna _name_to_id da una lista di meal record."""
+    for m in meals:
+        cid = _meal_id(m)
+        cname = _meal_name(m)
+        if cid and cname:
+            _name_to_id[cname] = cid
+
+
+async def _resolve_numeric_id(client_name: str) -> str | None:
+    """
+    Cerca l'ID numerico del cliente in _name_to_id; se mancante interroga /meals.
+    Ritorna l'ID come stringa oppure None.
+    """
+    if client_name in _name_to_id:
+        return _name_to_id[client_name]
+    try:
+        async with HackapizzaClient(BASE_URL, API_KEY, TEAM_ID) as c:
+            meals = await c.get_meals(_current_turn_id)
+        _update_name_to_id(meals)
+    except Exception as exc:
+        print(f"[SERVING] WARN risoluzione id per {client_name!r}: {exc}")
+    return _name_to_id.get(client_name)
+
+
 # ---------------------------------------------------------------------------
 # Callback per l'orchestratore
 # ---------------------------------------------------------------------------
@@ -107,23 +154,23 @@ async def handle_new_client(data: dict[str, Any]) -> None:
     """
     Chiamata dall'orchestratore quando arriva evento client_spawned.
     Abbina l'ordine a un piatto e avvia la preparazione.
+    Usa clientName come chiave di dedup (l'SSE non fornisce l'ID numerico).
     """
-    # Prova vari campi possibili per l'id cliente
-    client_id = (
-        data.get("clientId")
-        or data.get("id")
-        or data.get("clientName")
-    )
-    client_name = data.get("clientName", str(client_id))
+    client_name = data.get("clientName", "")
     order_text = data.get("orderText", "")
 
-    if not client_id:
-        print(f"[SERVING] client_spawned senza id: {data}")
+    # Aggiorna cache nome→id se l'evento contiene già un ID numerico
+    numeric_id = str(data.get("clientId") or data.get("id") or "")
+    if numeric_id and numeric_id.isdigit():
+        _name_to_id[client_name] = numeric_id
+
+    if not client_name:
+        print(f"[SERVING] client_spawned senza nome: {data}")
         return
 
-    if client_id in _seen_clients:
+    if client_name in _seen_clients:
         return  # già gestito
-    _seen_clients.add(client_id)
+    _seen_clients.add(client_name)
 
     dish = _match_dish(order_text)
     print(
@@ -135,7 +182,7 @@ async def handle_new_client(data: dict[str, Any]) -> None:
         print("[SERVING] SKIP: nessun piatto nel menu corrisponde")
         return
 
-    _pending_clients[client_id] = {
+    _pending_clients[client_name] = {
         "name": client_name,
         "order_text": order_text,
         "dish": dish,
@@ -145,16 +192,17 @@ async def handle_new_client(data: dict[str, Any]) -> None:
         try:
             result = await client.prepare_dish(dish)
             print(f"[SERVING] prepare_dish({dish!r}) → {result}")
-            _dish_queue.setdefault(dish, []).append(client_id)
+            _dish_queue.setdefault(dish, []).append(client_name)
         except Exception as exc:
             print(f"[SERVING] ERRORE prepare_dish({dish!r}): {exc}")
-            _pending_clients.pop(client_id, None)
+            _pending_clients.pop(client_name, None)
 
 
 async def handle_dish_ready(data: dict[str, Any]) -> None:
     """
     Chiamata dall'orchestratore quando arriva evento preparation_complete.
-    Serve il piatto pronto al primo cliente in coda.
+    Serve il piatto pronto al primo cliente in coda, usando l'ID numerico
+    recuperato da /meals.
     """
     dish = (
         data.get("dish")
@@ -170,16 +218,21 @@ async def handle_dish_ready(data: dict[str, Any]) -> None:
         print(f"[SERVING] {dish!r} pronto ma nessun cliente in coda — ignorato")
         return
 
-    client_id = waiting.pop(0)
-    client_info = _pending_clients.pop(client_id, {})
-    client_name = client_info.get("name", str(client_id))
+    client_name = waiting.pop(0)
+    client_info = _pending_clients.pop(client_name, {})
+
+    # Risolvi l'ID numerico richiesto da serve_dish
+    serve_id = await _resolve_numeric_id(client_name)
+    if not serve_id:
+        print(f"[SERVING] WARN: ID numerico non trovato per {client_name!r}, uso nome come fallback")
+        serve_id = client_name
 
     async with HackapizzaClient(BASE_URL, API_KEY, TEAM_ID) as client:
         try:
-            result = await client.serve_dish(dish, client_id)
-            print(f"[SERVING] serve_dish({dish!r}, {client_id}) → {client_name} | {result}")
+            result = await client.serve_dish(dish, serve_id)
+            print(f"[SERVING] serve_dish({dish!r}, id={serve_id}) → {client_name} | {result}")
         except Exception as exc:
-            print(f"[SERVING] ERRORE serve_dish({dish!r}, {client_id}): {exc}")
+            print(f"[SERVING] ERRORE serve_dish({dish!r}, id={serve_id}): {exc}")
 
 
 # ---------------------------------------------------------------------------
@@ -188,16 +241,18 @@ async def handle_dish_ready(data: dict[str, Any]) -> None:
 
 async def run_serving_agent(turn_id: int = 0) -> None:
     """
-    Apre il ristorante, carica il menu, poi gira in polling finché
-    il task non viene cancellato dall'orchestratore (cambio fase).
+    Carica il menu, poi gira in polling finché il task non viene cancellato
+    dall'orchestratore (cambio fase).
     """
-    global _pending_clients, _dish_queue, _menu_names, _seen_clients
+    global _pending_clients, _dish_queue, _menu_names, _seen_clients, _name_to_id, _current_turn_id
 
     # Reset stato per il nuovo turno
     _pending_clients = {}
     _dish_queue = {}
     _menu_names = {}
     _seen_clients = set()
+    _name_to_id = {}
+    _current_turn_id = turn_id
 
     # Carica menu (il ristorante è già stato aperto nella fase waiting)
     async with HackapizzaClient(BASE_URL, API_KEY, TEAM_ID) as client:
@@ -214,20 +269,27 @@ async def run_serving_agent(turn_id: int = 0) -> None:
     print(f"[SERVING] in attesa di clienti (turno {turn_id})…")
 
     # Polling fallback: raccoglie clienti arrivati che l'SSE potrebbe aver perso
+    # e aggiorna la cache nome→id
     try:
         while True:
             await asyncio.sleep(POLL_INTERVAL)
             try:
                 async with HackapizzaClient(BASE_URL, API_KEY, TEAM_ID) as client:
                     meals = await client.get_meals(turn_id)
+
+                # Aggiorna sempre la cache nome→id (serve per serve_dish)
+                _update_name_to_id(meals)
+
+                # Processa i clienti non ancora visti (dedup per clientName)
                 for meal in meals:
-                    cid = meal.get("id") or meal.get("clientId")
-                    if cid and cid not in _seen_clients:
+                    cname = _meal_name(meal)
+                    if cname and cname not in _seen_clients:
                         await handle_new_client({
-                            "clientId": cid,
-                            "clientName": meal.get("clientName", str(cid)),
-                            "orderText": meal.get("orderText", ""),
+                            "clientId": _meal_id(meal),
+                            "clientName": cname,
+                            "orderText": meal.get("orderText", meal.get("order_text", "")),
                         })
+
             except asyncio.CancelledError:
                 raise
             except Exception as exc:
