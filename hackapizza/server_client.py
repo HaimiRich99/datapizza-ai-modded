@@ -126,9 +126,10 @@ class HackapizzaClient:
             "method": "tools/call",
             "params": {"name": tool_name, "arguments": arguments},
         }
+        mcp_headers = {**self._headers, "Accept": "application/json, text/event-stream"}
         async with session.post(
             f"{self.base_url}/mcp",
-            headers=self._headers,
+            headers=mcp_headers,
             data=json.dumps(payload),
         ) as resp:
             resp.raise_for_status()
