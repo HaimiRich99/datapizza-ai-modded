@@ -56,14 +56,14 @@ except ImportError:
 
 class FocusStrategyPlan(BaseModel):
     focus_recipe_name: str = Field(
-        description="Nome ESATTO della ricetta principale da ripetere più volte (alta prestige, pochi ingredienti unici)"
+        description="Nome ESATTO della ricetta principale su cui puntare (minor numero di ingredienti)"
     )
     backup_recipe_name: Optional[str] = Field(
         None,
-        description="Nome ESATTO di una ricetta secondaria opzionale (preferibilmente con ingredienti sovrapposti alla focus). None se non serve."
+        description="Nome ESATTO di una ricetta secondaria opzionale (preferibilmente completabile facilmente). None se non serve."
     )
     copies_target: int = Field(
-        description="Numero di copie da preparare per la ricetta focus (tipicamente 2-4, in base al budget stimato)"
+        description="Numero di copie da preparare per la ricetta focus (almeno 1, tipicamente 3-5 per acquistare in stock)"
     )
     reasoning: str = Field(
         description="Spiegazione della scelta in 1-2 righe"
@@ -77,23 +77,22 @@ class FocusStrategyPlan(BaseModel):
 _SYSTEM_PROMPT = """\
 Sei un agente strategico per un gioco di ristorante galattico con aste chiuse.
 
-Ricevi l'inventario attuale e la lista delle ricette (con ingredienti e prestige).
+Ricevi l'inventario attuale e la lista delle ricette.
 
-OBIETTIVO: identificare 1 ricetta da produrre più volte (massimizzare le copie vendute),
-più opzionalmente 1 ricetta di backup con ingredienti sovrapposti.
+OBIETTIVO:
+1. Individuare la ricetta o le ricette con il MINOR numero di ingredienti totali richiesti.
+2. Puntare a completare assolutamente ALMENO UNA ricetta (è un costraint fondamentale).
+3. Acquistare in stock (più copie) gli ingredienti di queste ricette facili se il budget lo permette.
 
 Criteri di selezione della ricetta focus:
-- Alta prestige (più punti per serving)
-- Pochi ingredienti unici da comprare (meno costi di approvvigionamento)
-- Rapporto prestige/n_ingredienti_mancanti il più alto possibile
-- Ingredienti già parzialmente in inventario = bonus
+- MINOR numero di ingredienti necessari per completarla (priorità assoluta). Scegli le ricette più semplici.
+- Ingredienti già nell'inventario = grandissimo bonus, perché ci avvicinano a completare almeno una ricetta.
+- Prestige è secondario rispetto alla priorità di completare il piatto.
 
 Criteri del backup:
-- Ingredienti il più sovrapposti possibile con la focus (condivisione ingredienti = efficienza)
-- Buona prestige
+- Stessi criteri (ricette facili, pochi ingredienti mancanti) o alta sovrapposizione di ingredienti con la focus.
 
-copies_target: stima quante copie della focus possiamo permetterci.
-Se il saldo stimato è alto (>2000) → 3-4 copie. Se basso (<1000) → 2 copie.
+copies_target: quante copie della focus puntiamo ad avere. Deve essere almeno 1 per garantire il completamento. Se la ricetta è molto semplice e abbiamo fondi, possiamo puntare "in stock" a 3-5 copie.
 """
 
 
@@ -101,16 +100,17 @@ def _compact_recipes(recipes: list[dict], inventory: dict[str, int]) -> list[dic
     out = []
     for r in recipes:
         ings = r.get("ingredients", {})
-        missing = [ing for ing, qty in ings.items() if inventory.get(ing, 0) < qty]
+        total_qty = sum(ings.values())
+        missing_qty = sum(max(0, qty - inventory.get(ing, 0)) for ing, qty in ings.items())
         out.append({
             "name": r["name"],
             "prestige": r.get("prestige", 0),
             "ingredients": list(ings.keys()),
-            "missing": missing,
-            "score": round(r.get("prestige", 0) / max(1, len(missing)), 1),
+            "total_qty": total_qty,
+            "missing_qty": missing_qty,
         })
-    # Ordina per score decrescente per aiutare l'LLM
-    out.sort(key=lambda x: -x["score"])
+    # Ordina per facilità di completamento (meno ingredienti mancanti, poi meno ingredienti totali)
+    out.sort(key=lambda x: (x["missing_qty"], x["total_qty"], -x["prestige"]))
     return out
 
 
@@ -134,7 +134,7 @@ def _call_llm_sync(
     prompt = (
         f"Saldo stimato: {balance}\n"
         f"Inventario attuale: {json.dumps(inventory, ensure_ascii=False) if inventory else '(vuoto)'}\n\n"
-        f"Ricette disponibili (ordinate per score prestige/ingredienti_mancanti):\n"
+        f"Ricette disponibili (ordinate per facilità: meno ingredienti mancanti, meno qty totali):\n"
         f"{json.dumps(compact[:40], ensure_ascii=False, indent=2)}"
     )
 
@@ -164,22 +164,20 @@ def _best_recipe_by_score(
     inventory: dict[str, int],
     exclude: set[str] | None = None,
 ) -> dict:
-    """Sceglie la ricetta con score = prestige / n_ingredienti_mancanti più alto."""
+    """Sceglie la ricetta con meno ingredienti mancanti e meno ingredienti totali."""
     exclude = exclude or set()
-    best = None
-    best_score = -1.0
-
-    for r in recipes:
-        if r["name"] in exclude:
-            continue
+    
+    def score_recipe(r):
         ings = r.get("ingredients", {})
-        missing = [ing for ing, qty in ings.items() if inventory.get(ing, 0) < qty]
-        score = r.get("prestige", 0) / max(1, len(missing))
-        if score > best_score:
-            best_score = score
-            best = r
+        total_qty = sum(ings.values())
+        missing_qty = sum(max(0, qty - inventory.get(ing, 0)) for ing, qty in ings.items())
+        # Vogliamo MINIMIZZARE missing_qty, MINIMIZZARE total_qty, MASSIMIZZARE prestige
+        return (missing_qty, total_qty, -r.get("prestige", 0))
 
-    return best  # type: ignore
+    valid_recipes = [r for r in recipes if r["name"] not in exclude]
+    valid_recipes.sort(key=score_recipe)
+    
+    return valid_recipes[0] if valid_recipes else recipes[0]
 
 
 def _overlap_score(recipe_a: dict, recipe_b: dict) -> float:
@@ -198,29 +196,34 @@ def _fallback_plan(
     focus = _best_recipe_by_score(recipes, inventory)
     print(f"[STRATEGY] focus algoritmico: {focus['name']!r} | prestige={focus.get('prestige')}")
 
-    # Backup: massima sovrapposizione con focus e buona prestige
+    # Backup: cerchiamo la successiva ricetta più facile, idealmente con overlap
     focus_ings = set(focus.get("ingredients", {}).keys())
-    backup = None
-    best_backup_score = -1.0
+    
+    def backup_score(r):
+        if r["name"] == focus["name"]: return (float('inf'),)
+        ings_r = set(r.get("ingredients", {}).keys())
+        overlap = len(focus_ings & ings_r)
+        
+        ings = r.get("ingredients", {})
+        total_qty = sum(ings.values())
+        missing_qty = sum(max(0, qty - inventory.get(ing, 0)) for ing, qty in ings.items())
+        
+        # Penalizziamo pesantemente missing_qty, preferiamo alto overlap
+        # quindi ordiniamo per: missing_qty (crescente), -overlap (crescente), total_qty (crescente)
+        return (missing_qty, -overlap, total_qty, -r.get("prestige", 0))
 
-    for r in recipes:
-        if r["name"] == focus["name"]:
-            continue
-        overlap = _overlap_score(focus, r)
-        combined = overlap * 0.6 + r.get("prestige", 0) / 100 * 0.4
-        if combined > best_backup_score:
-            best_backup_score = combined
-            backup = r
+    valid_backups = sorted(recipes, key=backup_score)
+    backup = valid_backups[0] if valid_backups and backup_score(valid_backups[0])[0] < float('inf') else None
 
-    backup_name = backup["name"] if backup and best_backup_score > 0.2 else None
+    backup_name = backup["name"] if backup else None
     if backup_name:
         print(f"[STRATEGY] backup algoritmico: {backup_name!r}")
 
     return FocusStrategyPlan(
         focus_recipe_name=focus["name"],
         backup_recipe_name=backup_name,
-        copies_target=N_COPIES_TARGET,
-        reasoning="Selezione algoritmica per massimo prestige/ingredienti_mancanti",
+        copies_target=max(3, N_COPIES_TARGET),  # Acquistiamo in stock sulle ricette facili
+        reasoning="Selezione algoritmica per minor numero di ingredienti (strategia target=completamento certo)",
     )
 
 

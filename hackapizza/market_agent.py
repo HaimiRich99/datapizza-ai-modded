@@ -217,17 +217,47 @@ async def run_market_agent(dry_run: bool = False, sell: bool = True) -> list[dic
         _, copies_target = load_focus_strategy()
         copies_target = max(1, copies_target)
 
+        buy_targets = []
+        sell_targets = []
+
         print(f"[MARKET] ricette target ({len(targets)}) | copie target: {copies_target}:")
         for r in targets:
             needed = r.get("ingredients", {})
-            covered = sum(1 for ing, qty in needed.items() if inventory.get(ing, 0) >= qty * copies_target)
-            print(f"  - {r['name']} | {covered}/{len(needed)} ingredienti coperti x{copies_target} | prestige={r.get('prestige')}")
+            total_qty = sum(qty * copies_target for qty in needed.values())
+            missing_qty = sum(max(0, qty * copies_target - inventory.get(ing, 0)) for ing, qty in needed.items())
+            total_unique = len(needed)
+            covered_unique = sum(1 for ing, qty in needed.items() if inventory.get(ing, 0) >= qty * copies_target)
+            
+            # Decidiamo se acquistare o vendere (se manca > 50% in quantita -> abbandoniamo l'acquisto e vendiamo)
+            if total_qty > 0 and missing_qty > total_qty / 2:
+                sell_targets.append(r)
+                decision = "ABBANDONATA (troppi mancanti, venderemo il surplus)"
+            else:
+                buy_targets.append(r)
+                decision = "MANTENUTA (acquisteremo i mancanti sul mercato)"
+
+            print(f"  - {r['name']} | {covered_unique}/{total_unique} ingredienti coperti x{copies_target} | mancanti: {missing_qty}/{total_qty} -> {decision}")
 
         # --- 1. Vendi surplus UNA sola volta (solo se sell=True) ---
         sold: list[dict] = []
         if sell:
             surplus = load_surplus()
-            sold = await sell_surplus(client, surplus, dry_run)
+            
+            # Filtriamo il surplus salvaguardando gli ingredienti delle ricette mantenute (buy_targets)
+            needed_for_buy = defaultdict(int)
+            for r in buy_targets:
+                for ing, qty in r.get("ingredients", {}).items():
+                    needed_for_buy[ing] = max(needed_for_buy[ing], qty * copies_target)
+                    
+            filtered_surplus = {}
+            for ing, qty_left in surplus.items():
+                if ing in needed_for_buy:
+                    if qty_left > needed_for_buy[ing]:
+                        filtered_surplus[ing] = qty_left - needed_for_buy[ing]
+                else:
+                    filtered_surplus[ing] = qty_left
+
+            sold = await sell_surplus(client, filtered_surplus, dry_run)
         else:
             print("[MARKET] sell=False — salto vendita surplus")
 
@@ -237,7 +267,7 @@ async def run_market_agent(dry_run: bool = False, sell: bool = True) -> list[dic
         budget = balance * BUDGET_FRACTION
 
         for round_num in range(1, MAX_BUY_ROUNDS + 1):
-            missing = compute_missing(targets, virtual_inv, copies_target)
+            missing = compute_missing(buy_targets, virtual_inv, copies_target)
             if not missing:
                 print(f"[MARKET] round {round_num}: inventario completo — stop")
                 break
