@@ -206,6 +206,12 @@ async def _resolve_numeric_id(client_name: str, max_attempts: int = 3) -> str | 
 
     for attempt in range(1, max_attempts + 1):
         try:
+            # Se turn_id è 0 (e.g. init round) l'endpoint fallirebbe con 400. Meglio skippare
+            if _current_turn_id <= 0:
+                print(f"[SERVING] turn_id={_current_turn_id} non valido per /meals, attendo...")
+                await asyncio.sleep(1.0)
+                continue
+                
             async with HackapizzaClient(BASE_URL, API_KEY, TEAM_ID) as c:
                 meals = await c.get_meals(_current_turn_id, TEAM_ID)
             print(f"[SERVING] /meals turn={_current_turn_id}: {len(meals)} record (tentativo {attempt})")
@@ -379,6 +385,10 @@ async def run_serving_agent(turn_id: int = 0) -> None:
         while True:
             await asyncio.sleep(POLL_INTERVAL)
             try:
+                # Polling query fail fast if turn_id is 0 
+                if turn_id <= 0:
+                     continue
+                
                 async with HackapizzaClient(BASE_URL, API_KEY, TEAM_ID) as client:
                     meals = await client.get_meals(turn_id, TEAM_ID)
 

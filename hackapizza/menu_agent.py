@@ -112,10 +112,13 @@ async def get_market_prices() -> str:
 
         for res in restaurants:
             # Escludiamo noi stessi per non falsare le statistiche
-            if res.get("id") == TEAM_ID:
+            if res.get("id") == str(TEAM_ID) or res.get("id") == TEAM_ID:
                 continue
             
-            for item in res.get("menu", []):
+            menu_data = res.get("menu", [])
+            menu_items = menu_data.get("items", []) if isinstance(menu_data, dict) else menu_data
+            
+            for item in menu_items:
                 name = item.get("name")
                 price = item.get("price")
                 if name and price is not None:

@@ -41,18 +41,24 @@ BUDGET_FRACTION = 0.7
 # Prezzo a cui vendiamo il surplus (per unita)
 SELL_PRICE = 25.0
 
-SURPLUS_PATH = Path(__file__).parent / "explorer_data" / "surplus_ingredients.json"
 STRATEGY_PATH = Path(__file__).parent / "explorer_data" / "strategy.json"
 
 TOP_TARGET_RECIPES = 5   # usato solo nel fallback senza strategy
 MAX_BUY_ROUNDS = 5       # massimo numero di round di polling del mercato
 
 
+def load_simplest_recipes() -> list[dict]:
+    """Legge la lista di ricette scelte come target dallo strategy agent."""
+    if not STRATEGY_PATH.exists():
+        return []
+    try:
+        data = json.loads(STRATEGY_PATH.read_text(encoding="utf-8"))
+        return data.get("simplest_recipes", [])
+    except Exception:
+        return []
+
 def load_focus_strategy() -> tuple[list[str], int]:
-    """
-    Legge strategy.json e ritorna (focus_recipe_names, copies_target).
-    Fallback: lista vuota, copies_target=1.
-    """
+    """Fallback legacy se simplest_recipes non esiste."""
     if not STRATEGY_PATH.exists():
         return [], 1
     try:
@@ -104,14 +110,14 @@ def compute_missing(
     Calcola gli ingredienti mancanti per fare copies_target copie
     di ciascuna ricetta target.
     """
-    missing: dict[str, int] = defaultdict(int)
+    missing: dict[str, int] = {}
     for recipe in target_recipes:
         for ing, qty_per_copy in recipe.get("ingredients", {}).items():
             total_needed = qty_per_copy * copies_target
             have = inventory.get(ing, 0)
             if have < total_needed:
-                missing[ing] = max(missing[ing], total_needed - have)
-    return dict(missing)
+                missing[ing] = max(missing.get(ing, 0), total_needed - have)
+    return missing
 
 
 def find_best_entries(
@@ -119,16 +125,19 @@ def find_best_entries(
     market: list[dict],
     budget: float,
 ) -> list[dict]:
-    spent = 0.0
+    spent: float = 0.0
     to_buy: list[dict] = []
 
-    sell_by_ing: dict[str, list[dict]] = defaultdict(list)
+    sell_by_ing: dict[str, list[dict]] = {}
     for entry in market:
         if entry.get("side") != "SELL":
             continue
         ing = entry.get("ingredient_name", "")
         if ing:
+            if ing not in sell_by_ing:
+                sell_by_ing[ing] = []
             sell_by_ing[ing].append(entry)
+            
     for ing in sell_by_ing:
         sell_by_ing[ing].sort(key=lambda e: float(e.get("price", 9999)))
 
@@ -137,7 +146,7 @@ def find_best_entries(
         if not entries:
             print(f"  [MARKET] {ing}: non disponibile sul mercato")
             continue
-        qty_left = qty_needed
+        qty_left: int = qty_needed
         for entry in entries:
             if qty_left <= 0:
                 break
@@ -146,7 +155,7 @@ def find_best_entries(
                 print(f"  [SKIP] {ing} @ {price} troppo caro (max {MAX_PRICE_PER_UNIT})")
                 continue
             entry_qty = int(entry.get("quantity", 0))
-            cost = price * min(entry_qty, qty_left)
+            cost: float = price * entry_qty  # Paghi l'intera entry, non puoi splittare
             if spent + cost > budget:
                 print(f"  [SKIP] {ing} @ {price} budget esaurito")
                 continue
@@ -162,36 +171,34 @@ def find_best_entries(
     return to_buy
 
 
-def load_surplus() -> dict[str, int]:
-    if not SURPLUS_PATH.exists():
-        print(f"[MARKET] {SURPLUS_PATH.name} non trovato — nessun surplus da vendere")
-        return {}
-    data = json.loads(SURPLUS_PATH.read_text(encoding="utf-8"))
-    return data if isinstance(data, dict) else {}
-
 
 async def sell_surplus(
     client: "HackapizzaClient",
     surplus: dict[str, int],
+    purchased_inv: dict[str, int],
     dry_run: bool,
 ) -> list[dict]:
     if not surplus:
         print("[MARKET] nessun surplus da mettere in vendita")
         return []
 
-    print(f"[MARKET] surplus da vendere ({len(surplus)} ingredienti) @ {SELL_PRICE}/u:")
+    print(f"[MARKET] surplus da vendere ({len(surplus)} ingredienti):")
     created: list[dict] = []
     for ing, qty in surplus.items():
-        print(f"  SELL  {ing} x{qty} @ {SELL_PRICE}")
+        # Calcoliamo il prezzo di vendita: +5% rispetto all'asta, altrimenti il fittizio
+        cost_paid = purchased_inv.get(ing, 0)
+        sell_price = max(1, int(cost_paid * 1.05)) if cost_paid > 0 else SELL_PRICE
+        
+        print(f"  SELL  {ing} x{qty} @ {sell_price}")
         if dry_run:
-            created.append({"ingredient": ing, "quantity": qty, "price": SELL_PRICE})
+            created.append({"ingredient": ing, "quantity": qty, "price": sell_price})
             continue
         try:
             result = await client.create_market_entry(
                 side="SELL",
                 ingredient_name=ing,
                 quantity=qty,
-                price=SELL_PRICE,
+                price=sell_price,
             )
             print(f"    -> entry creata: {result}")
             created.append(result)
@@ -212,80 +219,144 @@ async def run_market_agent(dry_run: bool = False, sell: bool = True) -> list[dic
         inventory: dict[str, int] = dict(restaurant.get("inventory", {}))
         print(f"[MARKET] saldo: {balance} | inventario: {inventory or '(vuoto)'}")
 
-        recipes = await client.get_recipes()
-        targets = find_target_recipes(recipes, inventory)
-        _, copies_target = load_focus_strategy()
-        copies_target = max(1, copies_target)
+        simplest_recipes = load_simplest_recipes()
+        if not simplest_recipes:
+             # Fallback
+             recipes = await client.get_recipes()
+             simplest_recipes = find_target_recipes(recipes, inventory)
 
-        print(f"[MARKET] ricette target ({len(targets)}) | copie target: {copies_target}:")
-        for r in targets:
-            needed = r.get("ingredients", {})
-            covered = sum(1 for ing, qty in needed.items() if inventory.get(ing, 0) >= qty * copies_target)
-            print(f"  - {r['name']} | {covered}/{len(needed)} ingredienti coperti x{copies_target} | prestige={r.get('prestige')}")
+        virtual_inv = dict(inventory)
+        to_buy: dict[str, int] = {}
 
-        # --- 1. Vendi surplus UNA sola volta (solo se sell=True) ---
+        # 1. Calcolo del surplus e degli ingredienti da comprare in modo dinamico
+        # Ordiniamo le ricette per prestigio in modo da dare priorità alle più remunerative
+        sorted_recipes = sorted(simplest_recipes, key=lambda r: r.get("prestige", 0), reverse=True)
+        
+        print("\n[MARKET] Allocazione inventario per completare le ricette:")
+        for recipe in sorted_recipes:
+            ings = recipe.get("ingredients", {})
+            if not ings:
+                continue
+            
+            while True:
+                missing_for_one = {}
+                for ing, req_qty in ings.items():
+                    if virtual_inv.get(ing, 0) < req_qty:
+                        missing_for_one[ing] = req_qty - virtual_inv.get(ing, 0)
+                
+                total_req = sum(ings.values())
+                total_missing = sum(missing_for_one.values())
+                covered = total_req - total_missing
+
+                if total_missing == 0:
+                    # Abbiamo tutto per produrre una copia! Alloca l'inventario.
+                    print(f"  -> {recipe['name']}: Copia completata 100% da inventario. (allocata)")
+                    for ing, req_qty in ings.items():
+                        virtual_inv[ing] -= req_qty
+                
+                elif len(missing_for_one) == 1 and covered > 0:
+                    # Manca solo un tipo di ingrediente per chiudere! Ne abbiamo i rimanenti in inventario.
+                    missing_ing, missing_qty = list(missing_for_one.items())[0]
+                    to_buy[missing_ing] = to_buy.get(missing_ing, 0) + missing_qty
+                    print(f"  -> {recipe['name']}: Manca '{missing_ing}' x{missing_qty}. Inserito in wishlist di mercato. (allocata)")
+                    
+                    for ing, req_qty in ings.items():
+                        virtual_inv[ing] -= req_qty
+                        if virtual_inv[ing] < 0:
+                            virtual_inv[ing] = 0
+                else:
+                    # Ci mancano 2 o più elementi, o abbiamo 0 pezzi dell'intera ricetta. Stop.
+                    break
+        
+        # Quello che rimane in virtual_inv (non allocato a nessuna "quasi ricetta") è il NOSTRO SURPLUS REALE!
+        surplus = {ing: qty for ing, qty in virtual_inv.items() if qty > 0}
+        
+        print("\n[MARKET] Allocazione completata.")
+        print(f"  - Mancanti per chiudere set: {to_buy}")
+        print(f"  - Surplus (da vendere): {surplus}\n")
+
+        # Recupera prezzi d'asta dal bid agent (file salvato in run_bid_agent)
+        purchased_inv: dict[str, int] = {}
+        purchased_path = Path(__file__).parent / "explorer_data" / "purchased_inventory.json"
+        if purchased_path.exists():
+            try:
+                purchased_inv = json.loads(purchased_path.read_text(encoding="utf-8"))
+                print(f"[MARKET] caricati costi d'asta: {len(purchased_inv)} ingredienti.")
+            except Exception:
+                pass
+
+        # --- 2. Vendi surplus UNA sola volta (solo se sell=True) ---
         sold: list[dict] = []
         if sell:
-            surplus = load_surplus()
-            sold = await sell_surplus(client, surplus, dry_run)
+            sold = await sell_surplus(client, surplus, purchased_inv, dry_run)
         else:
             print("[MARKET] sell=False — salto vendita surplus")
 
-        # --- 2. Loop acquisti (max MAX_BUY_ROUNDS round) ---
+        # --- 3. Loop acquisti (max MAX_BUY_ROUNDS round) ---
         purchased_all: list[dict] = []
-        virtual_inv: dict[str, int] = dict(inventory)
         budget = balance * BUDGET_FRACTION
 
-        for round_num in range(1, MAX_BUY_ROUNDS + 1):
-            missing = compute_missing(targets, virtual_inv, copies_target)
-            if not missing:
-                print(f"[MARKET] round {round_num}: inventario completo — stop")
-                break
-
-            print(f"\n[MARKET] round {round_num} | budget: {budget:.2f} | mancanti: {len(missing)}")
-            for ing, qty in missing.items():
-                print(f"  - {ing}: {qty}")
-
-            market = await client.get_market_entries()
-            print(f"[MARKET] entry sul mercato: {len(market)}")
-
-            to_buy = find_best_entries(missing, market, budget)
-            if not to_buy:
-                print(f"[MARKET] round {round_num}: nessun acquisto possibile — stop")
-                break
-
-            bought_this_round: list[dict] = []
-            for entry in to_buy:
-                entry_id = entry.get("id")
-                ing = entry.get("ingredient_name", "?")
-                price = float(entry.get("price", 0))
-                qty_entry = int(entry.get("quantity", 1))
-
-                if dry_run:
-                    print(f"  [DRY-RUN] execute_transaction({entry_id}) — {ing} @ {price}")
-                    bought_this_round.append(entry)
-                    virtual_inv[ing] = virtual_inv.get(ing, 0) + qty_entry
-                    budget -= price * qty_entry
-                else:
-                    try:
-                        result = await client.execute_transaction(entry_id)
-                        print(f"  [OK] comprato {ing} @ {price} | {result}")
-                        bought_this_round.append(entry)
-                        virtual_inv[ing] = virtual_inv.get(ing, 0) + qty_entry
-                        budget -= price * qty_entry
-                    except Exception as exc:
-                        print(f"  [ERR] execute_transaction({entry_id}): {exc}")
-
-            purchased_all.extend(bought_this_round)
-
-            if not bought_this_round:
-                print(f"[MARKET] round {round_num}: tutti gli acquisti falliti — stop")
-                break
-            if budget <= 1:
-                print(f"[MARKET] round {round_num}: budget esaurito — stop")
-                break
+        if not to_buy:
+             print("[MARKET] Nessun ingrediente da comprare sul mercato (inventario sufficiente oppure troppe mancanze).")
         else:
-            print(f"[MARKET] raggiunti {MAX_BUY_ROUNDS} round — stop")
+            for round_num in range(1, MAX_BUY_ROUNDS + 1):
+                if not to_buy:
+                    break
+                print(f"\n[MARKET] round {round_num} | budget: {budget:.2f} | mancanti: {len(to_buy)}")
+                for ing, qty in to_buy.items():
+                    print(f"  - {ing}: {qty}")
+
+                market = await client.get_market_entries()
+                print(f"[MARKET] entry sul mercato: {len(market)}")
+
+                # Troviamo gli acquisti ottimali dalla wishlist `to_buy`
+
+                buy_list = find_best_entries(to_buy, market, budget)
+                if not buy_list:
+                    print(f"[MARKET] round {round_num}: nessun acquisto possibile — stop")
+                    break
+
+                bought_this_round: list[dict] = []
+                for entry in buy_list:
+                    ing = entry.get("ingredient_name", "?")
+                    if to_buy.get(ing, 0) <= 0:
+                        continue
+                        
+                    entry_id = entry.get("id")
+                    price = float(entry.get("price", 0))
+                    qty_entry = int(entry.get("quantity", 1))
+
+                    if dry_run:
+                        qty_act = min(qty_entry, to_buy[ing])
+                        print(f"  [DRY-RUN] execute_transaction({entry_id}) — {ing} x{qty_act} @ {price}")
+                        bought_this_round.append(entry)
+                        to_buy[ing] -= qty_act
+                        if to_buy[ing] <= 0:
+                            to_buy[ing] = 0
+                        budget -= price * qty_entry
+                    else:
+                        try:
+                            result = await client.execute_transaction(entry_id)
+                            print(f"  [OK] comprato {ing} @ {price} | {result}")
+                            bought_this_round.append(entry)
+                            virtual_inv[ing] = virtual_inv.get(ing, 0) + qty_entry
+                            to_buy[ing] -= qty_entry
+                            if to_buy[ing] <= 0:
+                                to_buy[ing] = 0
+                            budget -= price * qty_entry
+                        except Exception as exc:
+                            print(f"  [ERR] execute_transaction({entry_id}): {exc}")
+
+                purchased_all.extend(bought_this_round)
+
+                if not bought_this_round:
+                    print(f"[MARKET] round {round_num}: tutti gli acquisti falliti — stop")
+                    break
+                if budget <= 1:
+                    print(f"[MARKET] round {round_num}: budget esaurito — stop")
+                    break
+            else:
+                print(f"[MARKET] raggiunti {MAX_BUY_ROUNDS} round — stop")
 
     log_data = {"purchased": purchased_all, "sold": sold}
     log_path = Path(__file__).parent / "explorer_data" / "market_log.json"

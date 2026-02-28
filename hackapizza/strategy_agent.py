@@ -76,27 +76,27 @@ class FocusStrategyPlan(BaseModel):
 
 _SYSTEM_PROMPT = """Sei l'Executive Chef e il Procurement Manager Supremo del nostro ristorante nel Multiverso Gastronomico. Il tuo obiettivo assoluto è dominare il mercato massimizzando il volume di piatti serviti, applicando la "Strategia della Semplicità Spietata". 
 
-Abbiamo già scremato il Ricettario Cosmico e selezionato per te le 2 ricette in assoluto più semplici da preparare, con il minor numero di ingredienti e quantità. Questa è la tua "Shortlist d'Assalto" su cui concentrarti.
+Abbiamo già scremato il Ricettario Cosmico e selezionato per te le 10 ricette in assoluto più semplici da preparare, con il minor numero di ingredienti e quantità. Questa è la tua "Shortlist d'Assalto" su cui concentrarti.
 
 Ecco il tuo scenario operativo in questo esatto istante:
 - BUDGET ATTUALE: {current_budget} Crediti Galattici
 - INVENTARIO ATTUALE: {current_inventory}
 
-LE 2 RICETTE PIÙ SEMPLICI (LA TUA SHORTLIST):
+LE 10 RICETTE PIÙ SEMPLICI (LA TUA SHORTLIST):
 {simplest_recipes_formatted}
 
 Il tuo ciclo di operazioni DEVE seguire questi passi, senza eccezioni:
 
 1. LOGICA DI APPROVVIGIONAMENTO (ZERO SPRECHI):
 Analizza la Shortlist e calcola la strategia.
-- Scegli la ricetta principale su cui puntare (focus_recipe_name) dalle due fornite.
+- Scegli la ricetta principale su cui puntare (focus_recipe_name) dalle 10 fornite.
 - L'obiettivo è preparare il numero massimo di copie possibili (copies_target) della tua ricetta focus.
 - Valuta gli ingredienti previsti per il tuo target in base al budget e a ciò che hai in inventario.
 
 2. ESECUZIONE:
 Genera in output il piano strategico (FocusStrategyPlan). Spiega brevemente la tua scelta strategica di Focus e target copie nel campo reasoning."""
 
-def _get_simplest_recipes(recipes: list[dict], n: int = 2) -> list[dict]:
+def _get_simplest_recipes(recipes: list[dict], n: int = 10) -> list[dict]:
     """Seleziona le n ricette con il minor numero assoluto di ingredienti e quantità totali."""
     def sort_key(r):
         ings = r.get("ingredients", {})
@@ -132,7 +132,7 @@ def _call_llm_sync(
     if not regolo_key:
         return None
 
-    simplest = _get_simplest_recipes(recipes, n=2)
+    simplest = _get_simplest_recipes(recipes, n=10)
     formatted_recipes = _format_simplest_recipes(simplest)
     
     formatted_system_prompt = _SYSTEM_PROMPT.format(
@@ -363,20 +363,28 @@ async def run_strategy_agent() -> tuple[list[str], int]:
     if _recommendations_path.exists():
         try:
             rec_data = json.loads(_recommendations_path.read_text(encoding="utf-8"))
-            method = rec_data.get("method", "")
-            if method == "llm":
-                for r in rec_data.get("recommendations", []):
-                    ing = r.get("ingredient")
-                    bid = r.get("recommended_bid")
-                    if ing and bid:
-                        price_hints[ing] = bid
-                avoid_ings = set(rec_data.get("avoid_ingredients", []))
+            
+            # Formato nuovo da auction_analyst.py: {"price_hints": {"ingrediente": 10}, "turn_id": 0}
+            if "price_hints" in rec_data:
+                 hints = rec_data.get("price_hints", {})
+                 for ing, bid in hints.items():
+                     price_hints[ing] = bid
             else:
-                for ing, data in rec_data.get("recommendations", {}).items():
-                    bid = data.get("recommended_bid")
-                    if bid:
-                        price_hints[ing] = bid
-                avoid_ings = set(rec_data.get("avoid_ingredients", []))
+                # Formato legacy con {"recommendations": [...]}
+                method = rec_data.get("method", "")
+                if method == "llm":
+                    for r in rec_data.get("recommendations", []):
+                        ing = r.get("ingredient")
+                        bid = r.get("recommended_bid")
+                        if ing and bid:
+                            price_hints[ing] = bid
+                    avoid_ings = set(rec_data.get("avoid_ingredients", []))
+                else:
+                    for ing, data in rec_data.get("recommendations", {}).items():
+                        bid = data.get("recommended_bid")
+                        if bid:
+                            price_hints[ing] = bid
+                    avoid_ings = set(rec_data.get("avoid_ingredients", []))
             if price_hints:
                 print(f"[STRATEGY] price_hints da auction analyst: {len(price_hints)} ingredienti")
         except Exception as exc:
@@ -387,7 +395,7 @@ async def run_strategy_agent() -> tuple[list[str], int]:
     if backup_name:
         focus_recipes_list.append(backup_name)
 
-    simplest_recipes = _get_simplest_recipes(recipes, n=2)
+    simplest_recipes = _get_simplest_recipes(recipes, n=10)
 
     out: dict = {
         "method": "llm" if not isinstance(plan, FocusStrategyPlan) or _LLM_AVAILABLE else "algorithmic",
