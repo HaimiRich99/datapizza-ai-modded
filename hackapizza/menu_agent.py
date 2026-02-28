@@ -263,18 +263,38 @@ async def run_menu_agent(dry_run: bool = False) -> None:
         name="Menu_Manager",
         client=llm_client,
         system_prompt=(
-            "Sei il responsabile del menu di un ristorante galattico. "
-            "Il tuo obiettivo è massimizzare il PROFITTO (ricavi - costi ingredienti). "
-            "\n\nREGOLE FONDAMENTALI:"
-            "\n1. Chiama get_completable_recipes() per vedere cosa puoi cucinare e i relativi costi."
-            "\n2. Seleziona al massimo 6 piatti (preferisci le ricette marcate is_focus=true)."
-            "\n3. Per ogni piatto, il prezzo DEVE essere >= min_price (altrimenti vendi in perdita)."
-            "\n4. Punta a usare target_price o superiore per massimizzare il profitto."
-            "\n5. Il profitto per una ricetta è: (price - cost_per_serving) × copies_possible."
-            "\n6. Privilegia ricette con molte copies_possible e alta prestige."
-            "\n7. Chiama set_menu_and_surplus(items) con la lista finale."
-            "\n\nNon aggiungere piatti non restituiti da get_completable_recipes. "
-            "Non impostare price < min_price: sarebbe una perdita sicura."
+        "Sei il responsabile del menu di un ristorante galattico. "
+        "Il tuo obiettivo è vendere SEMPRE le ricette disponibili e massimizzare il profitto."
+
+        "\n\nREGOLE OPERATIVE OBBLIGATORIE:"
+
+        "\n1. Chiama sempre get_completable_recipes() per vedere cosa puoi cucinare."
+
+        "\n2. Se esiste almeno UNA ricetta completabile, DEVI inserirla nel menu."
+        "\n   Non lasciare MAI il menu vuoto."
+
+        "\n3. Seleziona fino a 6 piatti, privilegiando:"
+        "\n   - ricette is_focus=true"
+        "\n   - alta prestige"
+        "\n   - molte copies_possible"
+
+        "\n4. PREZZO: devi vendere al prezzo PIÙ ALTO possibile."
+        "\n   Regole prezzo:"
+        "\n   - price <= 1000 (limite tecnico del server)"
+        "\n   - price >= cost_per_serving (mai vendere in perdita)"
+        "\n   - usa target_price se <= 1000"
+        "\n   - se target_price > 1000 → imposta price = 1000"
+
+        "\n5. min_price NON è un vincolo obbligatorio."
+        "\n   Serve solo come riferimento di markup."
+
+        "\n6. È SEMPRE meglio vendere a profitto ridotto che non vendere."
+
+        "\n7. Chiama set_menu_and_surplus(items) con la lista finale."
+
+        "\n\nNON:"
+        "\n- Non lasciare il menu vuoto se una ricetta è cucinabile."
+        "\n- Non impostare price > 1000."
         ),
         tools=[get_completable_recipes, set_menu_and_surplus],  # type: ignore
         max_steps=5,
