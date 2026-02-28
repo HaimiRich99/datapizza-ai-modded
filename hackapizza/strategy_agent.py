@@ -47,7 +47,6 @@ try:
     _LLM_AVAILABLE = True
 except ImportError:
     _LLM_AVAILABLE = False
-    print("[STRATEGY] WARN: datapizza framework non trovato — solo fallback algoritmico")
 
 # ---------------------------------------------------------------------------
 # Pydantic models per LLM
@@ -150,8 +149,6 @@ def _call_llm_sync(
 
     prompt = "Esegui il tuo compito e genera l'output richiesto nel formato atteso."
 
-    print(f"[STRATEGY] Inventario attuale passato all'LLM: {inventory}")
-    print("[STRATEGY] LLM in elaborazione...")
     response = client.structured_response(input=prompt, output_cls=FocusStrategyPlan)
 
     raw = response.structured_data
@@ -209,7 +206,6 @@ def _fallback_plan(
     inventory: dict[str, int],
 ) -> FocusStrategyPlan:
     focus = _best_recipe_by_score(recipes, inventory)
-    print(f"[STRATEGY] focus algoritmico: {focus['name']!r} | prestige={focus.get('prestige')}")
 
     # Backup: massima sovrapposizione con focus e buona prestige
     focus_ings = set(focus.get("ingredients", {}).keys())
@@ -226,8 +222,6 @@ def _fallback_plan(
             backup = r
 
     backup_name = backup["name"] if backup and best_backup_score > 0.2 else None
-    if backup_name:
-        print(f"[STRATEGY] backup algoritmico: {backup_name!r}")
 
     return FocusStrategyPlan(
         focus_recipe_name=focus["name"],
@@ -301,8 +295,6 @@ async def run_strategy_agent() -> tuple[list[str], int]:
 
     inventory: dict[str, int] = restaurant.get("inventory", {})
     balance = float(restaurant.get("balance", 0))
-    print(f"[STRATEGY] ricette: {len(recipes)} | saldo: {balance:.0f} | "
-          f"inventario: {len(inventory)} ingredienti")
 
     recipe_map: dict[str, dict] = {r["name"]: r for r in recipes}
     all_ings: set[str] = {ing for r in recipes for ing in r.get("ingredients", {}).keys()}
@@ -313,8 +305,8 @@ async def run_strategy_agent() -> tuple[list[str], int]:
     if _LLM_AVAILABLE:
         try:
             plan = await asyncio.to_thread(_call_llm_sync, recipes, inventory, balance)
-        except Exception as exc:
-            print(f"[STRATEGY] LLM errore: {exc} — uso fallback")
+        except Exception:
+            pass
 
     if plan is None:
         plan = _fallback_plan(recipes, inventory)
@@ -327,7 +319,6 @@ async def run_strategy_agent() -> tuple[list[str], int]:
         if match:
             focus_name = match
         else:
-            print(f"[STRATEGY] WARN ricetta focus non trovata: {focus_name!r} — uso fallback")
             focus_name = _fallback_plan(recipes, inventory).focus_recipe_name
 
     backup_name = plan.backup_recipe_name
@@ -342,19 +333,11 @@ async def run_strategy_agent() -> tuple[list[str], int]:
     print(f"\n[STRATEGY] FOCUS: {focus_name!r} | prestige={focus_recipe.get('prestige')} | copie={copies_target}")
     if backup_recipe:
         print(f"[STRATEGY] BACKUP: {backup_name!r} | prestige={backup_recipe.get('prestige')}")
-    print(f"[STRATEGY] reasoning: {plan.reasoning}")
 
     # --- Calcola ingredienti e quantità ---
     ingredient_quantities, target_ings, primary_count = build_ingredient_quantities(
         focus_recipe, backup_recipe, inventory, copies_target
     )
-
-    print(f"\n[STRATEGY] ingredienti da comprare ({len(target_ings)}) | primari focus: {primary_count}:")
-    for i, ing in enumerate(target_ings, 1):
-        qty = ingredient_quantities.get(ing, 0)
-        have = inventory.get(ing, 0)
-        tag = "FOCUS" if i <= primary_count else "BACK"
-        print(f"  {i:2}. [{tag}] {ing}: vuoi={qty + have} | hai={have} | compra={qty}")
 
     # --- Leggi raccomandazioni prezzi dall'auction analyst ---
     _recommendations_path = Path(__file__).parent / "explorer_data" / "bid_recommendations.json"
@@ -385,10 +368,8 @@ async def run_strategy_agent() -> tuple[list[str], int]:
                         if bid:
                             price_hints[ing] = bid
                     avoid_ings = set(rec_data.get("avoid_ingredients", []))
-            if price_hints:
-                print(f"[STRATEGY] price_hints da auction analyst: {len(price_hints)} ingredienti")
-        except Exception as exc:
-            print(f"[STRATEGY] WARN lettura bid_recommendations: {exc}")
+        except Exception:
+            pass
 
     # --- Salva output ---
     focus_recipes_list = [focus_name]
@@ -413,7 +394,6 @@ async def run_strategy_agent() -> tuple[list[str], int]:
     out_path = Path(__file__).parent / "explorer_data" / "strategy.json"
     out_path.parent.mkdir(exist_ok=True)
     out_path.write_text(json.dumps(out, indent=2, ensure_ascii=False), encoding="utf-8")
-    print(f"\n[STRATEGY] analisi salvata -> {out_path}")
 
     return target_ings, primary_count
 
@@ -429,9 +409,6 @@ if __name__ == "__main__":
         target, primary_count = await run_strategy_agent()
         if bid_flag:
             from bid_agent import run_bid_agent
-            print("\n[STRATEGY] passo ingredienti al bid agent...\n")
             await run_bid_agent(preferred_ingredients=target, primary_count=primary_count)
-        else:
-            print("\nUsa --bid per eseguire anche il bid agent.")
 
     asyncio.run(main())

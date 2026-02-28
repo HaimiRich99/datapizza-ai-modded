@@ -61,7 +61,6 @@ def recommended_bid(bids: list[dict]) -> int:
 
 def load_all_ingredients() -> list[str]:
     if not _INGREDIENTS_PATH.exists():
-        print(f"[AUCTION] WARN: {_INGREDIENTS_PATH} non trovato")
         return []
     return [
         line.strip()
@@ -75,16 +74,9 @@ async def run_auction_analyst(auction_text: str, turn_id: int = 0) -> dict[str, 
     Analizza l'ultima asta e ritorna price_hints: {ingrediente: bid_consigliato}.
     Aggiorna bid_recommendations.json e strategy.json.
     """
-    print(f"\n[AUCTION] analisi asta turno {turn_id}")
-
     parsed = parse_auction_results(auction_text)
     if not parsed:
-        print("[AUCTION] nessun dato parsato")
         return {}
-
-    n_won = sum(1 for bids in parsed.values() if any(b["bought"] for b in bids))
-    n_failed = len(parsed) - n_won
-    print(f"[AUCTION] {len(parsed)} ingredienti | {n_won} comprati | {n_failed} solo insufficient funds")
 
     # Lista completa ingredienti (include anche quelli non apparsi in asta)
     all_ingredients = load_all_ingredients() or list(parsed.keys())
@@ -98,14 +90,6 @@ async def run_auction_analyst(auction_text: str, turn_id: int = 0) -> dict[str, 
     for ing, bids in parsed.items():
         if ing not in price_hints:
             price_hints[ing] = recommended_bid(bids)
-
-    # Riepilogo
-    above_one = {ing: p for ing, p in price_hints.items() if p > DEFAULT_BID}
-    print(f"[AUCTION] price_hints: {len(price_hints) - len(above_one)} @ bid={DEFAULT_BID} | {len(above_one)} con bid>{DEFAULT_BID}")
-    if above_one:
-        print("[AUCTION] ingredienti con bid>1:")
-        for ing, p in sorted(above_one.items(), key=lambda x: -x[1]):
-            print(f"  {ing}: {p}")
 
     # Salva bid_recommendations.json (letto da strategy_agent)
     _EXPLORER_DIR.mkdir(exist_ok=True)
@@ -125,7 +109,6 @@ async def run_auction_analyst(auction_text: str, turn_id: int = 0) -> dict[str, 
     strategy["price_hints"] = price_hints
     _STRATEGY_PATH.write_text(json.dumps(strategy, indent=2, ensure_ascii=False), encoding="utf-8")
 
-    print(f"[AUCTION] price_hints salvati ({len(price_hints)} ingredienti)\n")
     return price_hints
 
 

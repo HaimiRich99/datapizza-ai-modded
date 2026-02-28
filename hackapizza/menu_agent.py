@@ -245,7 +245,6 @@ async def run_menu_agent(dry_run: bool = False) -> None:
     _DRY_RUN = dry_run
 
     if not REGOLO_API_KEY:
-        print("[MENU] ATTENZIONE: REGOLO_API_KEY non trovata.")
         return
 
     llm_client = OpenAILikeClient(
@@ -279,19 +278,13 @@ async def run_menu_agent(dry_run: bool = False) -> None:
         max_steps=8, # Aumentato per garantirgli lo spazio di chiamare 3 tool di fila
     )
 
-    print("[MENU] Analisi mercato ed elaborazione menu in corso...")
     result = await menu_agent.a_run(
         "Fase Waiting attivata. Controlla il magazzino, analizza i prezzi del mercato dai log e "
         "imposta un menu che garantisca margini ma sconfigga i competitor. Chiudi l'operazione salvando il menu."
     )  # type: ignore
 
-    print("\n[MENU] Elaborazione completata.")
-    if result:
-        print(f"[MENU] {result.text}")
 
 if __name__ == "__main__":
     import sys
     dry = "--dry-run" in sys.argv
-    if dry:
-        print("[MENU] Avvio in modalità DRY-RUN (nessuna chiamata di mutazione al server)\n")
     asyncio.run(run_menu_agent(dry_run=dry))

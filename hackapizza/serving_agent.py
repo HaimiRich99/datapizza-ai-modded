@@ -116,7 +116,6 @@ class IntoleranceCheck(BaseModel):
 
 async def _check_intolerances(order_text: str, dish_name: str, dish_ingredients: list[str]) -> bool:
     if not REGOLO_API_KEY:
-        print("[SERVING] WARN: REGOLO_API_KEY mancante, salto check intolleranze.")
         return False
         
     try:
@@ -137,15 +136,13 @@ async def _check_intolerances(order_text: str, dish_name: str, dish_ingredients:
         raw = response.structured_data
         
         if isinstance(raw, IntoleranceCheck):
-            print(f"[SERVING] LLM Check per {dish_name}: intolleranza={raw.has_intolerance} ({raw.reasoning})")
             return raw.has_intolerance
         elif isinstance(raw, dict):
             parsed = IntoleranceCheck(**raw)
-            print(f"[SERVING] LLM Check per {dish_name}: intolleranza={parsed.has_intolerance} ({parsed.reasoning})")
             return parsed.has_intolerance
-            
-    except Exception as exc:
-        print(f"[SERVING] ERRORE durante check intolleranze: {exc}")
+
+    except Exception:
+        pass
         
     return False
 
@@ -158,10 +155,8 @@ async def _set_open(is_open: bool) -> None:
     async with HackapizzaClient(BASE_URL, API_KEY, TEAM_ID) as client:
         try:
             await client.update_restaurant_is_open(is_open)
-            stato = "aperto" if is_open else "chiuso"
-            print(f"[SERVING] ristorante {stato}")
-        except Exception as exc:
-            print(f"[SERVING] WARN update_restaurant_is_open({is_open}): {exc}")
+        except Exception:
+            pass
 
 
 def _meal_name(meal: dict) -> str:
@@ -208,20 +203,14 @@ async def _resolve_numeric_id(client_name: str, max_attempts: int = 3) -> str | 
         try:
             # Se turn_id è 0 (e.g. init round) l'endpoint fallirebbe con 400. Meglio skippare
             if _current_turn_id <= 0:
-                print(f"[SERVING] turn_id={_current_turn_id} non valido per /meals, attendo...")
                 await asyncio.sleep(1.0)
                 continue
-                
+
             async with HackapizzaClient(BASE_URL, API_KEY, TEAM_ID) as c:
                 meals = await c.get_meals(_current_turn_id, TEAM_ID)
-            print(f"[SERVING] /meals turn={_current_turn_id}: {len(meals)} record (tentativo {attempt})")
-            if meals:
-                # Log campi disponibili al primo tentativo per debug
-                if attempt == 1:
-                    print(f"[SERVING] meal fields: {list(meals[0].keys())}")
-                _update_name_to_id(meals)
-        except Exception as exc:
-            print(f"[SERVING] WARN /meals tentativo {attempt}: {exc}")
+            _update_name_to_id(meals)
+        except Exception:
+            pass
 
         if client_name in _name_to_id:
             return _name_to_id[client_name]
@@ -229,7 +218,6 @@ async def _resolve_numeric_id(client_name: str, max_attempts: int = 3) -> str | 
         if attempt < max_attempts:
             await asyncio.sleep(1.0)
 
-    print(f"[SERVING] ID non trovato per {client_name!r} dopo {max_attempts} tentativi")
     return None
 
 
@@ -246,19 +234,12 @@ async def handle_new_client(data: dict[str, Any]) -> None:
     client_name = data.get("clientName", "")
     order_text = data.get("orderText", "")
 
-    # Log campi extra dell'evento (debug: per vedere se server manda già clientId)
-    extra = {k: v for k, v in data.items() if k not in ("clientName", "orderText")}
-    if extra:
-        print(f"[SERVING] client_spawned extra fields: {extra}")
-
     # Aggiorna cache nome→id se l'evento contiene già un ID numerico
     numeric_id = str(data.get("clientId") or data.get("id") or data.get("client_id") or "")
     if numeric_id and str(numeric_id).lstrip("-").isdigit():
-        print(f"[SERVING] ID numerico trovato nell'evento SSE: {client_name} → {numeric_id}")
         _name_to_id[client_name] = numeric_id
 
     if not client_name:
-        print(f"[SERVING] client_spawned senza nome: {data}")
         return
 
     if client_name in _seen_clients:
@@ -272,7 +253,6 @@ async def handle_new_client(data: dict[str, Any]) -> None:
     )
 
     if not dish:
-        print("[SERVING] SKIP: nessun piatto nel menu corrisponde")
         return
 
     _pending_clients[client_name] = {
@@ -283,8 +263,7 @@ async def handle_new_client(data: dict[str, Any]) -> None:
 
     async with HackapizzaClient(BASE_URL, API_KEY, TEAM_ID) as client:
         try:
-            result = await client.prepare_dish(dish)
-            print(f"[SERVING] prepare_dish({dish!r}) → {result}")
+            await client.prepare_dish(dish)
             _dish_queue.setdefault(dish, []).append(client_name)
         except Exception as exc:
             print(f"[SERVING] ERRORE prepare_dish({dish!r}): {exc}")
@@ -303,12 +282,10 @@ async def handle_dish_ready(data: dict[str, Any]) -> None:
         or data.get("name")
     )
     if not dish:
-        print(f"[SERVING] preparation_complete senza dish: {data}")
         return
 
     waiting = _dish_queue.get(dish, [])
     if not waiting:
-        print(f"[SERVING] {dish!r} pronto ma nessun cliente in coda — ignorato")
         return
 
     client_name = waiting.pop(0)
@@ -318,7 +295,6 @@ async def handle_dish_ready(data: dict[str, Any]) -> None:
     serve_id = await _resolve_numeric_id(client_name)
     if not serve_id:
         print(f"[SERVING] ERRORE: ID numerico non trovato per {client_name!r} — piatto non servito")
-        print(f"[SERVING] DEBUG: _name_to_id attuale = {_name_to_id}")
         return
 
     # Call LLM per intolleranze "prima di servire"
@@ -373,11 +349,8 @@ async def run_serving_agent(turn_id: int = 0) -> None:
             for r in recipes_raw:
                 _recipes[r.get("name", "")] = r
                 
-            print(f"[SERVING] menu: {list(_menu_names.values()) or '(vuoto)'}")
-        except Exception as exc:
-            print(f"[SERVING] WARN caricamento menu: {exc}")
-
-    print(f"[SERVING] in attesa di clienti (turno {turn_id})…")
+        except Exception:
+            pass
 
     # Polling fallback: raccoglie clienti arrivati che l'SSE potrebbe aver perso
     # e aggiorna la cache nome→id
@@ -409,11 +382,10 @@ async def run_serving_agent(turn_id: int = 0) -> None:
 
             except asyncio.CancelledError:
                 raise
-            except Exception as exc:
-                print(f"[SERVING] WARN polling meals: {exc}")
+            except Exception:
+                pass
 
     except asyncio.CancelledError:
-        print("[SERVING] fase terminata — chiudo ristorante")
         await _set_open(False)
 
 
