@@ -181,6 +181,7 @@ PHASE_HANDLERS = {
 async def on_game_started(data: dict[str, Any]) -> None:
     global current_turn_id
     current_turn_id = data.get("turn_id", 0)
+    _serving.set_turn_id(current_turn_id)
     log("EVENT", f"game started | turn_id={current_turn_id}")
 
 
@@ -189,6 +190,7 @@ async def on_game_phase_changed(data: dict[str, Any]) -> None:
     phase = data.get("phase", "unknown")
     if "turn_id" in data:
         current_turn_id = data["turn_id"]
+        _serving.set_turn_id(current_turn_id)
     log("EVENT", f"phase changed → {phase} | turn_id={current_turn_id}")
     handler = PHASE_HANDLERS.get(phase)
     if handler:

@@ -22,7 +22,7 @@ TEAM_ID = 24
 BASE_URL = "https://hackapizza.datapizza.tech"
 API_KEY = os.getenv("TEAM_API_KEY", "")
 
-MAX_BUDGET = 1000.0      # Massimo budget da investire all'asta
+MAX_BUDGET = 500.0      # Massimo budget da investire all'asta
 MAX_INGREDIENTS = 20     # quanti ingredienti puntare al massimo
 DEFAULT_BID = 20         # offerta di fallback se non ci sono hint di prezzo
 
@@ -127,10 +127,8 @@ def build_bids_from_recipes(
             
         print(f"[BID] Ricetta {recipe['name']} | Costo stimato per stock: {cost_per_stock}")
 
-        # Quanti stock interi ci possiamo permettere?
-        stocks_to_buy = int(budget_per_recipe // cost_per_stock) if cost_per_stock > 0 else 0
-        stocks_to_buy = max(1, stocks_to_buy)  # Almeno 1 per provare
-        print(f"[BID] -> Budget assegnato: {budget_per_recipe:.0f} -> Stock stimati: {stocks_to_buy}")
+        # Compra sempre esattamente 1 stock (copie_della_ricetta = 1) per le 15 ricette
+        stocks_to_buy = 1
 
         # Genera le quantità per gli ingredienti di questa ricetta
         for ing, qty_per_stock in ings.items():

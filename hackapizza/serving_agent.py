@@ -72,6 +72,11 @@ _name_to_id: dict[str, str] = {}
 # turno corrente (usato per /meals nel fallback di risoluzione ID)
 _current_turn_id: int = 0
 
+def set_turn_id(turn_id: int) -> None:
+    global _current_turn_id
+    if turn_id > 0:
+        _current_turn_id = turn_id
+
 
 # ---------------------------------------------------------------------------
 # Matching ordine → piatto del menu
@@ -195,7 +200,7 @@ def _update_name_to_id(meals: list[dict]) -> None:
             _name_to_id[cname] = cid
 
 
-async def _resolve_numeric_id(client_name: str, max_attempts: int = 3) -> str | None:
+async def _resolve_numeric_id(client_name: str, max_attempts: int = 10) -> str | None:
     """
     Cerca l'ID numerico del cliente in _name_to_id; se mancante interroga /meals.
     Ritenta fino a max_attempts volte con breve pausa tra i tentativi.
