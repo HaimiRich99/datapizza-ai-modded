@@ -19,7 +19,6 @@ from collections import defaultdict
 from pathlib import Path
 
 from dotenv import load_dotenv
-
 from datapizza.agents import Agent
 from datapizza.tools import tool
 from datapizza.clients.openai_like import OpenAILikeClient
@@ -33,7 +32,7 @@ BASE_URL = "https://hackapizza.datapizza.tech"
 API_KEY = os.getenv("TEAM_API_KEY", "")
 REGOLO_API_KEY = os.getenv("REGOLO_API_KEY", "")
 
-MAX_MENU_SIZE = 6
+MAX_MENU_SIZE = 50
 MARKUP_SAFE = 1.2      # Prezzo minimo per sopravvivere (costo * 1.2)
 MARKUP_TARGET = 2.0    # Prezzo target se siamo in monopolio
 DEFAULT_COST_PER_ING = 25
@@ -237,6 +236,29 @@ async def set_menu_and_surplus(items: list[dict]) -> str:
 
 
 # ---------------------------------------------------------------------------
+# System prompt
+# ---------------------------------------------------------------------------
+
+_SYSTEM_PROMPT = """Sei il Chief Financial Officer (CFO) di un ristorante galattico iper-competitivo.
+Il tuo scopo è mettere a menu TUTTE le ricette che possiamo cucinare e prezzarle in modo redditizio.
+
+ISTRUZIONI OPERATIVE (tre passi, nell'ordine):
+1. Chiama get_completable_recipes() per vedere cosa puoi cucinare.
+2. Chiama get_market_prices() per spiare quanto fanno pagare gli altri.
+3. Includi MASSIMO 50 ricette completabili nel menu (nessuna esclusa), fino al limite di slot disponibili.
+   Ordinale per prestige decrescente se devi sceglierne alcune.
+
+STRATEGIA PREZZI OBBLIGATORIA:
+- DEVI garantire un profitto minimo. Imposta sempre price >= safe_min_price (1.2x sul costo).
+- Se la concorrenza vende un piatto, posizionati attorno al loro 'avg': stai leggermente sotto per rubare mercato,
+  o vicino al 'max' se il piatto ha alto prestige e noi abbiamo monopolio.
+- Se nessun concorrente vende quel piatto, sfrutta il monopolio e usa il 'target_price'.
+- Nessun prezzo può superare i 1000 crediti.
+
+Infine, chiama set_menu_and_surplus(items) per confermare le tue scelte."""
+
+
+# ---------------------------------------------------------------------------
 # Entry point dell'Agente
 # ---------------------------------------------------------------------------
 
@@ -256,29 +278,12 @@ async def run_menu_agent(dry_run: bool = False) -> None:
     menu_agent = Agent(
         name="Menu_Manager_Spietato",
         client=llm_client,
-        system_prompt=(
-            "Sei il Chief Financial Officer (CFO) di un ristorante galattico iper-competitivo. "
-            "Il tuo scopo è massimizzare il profitto senza spaventare i clienti, rubandoli alla concorrenza.\n\n"
-            
-            "ISTRUZIONI OPERATIVE:\n"
-            "1. Chiama 'get_completable_recipes()' per vedere cosa puoi cucinare.\n"
-            "2. Chiama SEMPRE 'get_market_prices()' per spiare quanto fanno pagare gli altri.\n"
-            "3. Seleziona fino a 6 ricette (priorità a is_focus=true e quelle ad alto prestigio/copie).\n\n"
-            
-            "STRATEGIA PREZZI OBBIGATORIA:\n"
-            "- DEVI garantire un profitto minimo. Imposta sempre price >= safe_min_price (che è il nostro 1.2x sul costo).\n"
-            "- Se la concorrenza vende un piatto, posizionati attorno al loro 'avg' (prezzo medio) se è superiore al tuo safe_min_price. "
-            "Sentiti libero di stare leggermente sotto l'avg per rubare quote di mercato, o vicino al 'max' se il piatto ha alto prestige e noi abbiamo monopolio.\n"
-            "- Se non ci sono dati di mercato per il piatto (nessun concorrente lo vende), sfrutta il monopolio e usa il 'target_price'.\n"
-            "- Nessun prezzo può superare i 1000 crediti.\n\n"
-            
-            "Infine, chiama 'set_menu_and_surplus(items)' per confermare le tue scelte."
-        ),
+        system_prompt=_SYSTEM_PROMPT,
         tools=[get_completable_recipes, get_market_prices, set_menu_and_surplus],  # type: ignore
-        max_steps=8, # Aumentato per garantirgli lo spazio di chiamare 3 tool di fila
+        max_steps=8,
     )
 
-    result = await menu_agent.a_run(
+    await menu_agent.a_run(
         "Fase Waiting attivata. Controlla il magazzino, analizza i prezzi del mercato dai log e "
         "imposta un menu che garantisca margini ma sconfigga i competitor. Chiudi l'operazione salvando il menu."
     )  # type: ignore

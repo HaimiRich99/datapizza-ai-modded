@@ -23,7 +23,6 @@ from dotenv import load_dotenv
 
 from auction_analyst import run_auction_analyst
 from bid_agent import run_bid_agent
-from market_agent import run_market_agent
 from menu_agent import run_menu_agent
 from server_client import HackapizzaClient
 import serving_agent as _serving
@@ -139,8 +138,6 @@ async def on_closed_bid() -> None:
 
 async def on_waiting() -> None:
     log("PHASE", "waiting — market (vendi+compra) → menu (componi) → apri → market (compra mancanti)")
-    await run_market_agent(sell=True)   # 1. vendi surplus + compra loop (ricette più vicine)
-    await run_menu_agent()              # 2. componi menu con inventario aggiornato
     # 3. apri il ristorante subito dopo aver composto il menu
     async with HackapizzaClient(BASE_URL, TEAM_API_KEY, TEAM_ID) as client:
         try:
@@ -148,7 +145,6 @@ async def on_waiting() -> None:
             log("WAIT", "ristorante aperto")
         except Exception as exc:
             log("WAIT", f"WARN apertura ristorante: {exc}")
-    await run_market_agent(sell=False)  # 4. secondo pass acquisti mirati (no vendita)
 
 
 async def on_serving() -> None:

@@ -24,7 +24,63 @@ BASE_URL = "https://hackapizza.datapizza.tech"
 API_KEY = os.getenv("TEAM_API_KEY", "")
 
 SNAPSHOTS_DIR = Path(__file__).parent / "explorer_data" / "snapshots"
+_HISTORY_PATH = Path(__file__).parent / "explorer_data" / "turn_history.json"
+_STRATEGY_PATH = Path(__file__).parent / "explorer_data" / "strategy.json"
 DELAY = 0.5  # secondi tra chiamate per evitare 429
+
+
+def _save_turn_summary(
+    turn_id: int,
+    balance: float,
+    meals: list,
+    restaurants: list | None = None,
+) -> None:
+    """Appende un riassunto del turno a turn_history.json (max 20 voci)."""
+    history: list = []
+    if _HISTORY_PATH.exists():
+        try:
+            history = json.loads(_HISTORY_PATH.read_text(encoding="utf-8"))
+        except Exception:
+            pass
+
+    prev_balance = history[-1]["balance_end"] if history else None
+    balance_delta = round(balance - prev_balance, 1) if prev_balance is not None else None
+
+    focus_recipe = None
+    if _STRATEGY_PATH.exists():
+        try:
+            strat = json.loads(_STRATEGY_PATH.read_text(encoding="utf-8"))
+            focus_recipe = strat.get("primary_recipe") or (strat.get("focus_recipes") or [None])[0]
+        except Exception:
+            pass
+
+    # Calcola rank e numero avversari dalle info pubbliche degli altri ristoranti
+    rank: int | None = None
+    competitors_active = 0
+    if restaurants:
+        others = [r for r in restaurants if r.get("id") not in (TEAM_ID, str(TEAM_ID))]
+        competitors_active = len(others)
+        other_balances = [float(r["balance"]) for r in others if r.get("balance") is not None]
+        if other_balances:
+            rank = sum(1 for b in other_balances if b > balance) + 1
+
+    clients_total = len(meals)
+    clients_served = sum(1 for m in meals if m.get("executed") or m.get("status") == "served")
+
+    history.append({
+        "turn_id": turn_id,
+        "timestamp": datetime.now().strftime("%Y-%m-%d_%H-%M-%S"),
+        "balance_end": round(balance, 1),
+        "balance_delta": balance_delta,
+        "clients_total": clients_total,
+        "clients_served": clients_served,
+        "focus_recipe": focus_recipe,
+        "rank": rank,
+        "competitors_active": competitors_active,
+    })
+    _HISTORY_PATH.write_text(
+        json.dumps(history[-20:], indent=2, ensure_ascii=False), encoding="utf-8"
+    )
 
 
 def save(folder: Path, filename: str, data: object) -> None:
@@ -32,17 +88,14 @@ def save(folder: Path, filename: str, data: object) -> None:
     path.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
 
 
-def fmt_inventory(inventory: dict) -> str:
-    if not inventory:
-        return "(vuoto)"
-    return ", ".join(f"{k}:{v}" for k, v in inventory.items())
-
-
 async def fetch(label: str, coro):
     """Esegue una coroutine con gestione errori e delay."""
-    await asyncio.sleep(DELAY)
     try:
+        await asyncio.sleep(DELAY)
         return await coro
+    except asyncio.CancelledError:
+        coro.close()  # evita RuntimeWarning su coroutine non awaited
+        raise
     except Exception:
         return None
 
@@ -59,6 +112,8 @@ async def main(turn_id: int | None = None) -> None:
     recipes: list = []
     market: list = []
     competitors: dict = {}
+    meals_result: list | None = None
+    restaurants_result: list | None = None
 
     async with HackapizzaClient(BASE_URL, API_KEY, TEAM_ID) as client:
 
@@ -124,6 +179,10 @@ async def main(turn_id: int | None = None) -> None:
         "competitors": list(competitors.keys()),
     }
     save(folder, "summary.json", summary)
+
+    # --- Turn history (solo a fine turno, quando abbiamo turn_id e balance reale) ---
+    if turn_id is not None and isinstance(balance, (int, float)):
+        _save_turn_summary(turn_id, float(balance), meals_result or [], restaurants_result or [])
 
 
 if __name__ == "__main__":

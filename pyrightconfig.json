@@ -14,6 +14,12 @@
     "build",
     "**/voice"
   ],
+  "extraPaths": [
+    "datapizza-ai-core",
+    "datapizza-ai-clients/datapizza-ai-clients-openai-like",
+    "datapizza-ai-clients/datapizza-ai-clients-openai",
+    "datapizza-ai-clients/datapizza-ai-clients-anthropic"
+  ],
   "reportMissingImports": true,
   "typeCheckingMode": "basic",
   "pythonVersion": "3.11",

@@ -22,73 +22,136 @@ TEAM_ID = 24
 BASE_URL = "https://hackapizza.datapizza.tech"
 API_KEY = os.getenv("TEAM_API_KEY", "")
 
-MAX_BUDGET = 1000.0      # Massimo budget da investire all'asta
+MAX_BUDGET = 100_000.0     # cap teorico di sicurezza
+BUDGET_FRACTION = 0.20     # non spendere più del 20% del saldo a turno
+MAX_COPIES_TO_STOCK = 2    # max copie per ricetta: varietà > volume
+MAX_SCALE = 1              # nessuno scaling: la diversità è già in ingredient_quantities
 MAX_INGREDIENTS = 20     # quanti ingredienti puntare al massimo
 DEFAULT_BID = 20         # offerta di fallback se non ci sono hint di prezzo
+
+OPPORTUNISTIC_BID = 2    # prezzo unitario bid opportunistici (ingredienti non target)
+OPPORTUNISTIC_QTY = 3    # quantità per ogni bid opportunistico
+
+_INGREDIENTS_PATH = Path(__file__).parent / "lista_completa_ingredienti.txt"
+
+
+def _load_all_ingredients() -> list[str]:
+    """Legge la lista completa degli ingredienti del gioco."""
+    if not _INGREDIENTS_PATH.exists():
+        return []
+    return [
+        line.strip()
+        for line in _INGREDIENTS_PATH.read_text(encoding="utf-8").splitlines()
+        if line.strip()
+    ]
+
+
+def _add_opportunistic_bids(main_bids: list[dict], all_ingredients: list[str]) -> list[dict]:
+    """
+    Aggiunge bid minimi su tutti gli ingredienti non già coperti dai bid principali.
+    Obiettivo: sfruttare vuoti di mercato senza impattare il budget principale.
+    """
+    already_bidding = {b["ingredient"] for b in main_bids}
+    extra = [
+        {"ingredient": ing, "quantity": OPPORTUNISTIC_QTY, "bid": OPPORTUNISTIC_BID}
+        for ing in all_ingredients
+        if ing not in already_bidding
+    ]
+    return main_bids + extra
+
+def _budget_scale_quantities(
+    ingredient_quantities: dict[str, int],
+    copies_target: int,
+    balance: float,
+    price_hints: dict[str, int] | None = None,
+) -> dict[str, int]:
+    """
+    Scala le quantità dalla strategy fino a MAX_COPIES_TO_STOCK copie,
+    limitato da MAX_SCALE e dal budget (max BUDGET_FRACTION del saldo).
+    Il cap è demand-driven (quanti clienti ci aspettiamo per turno), non budget-driven.
+    """
+    if copies_target <= 0 or not ingredient_quantities:
+        return ingredient_quantities
+    price_hints = price_hints or {}
+
+    # Costo stimato per una singola copia della ricetta focus
+    cost_per_copy = sum(
+        (qty / copies_target) * (max(1, int(price_hints[ing] * 1.05)) if price_hints.get(ing) else DEFAULT_BID)
+        for ing, qty in ingredient_quantities.items()
+    )
+    if cost_per_copy <= 0:
+        return ingredient_quantities
+
+    # Cap per domanda: non stoccare più di MAX_COPIES_TO_STOCK copie
+    demand_cap = MAX_COPIES_TO_STOCK // copies_target  # quante volte moltiplicare il target base
+
+    # Cap per budget: non superare BUDGET_FRACTION del saldo
+    budget_cap = int(balance * BUDGET_FRACTION / (cost_per_copy * copies_target)) if cost_per_copy > 0 else MAX_SCALE
+
+    scale = max(1, min(demand_cap, budget_cap, MAX_SCALE))
+    if scale <= 1:
+        return ingredient_quantities
+
+    total_cost = cost_per_copy * copies_target * scale
+    print(f"[BID] scaling {scale}x → {copies_target * scale} copie totali | costo stimato {total_cost:.0f}")
+    return {ing: qty * scale for ing, qty in ingredient_quantities.items()}
+
 
 def build_bids_legacy(
     ingredients: list[str],
     balance: float,
     primary_count: int = 0,
     price_hints: dict[str, int] | None = None,
-    ingredient_quantities: dict[str, int] | None = None,
 ) -> list[dict]:
-    """
-    Costruisce le offerte per l'asta (Vecchia logica).
-
-    - primary_count: quanti dei primi ingredienti sono della ricetta focus (70% budget)
-    - price_hints: {ing: recommended_bid_per_unit} dall'auction analyst
-    - ingredient_quantities: {ing: qty_totale_da_comprare} dalla strategy
-    """
+    """Fallback di emergenza: distribuisce il budget sugli ingredienti forniti."""
     if not ingredients or balance <= 0:
         return []
 
     price_hints = price_hints or {}
-    ingredient_quantities = ingredient_quantities or {}
-    budget = min(MAX_BUDGET, float(balance))
+    budget = min(MAX_BUDGET, float(balance) * BUDGET_FRACTION)
     chosen = ingredients[:MAX_INGREDIENTS]
     bids = []
-
     n_primary = min(primary_count, len(chosen))
 
     def _bid_for(ing: str, budget_share: float) -> dict:
-        """Costruisce una singola offerta per un ingrediente."""
-        qty = ingredient_quantities.get(ing, 1)
-        qty = max(1, qty)
-
         hint = price_hints.get(ing)
-        if hint:
-            # Usa il prezzo raccomandato dall'analisi storica (+5% margine sicurezza)
-            bid_per_unit = max(1, int(hint * 1.05))
-        else:
-            # Distribuisce la quota budget sull'ingrediente
-            bid_per_unit = max(1, int(budget_share / qty)) if qty > 0 else DEFAULT_BID
-            bid_per_unit = max(bid_per_unit, DEFAULT_BID)
-
-        return {"ingredient": ing, "quantity": qty, "bid": bid_per_unit}
+        bid_per_unit = max(1, int(hint * 1.05)) if hint else max(DEFAULT_BID, int(budget_share))
+        return {"ingredient": ing, "quantity": 1, "bid": bid_per_unit}
 
     if n_primary > 0:
-        primary = chosen[:n_primary]
-        secondary = chosen[n_primary:]
-
-        # 70% budget → ingredienti focus (critici per la ricetta principale)
-        primary_budget = budget * 0.70
-        per_primary = primary_budget / n_primary
+        primary, secondary = chosen[:n_primary], chosen[n_primary:]
+        per_primary = budget * 0.70 / n_primary
         for ing in primary:
             bids.append(_bid_for(ing, per_primary))
-
-        # 30% budget → ingredienti backup
         if secondary:
-            sec_budget = budget * 0.30
-            per_secondary = sec_budget / len(secondary)
+            per_secondary = budget * 0.30 / len(secondary)
             for ing in secondary:
                 bids.append(_bid_for(ing, per_secondary))
     else:
-        # Nessuna distinzione primari/secondari
         per_ing = budget / len(chosen)
         for ing in chosen:
             bids.append(_bid_for(ing, per_ing))
 
+    return bids
+
+
+def build_bids_from_quantities(
+    ingredient_quantities: dict[str, int],
+    price_hints: dict[str, int] | None = None,
+) -> list[dict]:
+    """
+    Path primario: usa direttamente ingredient_quantities dalla strategy.
+    Le quantità sono già calcolate per (copies_target * qty_per_copy - inventario_attuale).
+    È il path più preciso e rispetta la priorità focus vs backup.
+    """
+    price_hints = price_hints or {}
+    bids = []
+    for ing, qty in ingredient_quantities.items():
+        if qty <= 0:
+            continue
+        hint = price_hints.get(ing)
+        bid_per_unit = max(1, int(hint * 1.05)) if hint else DEFAULT_BID
+        bids.append({"ingredient": ing, "quantity": qty, "bid": bid_per_unit})
     return bids
 
 
@@ -106,7 +169,7 @@ def build_bids_from_recipes(
         return []
 
     price_hints = price_hints or {}
-    budget = min(MAX_BUDGET, float(balance))
+    budget = min(MAX_BUDGET, float(balance) * BUDGET_FRACTION)
     bids_map: dict[str, dict] = {}  # ing -> {quantity, bid}
 
     # Dividiamo il budget equamente tra le ricette fornite
@@ -171,6 +234,7 @@ async def run_bid_agent(
     price_hints: dict[str, int] = {}
     ingredient_quantities: dict[str, int] = {}
     simplest_recipes: list[dict] = []
+    copies_target: int = 3
     _strategy_path = Path(__file__).parent / "explorer_data" / "strategy.json"
     if _strategy_path.exists():
         try:
@@ -178,6 +242,7 @@ async def run_bid_agent(
             price_hints = strat.get("price_hints", {})
             ingredient_quantities = strat.get("ingredient_quantities", {})
             simplest_recipes = strat.get("simplest_recipes", [])
+            copies_target = int(strat.get("copies_target", 3))
             if price_hints:
                 print(f"[BID] price_hints da auction analyst: {len(price_hints)} ingredienti")
             if ingredient_quantities:
@@ -192,11 +257,18 @@ async def run_bid_agent(
         balance = float(restaurant.get("balance", 0))
         print(f"[BID] saldo attuale: {balance}")
 
-        if simplest_recipes:
+        if ingredient_quantities:
+            # Path primario: scala le quantità in base al budget, poi costruisci i bid
+            scaled = _budget_scale_quantities(ingredient_quantities, copies_target, balance, price_hints)
+            bids = build_bids_from_quantities(scaled, price_hints)
+            print(f"[BID] path principale: ingredient_quantities ({len(bids)} ingredienti target)")
+        elif simplest_recipes:
+            # Fallback: nessuna quantity esplicita, usa le 10 ricette più semplici
             bids = build_bids_from_recipes(simplest_recipes, balance, price_hints)
+            print(f"[BID] fallback simplest_recipes ({len(bids)} ingredienti)")
         else:
-            # Fallback legacy se mancano le simplest_recipes
-            print("[BID] Uso fallback poichè simplest_recipes non esiste")
+            # Fallback legacy
+            print("[BID] fallback legacy")
             if preferred_ingredients is None:
                 recipes = await client.get_recipes()
                 preferred_ingredients = list({
@@ -205,7 +277,14 @@ async def run_bid_agent(
                     for ing in recipe.get("ingredients", {})
                     if ing
                 })
-            bids = build_bids_legacy(preferred_ingredients, balance, primary_count, price_hints, ingredient_quantities)
+            bids = build_bids_legacy(preferred_ingredients, balance, primary_count, price_hints)
+
+    # Aggiungi bid opportunistici su tutti gli ingredienti non già coperti
+    all_ingredients = _load_all_ingredients()
+    if all_ingredients:
+        bids_before = len(bids)
+        bids = _add_opportunistic_bids(bids, all_ingredients)
+        print(f"[BID] bid opportunistici aggiunti: {len(bids) - bids_before} ingredienti @ {OPPORTUNISTIC_BID}x{OPPORTUNISTIC_QTY}")
 
     print("\n=== OFFERTE ASTA ===")
     for b in bids:
@@ -216,13 +295,6 @@ async def run_bid_agent(
     out_path.parent.mkdir(exist_ok=True)
     out_path.write_text(json.dumps(bids, indent=2, ensure_ascii=False), encoding="utf-8")
     print(f"  salvato -> {out_path}")
-
-    # Memorizziamo "l'intenzione d'acquisto" come pseudo-purchased per il market agent
-    # Siccome l'asta è "chiusa", diamo per scontato che se offriamo X, lo paghiamo X (se viene accettato)
-    purchased_inv = {b["ingredient"]: b["bid"] for b in bids}
-    purchased_path = Path(__file__).parent / "explorer_data" / "purchased_inventory.json"
-    purchased_path.write_text(json.dumps(purchased_inv, indent=2, ensure_ascii=False), encoding="utf-8")
-    print(f"  costi stimati salvati per surplus -> {purchased_path}")
 
     if bids:
         payload = [{"ingredient": b["ingredient"], "quantity": b["quantity"], "bid": b["bid"]} for b in bids]
